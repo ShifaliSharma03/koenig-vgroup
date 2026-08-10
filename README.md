@@ -54,8 +54,6 @@ You will NOT need to edit any `.html` file for routine updates. Specifically, be
   `recordingUrl: "https://..."`. The Schedule page will show a "▶ Recording" button for that row.
 - **Adjust a date/time**: edit the `date` field on the relevant `SCHEDULE` entry (format
   `YYYY-MM-DD`). All countdown, status, and local-time-zone conversions recompute automatically.
-- **Add a demo recording for the Home page hero**: set `PROGRAM.demoRecordingUrl` at the top of the
-  file.
 
 Session status (Upcoming / Live now / Completed) and the "days until next session" countdown are
 computed automatically from today's date — nothing to update manually there.

@@ -113,21 +113,6 @@
       outlineBtn.setAttribute("href", PROGRAM.courseOutlineUrl);
     }
 
-    const demoBtn = $("#demoRecordingBtn");
-    if (demoBtn && typeof PROGRAM !== "undefined") {
-      if (PROGRAM.demoRecordingUrl) {
-        demoBtn.setAttribute("href", PROGRAM.demoRecordingUrl);
-        demoBtn.classList.remove("btn-disabled");
-        demoBtn.removeAttribute("aria-disabled");
-        demoBtn.textContent = "▶ Demo Recording";
-      } else {
-        demoBtn.setAttribute("aria-disabled", "true");
-        demoBtn.classList.add("btn-disabled");
-        demoBtn.addEventListener("click", (e) => e.preventDefault());
-        demoBtn.textContent = "▶ Demo Recording — Available Soon";
-      }
-    }
-
     initCountdown();
   }
 

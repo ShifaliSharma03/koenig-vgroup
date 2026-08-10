@@ -26,7 +26,6 @@ const PROGRAM = {
   startDate: "2026-08-17",
   endDate: "2026-09-24",
   stack: ["Node.js", "React", "Claude Agent SDK (TypeScript)", "Shopify Admin & Storefront API"],
-  demoRecordingUrl: null,        // set to a URL once a demo/intro recording exists
   courseOutlineUrl: "assets/downloads/Shopify-Agentic-AI-Developer-Bootcamp-Course-Outline.docx"
 };
 
