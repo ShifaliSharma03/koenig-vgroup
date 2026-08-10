@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prerequisites & Setup | Shopify Agentic AI Developer Bootcamp</title>
+<meta name="description" content="Everything to install and set up before Day 1 of the Shopify Agentic AI Developer Bootcamp.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛍️</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="nav-wrap">
+    <a class="brand-lockup" href="index.html">
+      <span class="logo-slot">
+        <img src="assets/images/koenig-logo.png" alt="Koenig Solutions" data-fallback onerror="this.style.display='none';this.nextElementSibling.style.display='inline-block'">
+        <span class="text-logo koenig">KOENIG<span> solutions</span></span>
+      </span>
+      <span class="brand-x">×</span>
+      <span class="logo-slot">
+        <img src="assets/images/vgroup-logo.png" alt="V Group Inc." data-fallback onerror="this.style.display='none';this.nextElementSibling.style.display='inline-block'">
+        <span class="text-logo vgroup">V Group Inc.</span>
+      </span>
+      <span class="brand-title">Agentic AI Developer Bootcamp</span>
+    </a>
+    <nav>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="schedule.html">Schedule</a></li>
+        <li><a href="curriculum.html">Curriculum</a></li>
+        <li><a href="prerequisites.html">Prerequisites</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="resources.html">Resources</a></li>
+      </ul>
+    </nav>
+    <div class="nav-actions">
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">🌙</button>
+      <button class="nav-burger" id="navBurger" aria-label="Toggle menu" aria-expanded="false">☰</button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <section class="hero" style="padding:44px 0 36px">
+    <div class="hero-inner">
+      <span class="eyebrow">🧰 Prerequisites</span>
+      <h1>Get set up before Day 1</h1>
+      <p class="hero-sub">Working knowledge of JavaScript/TypeScript, Node.js and React is assumed. No prior Shopify or LLM experience is required — both are covered from first principles in the opening modules. Check items off as you complete them; your progress is saved in this browser.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+
+      <div class="progress-wrap">
+        <div class="progress-bar-track"><div class="progress-bar-fill" id="prereqProgressFill"></div></div>
+        <span class="progress-label" id="prereqProgressLabel">0 / 0 ready</span>
+      </div>
+
+      <h2>Environment &amp; Accounts Needed</h2>
+      <ul class="checklist" id="prereqChecklist">
+        <li>
+          <input type="checkbox" id="p1">
+          <label for="p1">
+            Shopify Partner account with a free development store (Shopify CLI installed).
+            <a class="item-link" href="https://www.shopify.com/partners" target="_blank" rel="noopener">→ Create a free Shopify Partner account</a>
+          </label>
+        </li>
+        <li>
+          <input type="checkbox" id="p2">
+          <label for="p2">
+            Anthropic Console account with a Claude API key (Sonnet used as the default workshop model).
+            <a class="item-link" href="https://console.anthropic.com/" target="_blank" rel="noopener">→ Sign up at console.anthropic.com</a>
+          </label>
+        </li>
+        <li>
+          <input type="checkbox" id="p3">
+          <label for="p3">
+            Claude Code CLI installed locally. <strong>Note:</strong> there is no free tier for Claude Code — it requires either a paid Claude subscription (Pro at $20/mo or a Max plan) or pay-as-you-go Anthropic API billing enabled on your account.
+            <a class="item-link" href="https://code.claude.com/docs/" target="_blank" rel="noopener">→ Claude Code installation docs</a>
+          </label>
+        </li>
+        <li>
+          <input type="checkbox" id="p4">
+          <label for="p4">
+            Node.js 20+ (LTS) with npm/yarn installed, plus a React app scaffold (Vite) ready to go.
+            <a class="item-link" href="https://nodejs.org/" target="_blank" rel="noopener">→ Download Node.js LTS</a>
+          </label>
+        </li>
+        <li>
+          <input type="checkbox" id="p5">
+          <label for="p5">
+            VS Code (or your preferred editor) installed.
+            <a class="item-link" href="https://code.visualstudio.com/" target="_blank" rel="noopener">→ Download VS Code</a>
+          </label>
+        </li>
+        <li>
+          <input type="checkbox" id="p6">
+          <label for="p6">
+            Postman, or the Shopify GraphiQL app, for exploring the Storefront/Admin GraphQL APIs.
+            <a class="item-link" href="https://www.postman.com/downloads/" target="_blank" rel="noopener">→ Download Postman</a>
+          </label>
+        </li>
+        <li>
+          <input type="checkbox" id="p7">
+          <label for="p7">
+            Git installed and a GitHub account, for saving your lab work session to session.
+            <a class="item-link" href="https://git-scm.com/downloads" target="_blank" rel="noopener">→ Download Git</a>
+          </label>
+        </li>
+        <li>
+          <input type="checkbox" id="p8">
+          <label for="p8">
+            Optional: a Stripe/OpenAI developer sandbox account — used only for the ACP comparison walkthrough in Module 7.
+          </label>
+        </li>
+      </ul>
+
+      <div class="placeholder-note">Checklist state is stored only in your browser (localStorage) — it isn't synced anywhere, so it's private to this device.</div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Tech Stack</span>
+        <h2>What you'll actually be writing code in</h2>
+      </div>
+      <div class="grid grid-4">
+        <div class="card"><div class="icon">🟩</div><h3>Node.js</h3><p>Agent runtime &amp; backend — API calls, tool functions, MCP server.</p></div>
+        <div class="card"><div class="icon">⚛️</div><h3>React</h3><p>The shopper-facing chat widget UI, wired to the Node.js agent backend.</p></div>
+        <div class="card"><div class="icon">🟠</div><h3>Claude Agent SDK</h3><p>TypeScript SDK for the agent loop, custom tools, subagents and MCP servers.</p></div>
+        <div class="card"><div class="icon">🛍️</div><h3>Shopify APIs</h3><p>Storefront &amp; Admin GraphQL, webhooks, Shopify Flow, and Shopify's MCP servers.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Good to Know</span>
+        <h2>A few tips before you begin</h2>
+      </div>
+      <div class="grid grid-2">
+        <div class="card">
+          <h3>Use a dedicated dev store</h3>
+          <p>Don't practice against a live/production Shopify store. Partner development stores are free, disposable, and safe for testing write operations like draft orders and Flow triggers.</p>
+        </div>
+        <div class="card">
+          <h3>Keep API keys out of git</h3>
+          <p>You'll create <code>.env</code> files for your Shopify and Anthropic API keys during labs — we'll cover <code>.gitignore</code> hygiene on Day 1 so secrets never get committed.</p>
+        </div>
+        <div class="card">
+          <h3>Bring a webcam-friendly setup</h3>
+          <p>Sessions are interactive and hands-on — a second monitor (one for the call, one for coding) makes following along significantly easier.</p>
+        </div>
+        <div class="card">
+          <h3>Claude Code requires a paid plan</h3>
+          <p>There's no free tier — Claude Code needs either a Claude Pro/Max subscription or an Anthropic API account with billing enabled. Budget for this before Day 1.</p>
+        </div>
+        <div class="card">
+          <h3>Claude API usage has a cost</h3>
+          <p>Lab exercises are designed to be token-light, but keep an eye on your Anthropic Console usage dashboard, especially during the RAG and multi-agent modules.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <h4>Shopify Agentic AI Developer Bootcamp</h4>
+        <p class="small">A hands-on program on building agentic commerce experiences on Shopify with Claude, Node.js and React.</p>
+      </div>
+      <div>
+        <h4>Program</h4>
+        <ul>
+          <li><a href="schedule.html">Schedule</a></li>
+          <li><a href="curriculum.html">Curriculum</a></li>
+          <li><a href="prerequisites.html">Prerequisites</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>More</h4>
+        <ul>
+          <li><a href="about.html">About</a></li>
+          <li><a href="resources.html">Resources &amp; FAQ</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="mailto:training@koenig-solutions.com">training@koenig-solutions.com</a></li>
+          <li class="small">[Update with your Koenig program coordinator's contact]</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span id="footerYear"></span> Koenig Solutions. Delivered for V Group Inc.</span>
+      <div class="footer-logos">
+        <span class="logo-slot">
+          <img src="assets/images/koenig-logo.png" alt="Koenig Solutions" data-fallback onerror="this.style.display='none';this.nextElementSibling.style.display='inline-block'">
+          <span class="text-logo koenig" style="font-size:.85rem">KOENIG</span>
+        </span>
+        <span class="logo-slot">
+          <img src="assets/images/vgroup-logo.png" alt="V Group Inc." data-fallback onerror="this.style.display='none';this.nextElementSibling.style.display='inline-block'">
+          <span class="text-logo vgroup" style="font-size:.85rem">V Group Inc.</span>
+        </span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/data.js"></script>
+<script src="assets/js/main.js"></script>
+</body>
+</html>
