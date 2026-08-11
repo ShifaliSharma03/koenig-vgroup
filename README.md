@@ -75,11 +75,11 @@ real image automatically (no code changes needed). Recommended: transparent-back
 
 ## 4. Review checklist before going live
 
-- [ ] Drop in real Koenig + V Group logos (`assets/images/`)
+- [x] Drop in real Koenig + V Group logos (`assets/images/`)
 - [ ] Confirm/adjust the tentative module → session date mapping in `assets/js/data.js`
-- [ ] Replace the placeholder contact email in the footer of each page (`training@koenig-solutions.com`)
-- [ ] Replace the "About Koenig" / "About V Group" placeholder bios on `about.html`
-- [ ] Add trainer name/bio on `about.html`
+- [x] Replace the placeholder contact email in the footer of each page (now `Maitri.Bhansali@koenig-solutions.com`)
+- [x] Replace the "About Koenig" / "About V Group" placeholder bios on `about.html`
+- [x] Add trainer name/bio on `about.html`
 - [ ] Re-generate or edit `assets/downloads/Shopify-Agentic-AI-Developer-Bootcamp-Course-Outline.docx`
       if the curriculum changes materially
 - [ ] Spot-check the Schedule page's local-time-zone conversion and countdown in a real browser
