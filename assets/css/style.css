@@ -344,6 +344,19 @@ p { margin: 0 0 1em; color: var(--text-muted); }
   font-size: .78rem; color: var(--text-faint);
 }
 
+/* ---------- Trainer card ---------- */
+.trainer-card { display: flex; gap: 22px; align-items: flex-start; max-width: 780px; }
+.trainer-photo {
+  width: 108px; height: 108px; border-radius: 50%; object-fit: cover;
+  flex-shrink: 0; border: 3px solid var(--surface-alt); box-shadow: var(--shadow-sm);
+}
+.trainer-body h3 { margin-bottom: 2px; }
+.trainer-title { color: var(--shopify-green); font-weight: 700; font-size: .88rem; margin-bottom: 10px; }
+.trainer-meta { font-size: .8rem; color: var(--text-faint); margin-bottom: 0; }
+@media (max-width: 560px) {
+  .trainer-card { flex-direction: column; align-items: center; text-align: center; }
+}
+
 /* ---------- Timeline / Schedule ---------- */
 .schedule-toolbar {
   display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between;
