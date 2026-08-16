@@ -1,7 +1,7 @@
 # Shopify Agentic AI Developer Bootcamp — Program Website
 
 Static, no-build-step website for the **Shopify Agentic AI Developer Bootcamp**, delivered by
-**Koenig Solutions** for **V Group Inc.** (17 Aug – 24 Sep 2026, 10:00–12:00 IST, 20 live sessions / 40 hours).
+**Koenig Solutions** for **V Group Inc.** (17 Aug – 28 Sep 2026, 10:00–12:00 IST, 20 live sessions / 40 hours).
 
 Plain HTML + CSS + vanilla JS — no framework, no bundler, no `npm install` required. It runs by
 opening the files directly or via any static file server, and deploys straight to GitHub Pages.
