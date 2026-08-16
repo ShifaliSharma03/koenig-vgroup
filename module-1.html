@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module 1 Content | Shopify Agentic AI Developer Bootcamp</title>
+<meta name="description" content="Module 1: LLM Foundations & Vibe Coding with Claude — what's covered, key concepts, and what you'll build.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛍️</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="nav-wrap">
+    <a class="brand-lockup" href="index.html">
+      <span class="logo-slot">
+        <img src="assets/images/koenig-logo.png" alt="Koenig Solutions" data-fallback onerror="this.style.display='none';this.nextElementSibling.style.display='inline-block'">
+        <span class="text-logo koenig">KOENIG<span> solutions</span></span>
+      </span>
+      <span class="brand-x">×</span>
+      <span class="logo-slot">
+        <img src="assets/images/vgroup-logo.png" alt="V Group Inc." data-fallback onerror="this.style.display='none';this.nextElementSibling.style.display='inline-block'">
+        <span class="text-logo vgroup">V Group Inc.</span>
+      </span>
+      <span class="brand-title">Agentic AI Developer Bootcamp</span>
+    </a>
+    <nav>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="schedule.html">Schedule</a></li>
+        <li><a href="curriculum.html" class="active">Curriculum</a></li>
+        <li><a href="prerequisites.html">Prerequisites</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="resources.html">Resources</a></li>
+      </ul>
+    </nav>
+    <div class="nav-actions">
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">🌙</button>
+      <button class="nav-burger" id="navBurger" aria-label="Toggle menu" aria-expanded="false">☰</button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <section class="hero" style="padding:44px 0 36px">
+    <div class="hero-inner">
+      <p style="margin-bottom:14px"><a href="curriculum.html" class="small" style="text-decoration:none;color:var(--koenig-blue);font-weight:600">← Back to Curriculum</a></p>
+      <span class="eyebrow badge-live" style="background:var(--live-bg);border-color:transparent;color:var(--live-text)">📖 Module 1 · Live</span>
+      <h1>LLM Foundations & Vibe Coding with Claude</h1>
+      <p class="hero-sub">Get comfortable with how LLMs and Claude work, and start building with natural-language-driven (“vibe”) coding.</p>
+      <div class="hero-meta">
+        <span class="pill">📅 <strong>17 – 18 Aug 2026</strong></span>
+        <span class="pill">🕥 10:00 – 12:00 IST</span>
+        <span class="pill"><strong>2</strong> Live Sessions</span>
+        <span class="pill"><strong>6</strong> Topics</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="callout callout-koenig">
+        <span class="emoji">💡</span>
+        <div>
+          <h3>Before you arrive</h3>
+          <p>Make sure your <a href="prerequisites.html">Prerequisites checklist</a> is complete — a working Shopify Partner dev store, an active Claude API key, Claude Code CLI installed and authenticated, and Node.js/React ready to go. Setup issues on Day 1 eat into lab time for everyone.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">What's covered</span>
+        <h2>Six topics across two sessions</h2>
+        <p>This page is meant to be a complete, standalone reference for Module 1 — everything below is enough to prepare for, follow along with, and revisit after each session, without needing outside material.</p>
+      </div>
+
+      <!-- 1.1 -->
+      <div class="module-topic type-b">
+        <span class="topic-eyebrow">1.1 · Briefing</span>
+        <h3>Kickoff & Environment Setup</h3>
+        <p>Before any coding starts, everyone verifies the same four things. Run these checks yourself ahead of Session 1 — don't wait to discover a gap live.</p>
+
+        <div class="simple-table-wrap">
+          <table class="simple-table">
+            <thead><tr><th>Requirement</th><th>How to verify</th><th>Looks like</th></tr></thead>
+            <tbody>
+              <tr><td>Shopify Partner dev store</td><td>Log in at your Partner dashboard and open the store</td><td>An empty/demo store you can freely break</td></tr>
+              <tr><td>Claude API access</td><td><code>claude auth status</code> in a terminal</td><td>Shows an authenticated account, not a login prompt</td></tr>
+              <tr><td>Claude Code CLI</td><td><code>claude --version</code></td><td>Prints a version number, not "command not found"</td></tr>
+              <tr><td>Node.js 20+ / React scaffold</td><td><code>node --version</code></td><td><code>v20.x.x</code> or higher</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout-warn">⚠️ <strong>Claude Code has no free tier.</strong> It requires a paid Claude Pro/Max plan or an Anthropic API account with billing enabled. If <code>claude auth status</code> fails, resolve billing before Session 1 — see the full <a href="prerequisites.html">Prerequisites</a> page for setup links.</div>
+
+        <div class="callout-tip"><strong>Why a dev store only:</strong> later modules create draft orders, trigger Shopify Flow, and register webhooks. Never point these at a live/production store — a free Partner dev store is disposable and safe to break.</div>
+      </div>
+
+      <!-- 1.2 -->
+      <div class="module-topic type-b">
+        <span class="topic-eyebrow">1.2 · Briefing</span>
+        <h3>How LLMs Actually Work</h3>
+        <p>Everything an AI agent does later in this program — why it "forgets" things, why it costs money per request, why one model feels smarter than another — traces back to four ideas. Get these right now and a lot of later debugging gets easier.</p>
+
+        <div class="concept-block">
+          <div class="concept-icon">🔤</div>
+          <div class="concept-body">
+            <h4>Tokens are not words</h4>
+            <p>Claude reads and writes in <strong>tokens</strong> — chunks of text that are often smaller than a whole word. Common short words are usually one token; longer or unusual words get split into pieces.</p>
+            <div class="code-block"><span class="cm">// Roughly how a sentence gets tokenized (illustrative, not exact)</span>
+"Shopify agents are useful"
+→ ["Shop", "ify", " agents", " are", " useful"]   <span class="cm">// 5 tokens, 4 words</span></div>
+            <p>This matters practically: Claude's API is billed per token (input + output), and every limit you'll hear about — context window, max output — is measured in tokens, not words or characters.</p>
+          </div>
+        </div>
+
+        <div class="concept-block">
+          <div class="concept-icon">🧠</div>
+          <div class="concept-body">
+            <h4>The context window is working memory, not storage</h4>
+            <p>The <strong>context window</strong> is the maximum amount of conversation (in tokens) Claude can "see" at once — your messages, its replies, any documents or tool results you've included. As of this program, Claude Sonnet 5 (our default model) and Opus 4.8 support up to <strong>1,000,000 tokens</strong> of context; Haiku 4.5 supports <strong>200,000 tokens</strong>. That's roughly 750,000 words at the high end — most of a very long novel.</p>
+            <p class="mb-0">Nothing persists after a conversation ends. If an application wants Claude to "remember" earlier turns, it has to resend that history as part of the context window on every request — there's no hidden long-term memory. We'll cover strategies for managing this deliberately (summarization, trimming) once we build multi-turn agents in Module 2.</p>
+          </div>
+        </div>
+
+        <div class="concept-block">
+          <div class="concept-icon">🌡️</div>
+          <div class="concept-body">
+            <h4>Temperature controls randomness, not "creativity"</h4>
+            <p class="mb-0">Temperature is a setting (typically 0–1) that controls how much the model varies its word choices. At <strong>temperature 0</strong>, the same prompt reliably produces close to the same output every time — good for anything that needs to be predictable (structured data extraction, classification). Higher temperatures introduce more variety — useful for brainstorming or creative copy, risky for anything downstream code needs to parse.</p>
+          </div>
+        </div>
+
+        <h4>Choosing a model tier</h4>
+        <div class="simple-table-wrap">
+          <table class="simple-table">
+            <thead><tr><th>Model</th><th>Context window</th><th>Best for</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Haiku 4.5</strong></td><td>200K tokens</td><td>High-volume, simple tasks where speed/cost matter most (classification, short extractions)</td></tr>
+              <tr class="row-highlight"><td><strong>Sonnet 5</strong><br><span class="small">Workshop default</span></td><td>1M tokens</td><td>The balanced choice for agentic tool-use, coding, and most of this program's labs</td></tr>
+              <tr><td><strong>Opus 4.8</strong></td><td>1M tokens</td><td>The deepest reasoning tier — complex multi-step planning where quality matters more than speed or cost</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="small">Exact limits and pricing are Anthropic's to update over time — check the <a href="resources.html">Resources page</a> for a link to current docs if you want to confirm the latest numbers.</p>
+
+        <div class="concept-block">
+          <div class="concept-icon">🔎</div>
+          <div class="concept-body">
+            <h4>A quick word on embeddings</h4>
+            <p class="mb-0">You'll hear "embeddings" again when we cover Retrieval-Augmented Generation (RAG) later in the program. In short: an embedding turns a piece of text into a list of numbers (a vector) that captures its <em>meaning</em>, so a computer can compare how similar two pieces of text are — the basis for search that understands intent, not just keyword matching.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 1.3 -->
+      <div class="module-topic type-l">
+        <span class="topic-eyebrow">1.3 · Briefing + Lab</span>
+        <h3>Prompt Engineering That Holds Up in Production</h3>
+        <p>A prompt that works once in a chat window is not the same as a prompt that works reliably inside an application. This is the shift from "chatting" to engineering.</p>
+
+        <div class="concept-block">
+          <div class="concept-icon">💬</div>
+          <div class="concept-body">
+            <h4>System prompt vs. user prompt</h4>
+            <p>The <strong>system prompt</strong> sets durable behavior — role, tone, constraints — that should hold across an entire conversation. The <strong>user prompt</strong> carries the specific, per-turn request.</p>
+            <div class="code-block"><span class="cm">// System prompt (set once)</span>
+"You are a product copywriter for an outdoor gear store.
+Always respond with a single JSON object matching:
+{ title: string, description: string, seo_keywords: string[] }
+Never include text outside the JSON object."
+
+<span class="cm">// User prompt (per request)</span>
+"Product: Trailblazer 40L Hiking Backpack, waterproof, 12 external pockets"</div>
+          </div>
+        </div>
+
+        <div class="concept-block">
+          <div class="concept-icon">🔁</div>
+          <div class="concept-body">
+            <h4>Few-shot examples beat more instructions</h4>
+            <p>When output is inconsistent, adding 1–2 concrete examples usually fixes it faster than adding more rules in prose.</p>
+            <div class="callout-tip mb-0">
+              <p><strong>Before (inconsistent):</strong> "Write a short product description." → sometimes a sentence, sometimes a bullet list, sometimes includes a price it invented.</p>
+              <p><strong>After (few-shot):</strong> include 2 example input/output pairs in the prompt showing the exact desired shape. Output consistency jumps immediately.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="concept-block">
+          <div class="concept-icon">🧩</div>
+          <div class="concept-body">
+            <h4>Chain-of-thought, used deliberately</h4>
+            <p class="mb-0">For multi-step reasoning (e.g. "does this product need a size variant, and if so which sizes"), letting the model reason step-by-step before answering improves accuracy — but in a production response, that reasoning is usually hidden from the end user and only the final answer is returned.</p>
+          </div>
+        </div>
+
+        <div class="concept-block">
+          <div class="concept-icon">🔒</div>
+          <div class="concept-body">
+            <h4>Output constraints prevent downstream bugs</h4>
+            <p>Anything parsing the model's output — a database column, a UI component, another function — needs a predictable shape. State the format explicitly and validate it.</p>
+            <div class="code-block">Respond with <span class="cm">only</span> valid JSON, no markdown fences, matching exactly:
+{ "title": string, "description": string, "seo_keywords": string[] }</div>
+          </div>
+        </div>
+
+        <h4>Lab: build a prompt that survives edge cases</h4>
+        <p>Starting from a loose prompt ("write a product description"), iterate it in the Claude Console until it reliably returns the JSON shape above. Test it against all four of these before calling it done:</p>
+        <ul class="mini-check">
+          <li>A normal, well-formed product name</li>
+          <li>An empty or missing product title</li>
+          <li>A non-English product name</li>
+          <li>A product name containing HTML or special characters</li>
+        </ul>
+        <p class="mb-0"><strong>Done means:</strong> valid, parseable JSON on all four — not just the first one.</p>
+      </div>
+
+      <!-- 1.4 -->
+      <div class="module-topic type-d">
+        <span class="topic-eyebrow">1.4 · Briefing + Demo</span>
+        <h3>Vibe Coding Fundamentals</h3>
+        <p>"Vibe coding" gets used loosely — here it means a specific, disciplined loop with Claude Code, not handing over the keyboard and looking away.</p>
+
+        <h4>The loop</h4>
+        <ol class="step-list">
+          <li><strong>Plan</strong> — write the goal, constraints, and edge cases in a sentence or two before opening Claude Code</li>
+          <li><strong>Prompt</strong> — describe the task clearly, including what "done" looks like</li>
+          <li><strong>Review the diff</strong> — read every changed file before accepting; ask Claude Code to explain any line you don't understand</li>
+          <li><strong>Iterate</strong> — request specific changes rather than re-describing the whole task from scratch</li>
+        </ol>
+
+        <h4>Tool permissions</h4>
+        <p>Claude Code asks before taking actions like editing files or running shell commands. Treat these prompts as real decision points, not a formality to click through — if a requested action doesn't make sense for the task, say no and ask what it's for.</p>
+
+        <h4>What a good review actually checks</h4>
+        <ul class="plain-list">
+          <li>Does the diff match what you actually asked for?</li>
+          <li>Are there side effects you didn't expect (extra files, changed configs)?</li>
+          <li>Is error handling reasonable, or does it silently swallow failures?</li>
+          <li>Would you be comfortable explaining this code to someone else?</li>
+        </ul>
+        <div class="callout-tip mb-0"><strong>Addressing the obvious pushback:</strong> "isn't this just letting the AI write bad code?" — only if you skip the review step. The discipline of reading every diff before accepting <em>is</em> vibe coding; skipping it is something else entirely.</div>
+      </div>
+
+      <!-- 1.5 -->
+      <div class="module-topic type-l">
+        <span class="topic-eyebrow">1.5 · Lab</span>
+        <h3>Vibe-Code a Product Data Utility (Node.js)</h3>
+        <p>Your first full pass through the loop above, on a small, real task.</p>
+
+        <h4>Starting point</h4>
+        <p>You'll be given a sample product CSV, intentionally a little messy:</p>
+        <div class="code-block">name,description,price
+  Trailblazer 40L Backpack ,Waterproof hiking pack,129.99
+CAMP STOVE MINI,,45.00
+Insulated Water Bottle 1L,Keeps drinks cold 24h,22.50</div>
+        <p>Notice the stray whitespace, inconsistent casing, and one missing description — all deliberate.</p>
+
+        <h4>The task</h4>
+        <p>Open Claude Code and describe the goal: build a Node.js script that reads the CSV, cleans up the fields (trim whitespace, normalize casing), and generates a one-line SEO-friendly description for any product missing one — using the Claude API and the prompt discipline from 1.3.</p>
+
+        <h4>Try prompting Claude Code with something like:</h4>
+        <div class="code-block">"Build a Node.js script (Node 20+, ESM) that:
+1. Reads products.csv (name, description, price)
+2. Trims whitespace and normalizes name casing to Title Case
+3. For any row with an empty description, calls the Claude API
+   to generate one SEO-friendly sentence
+4. Prints the cleaned, complete product list to the console
+Use the @anthropic-ai/sdk package and read the API key from
+process.env.ANTHROPIC_API_KEY."</div>
+
+        <h4>Acceptance checklist</h4>
+        <ul class="mini-check">
+          <li>Script runs with <code>node</code> against the sample CSV without errors</li>
+          <li>Whitespace and casing issues are visibly fixed in the output</li>
+          <li>The row with a missing description now has a generated one</li>
+          <li>You read and understood every part of the diff before accepting it</li>
+        </ul>
+
+        <div class="callout-tip"><strong>Stuck?</strong> Common issues: <code>ANTHROPIC_API_KEY</code> not set in your shell/.env, Node running an older cached version (check with <code>node --version</code>), or the CSV parser choking on the trailing comma-less last line — ask Claude Code to add error handling for malformed rows rather than debugging it manually.</div>
+      </div>
+
+      <!-- 1.6 -->
+      <div class="module-topic type-l">
+        <span class="topic-eyebrow">1.6 · Lab</span>
+        <h3>Vibe-Code a React Chat UI Skeleton</h3>
+        <p>A UI-only exercise — no backend calls yet. This component gets wired to a real agent later in the program, so the shape you choose now matters.</p>
+
+        <h4>What to build</h4>
+        <p>A functional React component with: a scrollable message list, a controlled text input, and a "send" handler that appends to the list (no network call yet — just local state).</p>
+
+        <h4>Use this state shape</h4>
+        <p>Keep messages as an array of role/content pairs — this exact shape gets reused when the widget is wired to a live agent later:</p>
+        <div class="code-block">const [messages, setMessages] = useState([
+  { role: "assistant", content: "Hi! Ask me about our products." },
+]);
+<span class="cm">// role is "user" | "assistant"</span></div>
+
+        <h4>Try prompting Claude Code with something like:</h4>
+        <div class="code-block">"Build a React functional component called ChatWidget.
+State: messages (array of {role, content}), and inputValue (string).
+Render the message list scrollable, with user/assistant messages
+visually distinguished. A controlled input + send button appends a
+new {role: 'user', content: inputValue} message and clears the input.
+No API calls — just local state for now. Use plain CSS, no UI library."</div>
+
+        <h4>Acceptance checklist</h4>
+        <ul class="mini-check">
+          <li>Typing and submitting a message appends it to the visible list</li>
+          <li>The input clears after send</li>
+          <li>The component renders sensibly with zero messages (empty state)</li>
+          <li>Message state uses the <code>{role, content}</code> shape above</li>
+        </ul>
+
+        <div class="callout-tip"><strong>Save this.</strong> Commit the component to your own local git repo — you'll extend it directly rather than rebuild it when the shopping agent gets a real UI later in the program.</div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="callout callout-shopify">
+        <span class="emoji">🔭</span>
+        <div>
+          <h3>Where this goes next</h3>
+          <p>The Node.js habits from 1.5 and the React chat shell from 1.6 both get reused directly once you start building the real Shopify shopping agent. Nothing here is a throwaway exercise.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <h4>Shopify Agentic AI Developer Bootcamp</h4>
+        <p class="small">A hands-on program on building agentic commerce experiences on Shopify with Claude, Node.js and React.</p>
+      </div>
+      <div>
+        <h4>Program</h4>
+        <ul>
+          <li><a href="schedule.html">Schedule</a></li>
+          <li><a href="curriculum.html">Curriculum</a></li>
+          <li><a href="prerequisites.html">Prerequisites</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>More</h4>
+        <ul>
+          <li><a href="about.html">About</a></li>
+          <li><a href="resources.html">Resources &amp; FAQ</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="mailto:Maitri.Bhansali@koenig-solutions.com">Maitri.Bhansali@koenig-solutions.com</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span id="footerYear"></span> Koenig Solutions. Delivered for V Group Inc.</span>
+      <div class="footer-logos">
+        <span class="logo-slot">
+          <img src="assets/images/koenig-logo.png" alt="Koenig Solutions" data-fallback onerror="this.style.display='none';this.nextElementSibling.style.display='inline-block'">
+          <span class="text-logo koenig" style="font-size:.85rem">KOENIG</span>
+        </span>
+        <span class="logo-slot">
+          <img src="assets/images/vgroup-logo.png" alt="V Group Inc." data-fallback onerror="this.style.display='none';this.nextElementSibling.style.display='inline-block'">
+          <span class="text-logo vgroup" style="font-size:.85rem">V Group Inc.</span>
+        </span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/data.js"></script>
+<script src="assets/js/main.js"></script>
+</body>
+</html>

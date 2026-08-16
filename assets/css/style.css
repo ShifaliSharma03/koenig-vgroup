@@ -495,6 +495,91 @@ table.schedule-table .local-time { display: block; font-size: .76rem; color: var
 }
 .search-empty { text-align: center; padding: 30px; color: var(--text-faint); display: none; }
 
+/* ---------- Code blocks & inline code (module content pages) ---------- */
+code {
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+  background: var(--surface-alt); border: 1px solid var(--border);
+  padding: 1px 6px; border-radius: 4px; font-size: .88em; color: var(--text);
+}
+.code-block {
+  background: var(--surface-alt); border: 1px solid var(--border); border-radius: var(--radius-sm);
+  padding: 14px 16px; font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+  font-size: .84rem; line-height: 1.6; overflow-x: auto; white-space: pre;
+  color: var(--text); margin: 6px 0 16px;
+}
+.code-block .cm { color: var(--text-faint); font-style: italic; }
+.code-label {
+  font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em;
+  color: var(--text-faint); margin: 0 0 4px;
+}
+
+/* ---------- Module content page ---------- */
+.module-topic {
+  border: 1px solid var(--border); border-top: 4px solid var(--border);
+  border-radius: var(--radius-md); background: var(--surface); box-shadow: var(--shadow-sm);
+  padding: 28px 30px; margin-bottom: 28px;
+}
+.module-topic.type-b { border-top-color: var(--koenig-blue); }
+.module-topic.type-l { border-top-color: var(--shopify-green); }
+.module-topic.type-d { border-top-color: var(--claude-orange); }
+.module-topic h3 { font-size: 1.25rem; margin-bottom: 4px; }
+.module-topic > p:first-of-type { font-size: .96rem; }
+.module-topic .topic-eyebrow { font-size: .78rem; font-weight: 700; color: var(--shopify-green); text-transform: uppercase; letter-spacing: .05em; margin-bottom: 6px; display: block; }
+.module-topic.type-b .topic-eyebrow { color: var(--koenig-blue); }
+.module-topic.type-d .topic-eyebrow { color: var(--claude-orange); }
+.module-topic h4 { font-size: .95rem; margin: 0 0 6px; color: var(--text); }
+
+/* Concept block: boxes off a sub-topic with an icon so dense briefings don't read as a flat wall of headers */
+.concept-block {
+  display: flex; gap: 14px; align-items: flex-start;
+  background: var(--surface-alt); border: 1px solid var(--border); border-radius: var(--radius-sm);
+  padding: 16px 18px; margin: 16px 0;
+}
+.concept-block .concept-icon {
+  flex-shrink: 0; width: 34px; height: 34px; border-radius: 8px;
+  background: rgba(14,127,192,.12); color: var(--koenig-blue);
+  display: flex; align-items: center; justify-content: center; font-size: 1.05rem;
+}
+.concept-block .concept-body { flex: 1; min-width: 0; }
+.concept-block .concept-body > *:last-child { margin-bottom: 0; }
+.concept-block + h4 { margin-top: 18px; }
+
+/* Acceptance / test-case checklist — reserved for things a trainee actually checks off as verified */
+.mini-check { list-style: none; margin: 8px 0 14px; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+.mini-check li { display: flex; align-items: flex-start; gap: 8px; font-size: .92rem; color: var(--text-muted); }
+.mini-check li::before { content: "✓"; color: var(--shopify-green); font-weight: 800; flex-shrink: 0; }
+
+/* Sequential process steps — numbered, not checkmarked (nothing to "verify" yet) */
+.step-list { list-style: none; margin: 8px 0 14px; padding: 0; counter-reset: steps; display: flex; flex-direction: column; gap: 10px; }
+.step-list li { counter-increment: steps; display: flex; align-items: flex-start; gap: 10px; font-size: .92rem; color: var(--text-muted); }
+.step-list li::before {
+  content: counter(steps); flex-shrink: 0; width: 22px; height: 22px; border-radius: 50%;
+  background: var(--koenig-blue); color: #fff; font-size: .72rem; font-weight: 700;
+  display: flex; align-items: center; justify-content: center; margin-top: 1px;
+}
+
+/* Plain informational bullets — review questions, considerations; not steps, not checks */
+.plain-list { list-style: none; margin: 8px 0 14px; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+.plain-list li { display: flex; align-items: flex-start; gap: 10px; font-size: .92rem; color: var(--text-muted); }
+.plain-list li::before { content: "–"; color: var(--text-faint); font-weight: 700; flex-shrink: 0; }
+
+.simple-table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: var(--radius-sm); margin: 10px 0 16px; }
+table.simple-table { width: 100%; border-collapse: collapse; min-width: 480px; }
+table.simple-table th {
+  text-align: left; font-size: .74rem; text-transform: uppercase; letter-spacing: .05em;
+  color: var(--text-faint); padding: 10px 14px; border-bottom: 1px solid var(--border); background: var(--surface-alt);
+}
+table.simple-table td { padding: 12px 14px; border-bottom: 1px solid var(--border); font-size: .87rem; vertical-align: middle; }
+table.simple-table tr:last-child td { border-bottom: none; }
+table.simple-table .row-highlight td { background: rgba(0,132,61,.05); }
+table.simple-table .row-highlight td:first-child { border-left: 3px solid var(--shopify-green); }
+
+.callout-tip { border: 1px solid var(--border); background: var(--surface-alt); border-left: 3px solid var(--koenig-blue); border-radius: var(--radius-sm); padding: 14px 18px; margin: 16px 0; font-size: .88rem; }
+.callout-tip strong { color: var(--koenig-blue); }
+.callout-tip p { margin-bottom: 8px; }
+.callout-tip p:last-child { margin-bottom: 0; }
+.callout-warn { border: 1px solid var(--border); background: var(--soon-bg); border-left: 3px solid #d98a2b; border-radius: var(--radius-sm); padding: 14px 18px; margin: 16px 0; font-size: .88rem; color: var(--soon-text); }
+
 /* ---------- Checklist (Prerequisites) ---------- */
 .checklist { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
 .checklist li {

@@ -59,8 +59,8 @@ const CURRICULUM = [
     id: "m1",
     title: "LLM Foundations & Vibe Coding with Claude",
     goal: "Get comfortable with how LLMs and Claude work, and start building with natural-language-driven (“vibe”) coding.",
-    materialsAvailable: false,
-    materialsUrl: null,
+    materialsAvailable: true,
+    materialsUrl: "module-1.html",
     topics: [
       { type: "B", title: "Kickoff & Environment Setup", detail: "Program roadmap; verify Shopify Partner/dev store, Claude API key, Claude Code CLI, and the Node.js/React toolchain for every participant." },
       { type: "B", title: "How LLMs Actually Work", detail: "Tokens, context windows, embeddings, temperature/sampling, model families (Opus/Sonnet/Haiku) and how to pick a model for a task." },
