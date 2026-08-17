@@ -6,7 +6,9 @@
        once its slides/recordings/labs are ready to publish (before each
        session, per module).
      - Set `recordingUrl` on a SESSION once that class has been delivered
-       and the recording is uploaded.
+       and the recording is live on mykoenig.com (paste the mykoenig.com
+       link for that recording — trainees sign in there with their
+       official email).
      - Adjust dates/times if the schedule changes.
    Everything on every page (Home, Schedule, Curriculum) renders from this
    file — you do not need to touch the HTML for routine updates.
@@ -26,7 +28,8 @@ const PROGRAM = {
   startDate: "2026-08-17",
   endDate: "2026-09-28",
   stack: ["Node.js", "React", "Claude Agent SDK (TypeScript)", "Shopify Admin & Storefront API"],
-  courseOutlineUrl: "assets/downloads/Shopify-Agentic-AI-Developer-Bootcamp-Course-Outline.docx"
+  courseOutlineUrl: "assets/downloads/Shopify-Agentic-AI-Developer-Bootcamp-Course-Outline.docx",
+  teamsJoinUrl: "https://teams.microsoft.com/meet/485172929332022?p=1YfEQ74mTN2R8vFShj"
 };
 
 /* Each session: n, date (ISO yyyy-mm-dd), moduleId, recordingUrl (null until delivered) */
@@ -202,7 +205,7 @@ const GLOSSARY = [
 ];
 
 const FAQ = [
-  { q: "What if I miss a live session?", a: "Every session is recorded. Once the recording is processed and approved, it will be linked from the Schedule page next to that session — look for the status badge to switch from “Upcoming” to a “Watch Recording” link." },
+  { q: "What if I miss a live session?", a: "Every session is recorded and published on mykoenig.com — sign in there with your official email to watch it. Once a recording is available, a direct link also appears in the Materials column on the Schedule page next to that session." },
   { q: "Will module content be shared in advance?", a: "Each module's content is published on the Curriculum page shortly before that module's first session, once finalized. Until then it's marked “Available soon.”" },
   { q: "What do I need installed before Day 1?", a: "See the Prerequisites page for the full checklist — a Shopify Partner dev store, an Anthropic Claude API key, Claude Code CLI, and a Node.js/React toolchain." },
   { q: "Is this beginner-friendly?", a: "Working knowledge of JavaScript/TypeScript, Node.js, and React is assumed. No prior Shopify or LLM experience is required — both are covered from first principles in the opening modules." },

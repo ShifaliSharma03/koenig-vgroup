@@ -114,6 +114,38 @@
     }
 
     initCountdown();
+    initJoinButton();
+  }
+
+  /* ---------------- Join Now button (Home) — live only during a session's actual date/time ---------------- */
+  function initJoinButton() {
+    const btn = $("#joinNowBtn");
+    if (!btn || typeof SCHEDULE === "undefined" || typeof PROGRAM === "undefined") return;
+
+    function update() {
+      const liveSession = SCHEDULE.find((s) => sessionStatus(s.date) === "live");
+      if (liveSession && PROGRAM.teamsJoinUrl) {
+        btn.href = PROGRAM.teamsJoinUrl;
+        btn.target = "_blank";
+        btn.rel = "noopener";
+        btn.removeAttribute("aria-disabled");
+        btn.classList.remove("btn-disabled");
+        btn.classList.add("btn-live");
+        btn.innerHTML = `<span class="live-dot"></span>Join Now via Teams — Session ${liveSession.n} is live`;
+        btn.onclick = null;
+      } else {
+        btn.href = "#";
+        btn.removeAttribute("target");
+        btn.removeAttribute("rel");
+        btn.setAttribute("aria-disabled", "true");
+        btn.classList.remove("btn-live");
+        btn.classList.add("btn-disabled");
+        btn.innerHTML = "🔒 Join Now — Live During Sessions Only";
+        btn.onclick = (e) => e.preventDefault();
+      }
+    }
+    update();
+    setInterval(update, 30000); // catches the exact start/end boundary if the tab is left open
   }
 
   function initCountdown() {
@@ -200,7 +232,7 @@
       if (s.recordingUrl) {
         materials = `<a class="btn btn-sm btn-outline" href="${s.recordingUrl}" target="_blank" rel="noopener">▶ Recording</a>`;
       } else if (status === "done") {
-        materials = '<span class="badge badge-soon">Recording processing</span>';
+        materials = '<span class="badge badge-soon">On mykoenig.com soon</span>';
       }
 
       return `
