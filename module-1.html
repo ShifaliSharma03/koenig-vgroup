@@ -266,27 +266,42 @@ Insulated Water Bottle 1L,Keeps drinks cold 24h,22.50</div>
         <p>Notice the stray whitespace, inconsistent casing, and one missing description — all deliberate.</p>
 
         <h4>The task</h4>
-        <p>Open Claude Code and describe the goal: build a Node.js script that reads the CSV, cleans up the fields (trim whitespace, normalize casing), and generates a one-line SEO-friendly description for any product missing one — using the Claude API and the prompt discipline from 1.3.</p>
+        <p>Open Claude Code and describe the goal: build a Node.js script that reads the CSV, cleans up the fields (trim whitespace, normalize casing), and for any row missing a description, calls the Claude API using <strong>the exact system prompt you finalized in Lab 1.3</strong> — not a simplified version of it.</p>
 
         <h4>Try prompting Claude Code with something like:</h4>
         <div class="code-block">"Build a Node.js script (Node 20+, ESM) that:
 1. Reads products.csv (name, description, price)
 2. Trims whitespace and normalizes name casing to Title Case
-3. For any row with an empty description, calls the Claude API
-   to generate one SEO-friendly sentence
+3. For any row with an empty description, calls the Claude API using
+   the system prompt below (from Lab 1.3) and extracts the
+   'description' field from its JSON response
 4. Prints the cleaned, complete product list to the console
 Use the @anthropic-ai/sdk package and read the API key from
-process.env.ANTHROPIC_API_KEY."</div>
+process.env.ANTHROPIC_API_KEY.
+
+System prompt to embed in the API call (from Lab 1.3):
+'You are a product copywriter for an outdoor gear store.
+Always respond with only a single valid JSON object, no markdown
+fences, no text outside the object, matching exactly:
+{ title: string, description: string, seo_keywords: string[] }
+If no product information is given, respond with
+{ "title": "", "description": "", "seo_keywords": [] } — do not
+invent a product. Strip any HTML tags from the input before use.
+Escape any double quotes inside string values so the JSON stays
+valid. Always respond in English regardless of the input product
+name's language.'"</div>
 
         <h4>Acceptance checklist</h4>
         <ul class="mini-check">
           <li>Script runs with <code>node</code> against the sample CSV without errors</li>
           <li>Whitespace and casing issues are visibly fixed in the output</li>
           <li>The row with a missing description now has a generated one</li>
+          <li>The API call uses your actual Lab 1.3 system prompt, not a rewritten one</li>
           <li>You read and understood every part of the diff before accepting it</li>
         </ul>
 
         <div class="callout-tip"><strong>Stuck?</strong> Common issues: <code>ANTHROPIC_API_KEY</code> not set in your shell/.env, Node running an older cached version (check with <code>node --version</code>), or the CSV parser choking on the trailing comma-less last line — ask Claude Code to add error handling for malformed rows rather than debugging it manually.</div>
+        <a class="btn btn-sm btn-primary" href="assets/downloads/Module-1-Lab-1.5-Step-by-Step-Guide.pdf" download>⬇ Download the step-by-step lab guide (PDF)</a>
       </div>
 
       <!-- 1.6 -->
@@ -322,6 +337,7 @@ No API calls — just local state for now. Use plain CSS, no UI library."</div>
         </ul>
 
         <div class="callout-tip"><strong>Save this.</strong> Commit the component to your own local git repo — you'll extend it directly rather than rebuild it when the shopping agent gets a real UI later in the program.</div>
+        <a class="btn btn-sm btn-primary" href="assets/downloads/Module-1-Lab-1.6-Step-by-Step-Guide.pdf" download>⬇ Download the step-by-step lab guide (PDF)</a>
       </div>
 
     </div>
