@@ -77,8 +77,8 @@ const CURRICULUM = [
     id: "m2",
     title: "Building Agents with the Claude API & Agent SDK",
     goal: "Move from prompting to programmable agents: tool use, structured outputs, and the Claude Agent SDK.",
-    materialsAvailable: false,
-    materialsUrl: null,
+    materialsAvailable: true,
+    materialsUrl: "module-2.html",
     topics: [
       { type: "B+L", title: "Anthropic Messages API Deep Dive", detail: "Requests, streaming, system prompts, multi-turn context, prompt caching for cost/latency. Lab: call the Messages API from a Node.js script and stream a response." },
       { type: "B+L", title: "Tool Use / Function Calling", detail: "Defining tool schemas, forcing/choosing tool calls, handling tool results. Lab: build a Node.js agent that calls a custom calculator/lookup tool." },

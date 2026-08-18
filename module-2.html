@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module 2 Content | Shopify Agentic AI Developer Bootcamp</title>
+<meta name="description" content="Module 2: Building Agents with the Claude API & Agent SDK — what's covered, key concepts, and what you'll build.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛍️</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="nav-wrap">
+    <a class="brand-lockup" href="index.html">
+      <span class="logo-slot">
+        <img src="assets/images/koenig-logo.png" alt="Koenig Solutions" data-fallback onerror="this.style.display='none';this.nextElementSibling.style.display='inline-block'">
+        <span class="text-logo koenig">KOENIG<span> solutions</span></span>
+      </span>
+      <span class="brand-x">×</span>
+      <span class="logo-slot">
+        <img src="assets/images/vgroup-logo.png" alt="V Group Inc." data-fallback onerror="this.style.display='none';this.nextElementSibling.style.display='inline-block'">
+        <span class="text-logo vgroup">V Group Inc.</span>
+      </span>
+      <span class="brand-title">Agentic AI Developer Bootcamp</span>
+    </a>
+    <nav>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="schedule.html">Schedule</a></li>
+        <li><a href="curriculum.html" class="active">Curriculum</a></li>
+        <li><a href="prerequisites.html">Prerequisites</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="resources.html">Resources</a></li>
+      </ul>
+    </nav>
+    <div class="nav-actions">
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">🌙</button>
+      <button class="nav-burger" id="navBurger" aria-label="Toggle menu" aria-expanded="false">☰</button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <section class="hero" style="padding:44px 0 36px">
+    <div class="hero-inner">
+      <p style="margin-bottom:14px"><a href="curriculum.html" class="small" style="text-decoration:none;color:var(--koenig-blue);font-weight:600">← Back to Curriculum</a></p>
+      <span class="eyebrow badge-live" style="background:var(--live-bg);border-color:transparent;color:var(--live-text)">📖 Module 2 · Live</span>
+      <h1>Building Agents with the Claude API & Agent SDK</h1>
+      <p class="hero-sub">Move from prompting to programmable agents: tool use, structured outputs, and the Claude Agent SDK.</p>
+      <div class="hero-meta">
+        <span class="pill">📅 <strong>19 – 20 Aug 2026</strong></span>
+        <span class="pill">🕥 10:00 – 12:00 IST</span>
+        <span class="pill"><strong>2</strong> Live Sessions</span>
+        <span class="pill"><strong>6</strong> Topics</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="callout callout-koenig">
+        <span class="emoji">💡</span>
+        <div>
+          <h3>Before you arrive</h3>
+          <p>Module 1's Node.js habits and your <code>ANTHROPIC_API_KEY</code> setup carry straight into this module — if <code>claude auth status</code> or a plain <code>node</code> script calling the Messages API didn't work by the end of Module 1, fix that first. Everything below assumes a working Node.js 20+ project you can run scripts in.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">What's covered</span>
+        <h2>Six topics across two sessions</h2>
+        <p>This page is meant to be a complete, standalone reference for Module 2 — everything below is enough to prepare for, follow along with, and revisit after each session, without needing outside material.</p>
+      </div>
+
+      <!-- 2.1 -->
+      <div class="module-topic type-l">
+        <span class="topic-eyebrow">2.1 · Briefing + Lab</span>
+        <h3>Anthropic Messages API Deep Dive</h3>
+        <p>Module 1 called the Messages API through simple, one-shot scripts. This session goes under the hood: how requests are structured, how streaming works, and how to keep a multi-turn conversation coherent and affordable.</p>
+
+        <div class="concept-block">
+          <div class="concept-icon">📨</div>
+          <div class="concept-body">
+            <h4>Anatomy of a request</h4>
+            <p>Every call takes a <code>model</code>, a <code>max_tokens</code> cap, an optional top-level <code>system</code> prompt, and a <code>messages</code> array of <code>{role, content}</code> turns — the same shape you used for the React chat widget's local state in Lab 1.6.</p>
+            <div class="code-block">import Anthropic from "@anthropic-ai/sdk";
+const client = new Anthropic();
+
+const response = await client.messages.create({
+  model: "claude-sonnet-5",
+  max_tokens: 1024,
+  system: "You are a concise Shopify merchandising assistant.",
+  messages: [
+    { role: "user", content: "Suggest a name for a waterproof backpack." }
+  ],
+});
+console.log(response.content[0].text);</div>
+          </div>
+        </div>
+
+        <div class="concept-block">
+          <div class="concept-icon">🌊</div>
+          <div class="concept-body">
+            <h4>Streaming responses</h4>
+            <p>For anything user-facing — like the chat widget from Module 1 — streaming tokens as they're generated feels dramatically faster than waiting for the full response, even though total generation time is the same.</p>
+            <div class="code-block">const stream = client.messages.stream({
+  model: "claude-sonnet-5",
+  max_tokens: 1024,
+  messages: [{ role: "user", content: "Write a short, upbeat product description for an insulated water bottle." }],
+});
+stream.on("text", (chunk) => process.stdout.write(chunk));
+await stream.finalMessage();</div>
+          </div>
+        </div>
+
+        <div class="concept-block">
+          <div class="concept-icon">🔁</div>
+          <div class="concept-body">
+            <h4>Multi-turn context is sent, not remembered</h4>
+            <p class="mb-0">There's no server-side session — every request resends the full <code>messages</code> history the app wants Claude to consider. As a conversation grows, so does the token count (and cost) of every subsequent call.</p>
+          </div>
+        </div>
+
+        <div class="concept-block">
+          <div class="concept-icon">💾</div>
+          <div class="concept-body">
+            <h4>Prompt caching for cost/latency</h4>
+            <p class="mb-0">Marking a stable block (a long system prompt, a product catalog excerpt) with <code>cache_control: { type: "ephemeral" }</code> lets Claude reuse it across calls instead of reprocessing it every time — meaningfully cutting cost and time-to-first-token for anything that resends the same large context repeatedly.</p>
+          </div>
+        </div>
+
+        <h4>Lab: stream a response from a Node.js script</h4>
+        <p>Write a small script that opens a stream against the Messages API and prints tokens to the console as they arrive, then prints the total input/output token usage from the final message once the stream completes.</p>
+        <ul class="mini-check">
+          <li>Text appears incrementally in the terminal, not all at once</li>
+          <li>The script reads <code>ANTHROPIC_API_KEY</code> from the environment, never hardcoded</li>
+          <li>Final usage (<code>input_tokens</code>/<code>output_tokens</code>) is printed after the stream ends</li>
+        </ul>
+        <a class="btn btn-sm btn-primary" href="assets/downloads/Module-2-Lab-2.1-Step-by-Step-Guide.pdf" download>⬇ Download the step-by-step lab guide (PDF)</a>
+      </div>
+
+      <!-- 2.2 -->
+      <div class="module-topic type-l">
+        <span class="topic-eyebrow">2.2 · Briefing + Lab</span>
+        <h3>Tool Use / Function Calling</h3>
+        <p>Tool use is what turns Claude from a text generator into something that can act — look something up, run a calculation, or (starting Module 3) touch a real Shopify store. Everything in the rest of the program builds on this pattern.</p>
+
+        <div class="concept-block">
+          <div class="concept-icon">🧰</div>
+          <div class="concept-body">
+            <h4>Defining a tool schema</h4>
+            <p>A tool is a name, a description Claude uses to decide <em>when</em> to call it, and a JSON Schema describing its inputs. Claude never executes anything itself — it only returns a request to call a tool; your code runs it and sends the result back.</p>
+            <div class="code-block">const tools = [{
+  name: "get_stock_level",
+  description: "Look up current inventory count for a product SKU.",
+  input_schema: {
+    type: "object",
+    properties: { sku: { type: "string" } },
+    required: ["sku"],
+  },
+}];</div>
+          </div>
+        </div>
+
+        <div class="concept-block">
+          <div class="concept-icon">🔀</div>
+          <div class="concept-body">
+            <h4>The tool-call round trip</h4>
+            <ol class="step-list">
+              <li><strong>Send</strong> — call <code>messages.create</code> with <code>tools</code> attached</li>
+              <li><strong>Inspect</strong> — check <code>response.stop_reason === "tool_use"</code></li>
+              <li><strong>Execute</strong> — run your actual function with the arguments Claude provided</li>
+              <li><strong>Reply</strong> — send the result back as a <code>tool_result</code> content block in a new user turn, then call the API again</li>
+            </ol>
+          </div>
+        </div>
+
+        <div class="concept-block">
+          <div class="concept-icon">🎯</div>
+          <div class="concept-body">
+            <h4>Choosing vs. forcing a tool call</h4>
+            <p class="mb-0"><code>tool_choice: { type: "auto" }</code> lets Claude decide whether a tool is needed at all (the default for most agents). <code>{ type: "tool", name: "..." }</code> forces a specific tool call — useful for narrow, single-purpose extraction tasks where you always want structured output, never prose.</p>
+          </div>
+        </div>
+
+        <div class="callout-warn">⚠️ <strong>Never trust tool arguments blindly.</strong> Claude generates the arguments to a tool call from the conversation — validate and sanity-check them in your code exactly as you would any other untrusted input, especially once tools start writing data in later modules.</div>
+
+        <h4>Lab: a calculator/lookup agent</h4>
+        <p>Build a Node.js agent with a single custom tool — a calculator (add/subtract/multiply/divide) or a static product lookup table, either is fine. Wire the full round trip above end to end.</p>
+        <ul class="mini-check">
+          <li>Asking a question the tool can't answer gets a plain-text reply, no tool call</li>
+          <li>Asking something the tool <em>can</em> answer triggers a real tool call with correct arguments</li>
+          <li>The tool's actual result (not a guess) appears in Claude's final answer</li>
+          <li>An invalid input (e.g. divide by zero, unknown SKU) is handled without crashing the script</li>
+        </ul>
+        <a class="btn btn-sm btn-primary" href="assets/downloads/Module-2-Lab-2.2-Step-by-Step-Guide.pdf" download>⬇ Download the step-by-step lab guide (PDF)</a>
+      </div>
+
+      <!-- 2.3 -->
+      <div class="module-topic type-l">
+        <span class="topic-eyebrow">2.3 · Briefing + Lab</span>
+        <h3>Claude Agent SDK Essentials</h3>
+        <p>The Claude Agent SDK packages the request → tool-call → result loop from 2.2 into a managed agent runtime, and adds the pieces a hand-rolled loop doesn't give you for free: custom MCP tool servers, permission modes, subagents, and hooks.</p>
+
+        <div class="concept-block">
+          <div class="concept-icon">🔄</div>
+          <div class="concept-body">
+            <h4>The agent loop, managed for you</h4>
+            <p class="mb-0">Instead of manually checking <code>stop_reason</code> and looping, the SDK's <code>query()</code> (or equivalent runner) handles the tool-call round trip internally — you register tools and get back a stream of agent turns, including intermediate tool calls and results.</p>
+          </div>
+        </div>
+
+        <div class="concept-block">
+          <div class="concept-icon">🖥️</div>
+          <div class="concept-body">
+            <h4>Custom tools via createSdkMcpServer</h4>
+            <p>Rather than defining raw tool schemas by hand as in 2.2, the SDK lets you expose a set of typed Node.js functions as an in-process MCP server the agent can call directly — the same shape of tool you'll later expose over the network in Module 7's custom MCP server lab.</p>
+            <div class="code-block">import { createSdkMcpServer, tool } from "@anthropic-ai/claude-agent-sdk";
+import { z } from "zod";
+
+const stockServer = createSdkMcpServer({
+  name: "inventory-tools",
+  tools: [
+    tool("get_stock_level", "Look up inventory for a SKU",
+      { sku: z.string() },
+      async ({ sku }) => ({ content: [{ type: "text", text: `SKU ${sku}: 42 in stock` }] })
+    ),
+  ],
+});</div>
+          </div>
+        </div>
+
+        <div class="concept-block">
+          <div class="concept-icon">🔐</div>
+          <div class="concept-body">
+            <h4>Permission modes</h4>
+            <p class="mb-0">The SDK supports permission modes ranging from prompting before every tool call to fully autonomous execution. For anything that can write data — draft orders, webhooks — default to a mode that requires explicit approval; we'll tighten this further with confirmation gates in Module 5.</p>
+          </div>
+        </div>
+
+        <div class="concept-block">
+          <div class="concept-icon">🧩</div>
+          <div class="concept-body">
+            <h4>Subagents and hooks, previewed</h4>
+            <p class="mb-0"><strong>Subagents</strong> let one agent delegate a sub-task to another agent with its own tools and system prompt — the basis for Module 8's multi-agent orchestration. <strong>Hooks</strong> run your code at defined points in the loop (before/after a tool call) — useful for logging, guardrails, or blocking a disallowed action outright.</p>
+          </div>
+        </div>
+
+        <h4>Lab: scaffold an agent project</h4>
+        <p>Set up a new Node.js/TypeScript project using the Claude Agent SDK. Register the <code>inventory-tools</code>-style MCP server above (or your own equivalent), and confirm the agent calls it correctly from a natural-language prompt.</p>
+        <ul class="mini-check">
+          <li>Project runs with <code>tsc</code> / <code>ts-node</code> without type errors</li>
+          <li>At least one custom tool is registered via <code>createSdkMcpServer</code></li>
+          <li>A natural-language prompt that should trigger the tool actually does</li>
+          <li>Permission mode is set deliberately, not left on a default you haven't checked</li>
+        </ul>
+      </div>
+
+      <!-- 2.4 -->
+      <div class="module-topic type-l">
+        <span class="topic-eyebrow">2.4 · Briefing</span>
+        <h3>Structured Outputs & Reliability</h3>
+        <p>An agent tool call that returns malformed data doesn't just look bad — downstream code that expects a specific shape can crash or silently corrupt state. This is about making failures loud and recoverable instead of silent.</p>
+
+        <div class="concept-block">
+          <div class="concept-icon">📐</div>
+          <div class="concept-body">
+            <h4>JSON-schema-constrained responses</h4>
+            <p class="mb-0">Building on the output-constraint prompting from Module 1's Lab 1.3, tool <code>input_schema</code>s (2.2) already give you schema-validated <em>inputs</em> to your tools. For a tool's <em>output</em> back to Claude, keep the same discipline: a fixed, documented shape the rest of your code can parse without guessing.</p>
+          </div>
+        </div>
+
+        <div class="concept-block">
+          <div class="concept-icon">✅</div>
+          <div class="concept-body">
+            <h4>Validate before you trust</h4>
+            <p>Parse and validate every tool result — both what Claude sends into your tool and what your tool sends back — with a schema library like <code>zod</code> rather than assuming the shape is correct.</p>
+            <div class="code-block">const StockResult = z.object({ sku: z.string(), inStock: z.number().int() });
+const parsed = StockResult.safeParse(rawToolResult);
+if (!parsed.success) {
+  // return a structured error to Claude, not a crash
+}</div>
+          </div>
+        </div>
+
+        <div class="concept-block">
+          <div class="concept-icon">🔁</div>
+          <div class="concept-body">
+            <h4>Retries and backoff</h4>
+            <p class="mb-0">Transient failures (rate limits, network blips) should retry with backoff automatically. A tool call that fails for a <em>logical</em> reason (SKU doesn't exist) should not retry — it should return a clear error result so Claude can respond appropriately, e.g. telling the shopper the item wasn't found.</p>
+          </div>
+        </div>
+
+        <div class="callout-tip"><strong>Fail loud, not silent:</strong> a tool that swallows an error and returns an empty/default result is worse than one that throws — it lets a wrong answer look confident. Surface failures as explicit, typed error results.</div>
+      </div>
+
+      <!-- 2.5 -->
+      <div class="module-topic type-b">
+        <span class="topic-eyebrow">2.5 · Briefing</span>
+        <h3>Conversation Memory & Guardrails</h3>
+        <p>As agents run longer conversations with more tool calls, two problems compound: the context window fills up, and the surface area for something to go wrong (or be abused) grows. This session is about managing both deliberately.</p>
+
+        <div class="concept-block">
+          <div class="concept-icon">🧠</div>
+          <div class="concept-body">
+            <h4>Context window management</h4>
+            <p class="mb-0">Revisiting Module 1's point that context is resent every call: a long-running agent needs a strategy once history approaches the model's limit — truncating oldest turns, or summarizing older parts of the conversation into a shorter recap the agent can still act on.</p>
+          </div>
+        </div>
+
+        <div class="concept-block">
+          <div class="concept-icon">✂️</div>
+          <div class="concept-body">
+            <h4>Summarization strategies</h4>
+            <p class="mb-0">A common pattern: once history crosses a token threshold, use a cheap, fast call (Haiku 4.5) to compress older turns into a short summary, keep the most recent turns verbatim, and continue the conversation on the combined, shorter context.</p>
+          </div>
+        </div>
+
+        <div class="concept-block">
+          <div class="concept-icon">🛡️</div>
+          <div class="concept-body">
+            <h4>Input/output guardrails</h4>
+            <p class="mb-0"><strong>Input guardrails</strong> screen what reaches the model (rate limiting, rejecting obviously malicious input). <strong>Output guardrails</strong> check what the model wants to do before it happens — especially before any tool call that costs money or changes state.</p>
+          </div>
+        </div>
+
+        <div class="callout-warn">⚠️ <strong>Safe defaults for state-changing actions.</strong> Any tool that writes data (creates an order, sends a message, changes inventory) should default to requiring explicit confirmation until proven safe in testing — this is the same principle behind the permission modes in 2.3, and the confirmation gates you'll build explicitly in Module 5.</div>
+      </div>
+
+      <!-- 2.6 -->
+      <div class="module-topic type-l">
+        <span class="topic-eyebrow">2.6 · Lab</span>
+        <h3>Standalone Multi-Tool Agent (Node.js)</h3>
+        <p>The capstone lab for this module: combine everything from 2.1–2.5 into one reusable agent skeleton — no Shopify yet, that starts in Module 3, where these exact tools get swapped for real Storefront/Admin API calls.</p>
+
+        <h4>Requirements</h4>
+        <ul class="plain-list">
+          <li>3+ custom tools (e.g. product lookup, order-status lookup, a calculator) registered via the Agent SDK</li>
+          <li>Conversation memory that persists correctly across multiple turns in one run</li>
+          <li>Structured, schema-validated JSON output from every tool, per 2.4</li>
+          <li>At least one guardrail — a confirmation step or a rejected out-of-scope request</li>
+        </ul>
+
+        <h4>Try prompting Claude Code with something like:</h4>
+        <div class="code-block">"Scaffold a Node.js/TypeScript Claude Agent SDK project called
+multi-tool-agent. Register three tools via createSdkMcpServer:
+1. get_product_info(name: string) — returns a mock product record
+2. get_order_status(orderId: string) — returns a mock order status
+3. calculate_discount(price: number, percent: number) — returns
+   the discounted price
+Validate every tool's output with zod before returning it to the
+agent. Keep full conversation history across turns in a REPL loop
+so I can ask follow-up questions that reference earlier answers."</div>
+
+        <h4>Acceptance checklist</h4>
+        <ul class="mini-check">
+          <li>All three tools are called correctly from natural-language prompts</li>
+          <li>A follow-up question referencing an earlier turn (e.g. "what about that same order?") resolves correctly</li>
+          <li>An invalid tool result is caught by validation, not passed through silently</li>
+          <li>You can explain exactly what happens at each step of the request → tool-call → result loop</li>
+        </ul>
+
+        <div class="callout-tip mb-0"><strong>Keep this project.</strong> This is the literal skeleton Module 3 wires up to real Shopify Storefront and Admin API calls — the mock tools get replaced, but the agent structure, validation, and memory handling stay the same.</div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="callout callout-shopify">
+        <span class="emoji">🔭</span>
+        <div>
+          <h3>Where this goes next</h3>
+          <p>The multi-tool agent from 2.6 is the reusable skeleton for the rest of the program — Module 3 replaces its mock tools with real Shopify Storefront and Admin API calls, and Module 7 exposes the same tools through a standards-compliant MCP server.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <h4>Shopify Agentic AI Developer Bootcamp</h4>
+        <p class="small">A hands-on program on building agentic commerce experiences on Shopify with Claude, Node.js and React.</p>
+      </div>
+      <div>
+        <h4>Program</h4>
+        <ul>
+          <li><a href="schedule.html">Schedule</a></li>
+          <li><a href="curriculum.html">Curriculum</a></li>
+          <li><a href="prerequisites.html">Prerequisites</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>More</h4>
+        <ul>
+          <li><a href="about.html">About</a></li>
+          <li><a href="resources.html">Resources &amp; FAQ</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="mailto:Maitri.Bhansali@koenig-solutions.com">Maitri.Bhansali@koenig-solutions.com</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span id="footerYear"></span> Koenig Solutions. Delivered for V Group Inc.</span>
+      <div class="footer-logos">
+        <span class="logo-slot">
+          <img src="assets/images/koenig-logo.png" alt="Koenig Solutions" data-fallback onerror="this.style.display='none';this.nextElementSibling.style.display='inline-block'">
+          <span class="text-logo koenig" style="font-size:.85rem">KOENIG</span>
+        </span>
+        <span class="logo-slot">
+          <img src="assets/images/vgroup-logo.png" alt="V Group Inc." data-fallback onerror="this.style.display='none';this.nextElementSibling.style.display='inline-block'">
+          <span class="text-logo vgroup" style="font-size:.85rem">V Group Inc.</span>
+        </span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/data.js"></script>
+<script src="assets/js/main.js"></script>
+</body>
+</html>
