@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module 3 Content | Shopify Agentic AI Developer Bootcamp</title>
+<meta name="description" content="Module 3: Shopify Platform, Storefront API, Admin API & Native AI — what's covered, key concepts, and what you'll build.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛍️</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="nav-wrap">
+    <a class="brand-lockup" href="index.html">
+      <span class="logo-slot">
+        <img src="assets/images/koenig-logo.png" alt="Koenig Solutions" data-fallback onerror="this.style.display='none';this.nextElementSibling.style.display='inline-block'">
+        <span class="text-logo koenig">KOENIG<span> solutions</span></span>
+      </span>
+      <span class="brand-x">×</span>
+      <span class="logo-slot">
+        <img src="assets/images/vgroup-logo.png" alt="V Group Inc." data-fallback onerror="this.style.display='none';this.nextElementSibling.style.display='inline-block'">
+        <span class="text-logo vgroup">V Group Inc.</span>
+      </span>
+      <span class="brand-title">Agentic AI Developer Bootcamp</span>
+    </a>
+    <nav>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="schedule.html">Schedule</a></li>
+        <li><a href="curriculum.html" class="active">Curriculum</a></li>
+        <li><a href="prerequisites.html">Prerequisites</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="resources.html">Resources</a></li>
+      </ul>
+    </nav>
+    <div class="nav-actions">
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">🌙</button>
+      <button class="nav-burger" id="navBurger" aria-label="Toggle menu" aria-expanded="false">☰</button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <section class="hero" style="padding:44px 0 36px">
+    <div class="hero-inner">
+      <p style="margin-bottom:14px"><a href="curriculum.html" class="small" style="text-decoration:none;color:var(--koenig-blue);font-weight:600">← Back to Curriculum</a></p>
+      <span class="eyebrow badge-live" style="background:var(--live-bg);border-color:transparent;color:var(--live-text)">📖 Module 3 · Live</span>
+      <h1>Shopify Platform, Storefront API, Admin API & Native AI</h1>
+      <p class="hero-sub">Learn Shopify's architecture, APIs, and built-in AI tools well enough to wire a custom agent to real store data.</p>
+      <div class="hero-meta">
+        <span class="pill">📅 <strong>21, 24 – 25 Aug 2026</strong></span>
+        <span class="pill">🕥 10:00 – 12:00 IST</span>
+        <span class="pill"><strong>3</strong> Live Sessions</span>
+        <span class="pill"><strong>8</strong> Topics</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="callout callout-koenig">
+        <span class="emoji">💡</span>
+        <div>
+          <h3>Before you arrive</h3>
+          <p>Every lab this module runs against your own <strong>free Shopify Partner development store</strong> — never a live/production store. If you don't have one yet, create it now from your Partner Dashboard; see <a href="prerequisites.html">Prerequisites</a> for the setup link. The multi-tool agent project from Module 2's <a href="module-2.html">Lab 2.6</a> also gets extended directly in this module — keep that project folder handy.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">What's covered</span>
+        <h2>Eight topics across three sessions</h2>
+        <p>This page is meant to be a complete, standalone reference for Module 3 — everything below is enough to prepare for, follow along with, and revisit after each session, without needing outside material.</p>
+      </div>
+
+      <!-- 3.1 -->
+      <div class="module-topic type-d">
+        <span class="topic-eyebrow">3.1 · Briefing + Demo</span>
+        <h3>Shopify Architecture for Developers</h3>
+        <p>Before touching any API, it helps to know what you're actually pointed at — the difference between an account, a store, and an app trips up a lot of first-time Shopify developers.</p>
+
+        <div class="concept-block">
+          <div class="concept-icon">🏗️</div>
+          <div class="concept-body">
+            <h4>Partner accounts and dev stores</h4>
+            <p class="mb-0">A <strong>Partner account</strong> is your developer identity with Shopify — free to create, and it's where you spin up <strong>development stores</strong>: full, free, disposable Shopify stores meant for building and testing, never for real sales. Every lab in this program runs against a dev store you create yourself.</p>
+          </div>
+        </div>
+
+        <div class="concept-block">
+          <div class="concept-icon">🔌</div>
+          <div class="concept-body">
+            <h4>Custom apps vs. public apps</h4>
+            <p>A <strong>custom app</strong> is built for and installed into exactly one store — the right choice while you're learning and building for a single dev store, which is what this program uses throughout. A <strong>public app</strong> is built to be installed into <em>any</em> merchant's store, distributed via the Shopify App Store, and requires the OAuth flow covered in Topic 3.2.</p>
+            <p class="mb-0">One thing to know before Topic 3.2: as of <strong>January 1, 2026</strong>, Shopify retired the old "create a custom app from inside the store's Admin" flow for new apps. Custom apps are now created and managed from the <strong>Dev Dashboard</strong> (<code>dev.shopify.com/dashboard</code>) — a separate site from the store Admin, shared across your Partner organization. The underlying idea (one app, one store, scoped access) hasn't changed, only where you go to set it up.</p>
+          </div>
+        </div>
+
+        <div class="concept-block">
+          <div class="concept-icon">🧭</div>
+          <div class="concept-body">
+            <h4>Three surfaces, three purposes</h4>
+            <div class="simple-table-wrap">
+              <table class="simple-table">
+                <thead><tr><th>Surface</th><th>Audience</th><th>Accessed via</th></tr></thead>
+                <tbody>
+                  <tr><td><strong>Admin</strong></td><td>The merchant</td><td>Admin dashboard (browser) + Admin API (GraphQL)</td></tr>
+                  <tr class="row-highlight"><td><strong>Storefront</strong></td><td>The shopper</td><td>The online store + Storefront API (GraphQL)</td></tr>
+                  <tr><td><strong>Checkout</strong></td><td>The shopper, at time of payment</td><td>Shopify-hosted checkout, extensible but not fully custom</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p class="mb-0">Nearly everything this module and Module 4 build touches the first two — Admin API for anything an agent needs to read or write on the merchant's behalf, Storefront API for anything a shopper-facing agent needs.</p>
+          </div>
+        </div>
+
+        <h4>Demo: tour of a live dev store and the Dev Dashboard</h4>
+        <p>A guided walkthrough — follow along in your own store and Partner organization:</p>
+        <ul class="plain-list">
+          <li><strong>Store Admin → Apps</strong> — where you'll see your app listed once it's installed from the Dev Dashboard, and where any legacy custom apps created before January 2026 still live</li>
+          <li><strong><code>dev.shopify.com/dashboard</code></strong> — the separate site where new apps are created, installed, and their credentials retrieved; their access <em>scopes</em> are actually declared in a local <code>shopify.app.toml</code> file and pushed via the CLI (used directly in Topic 3.2)</li>
+          <li><strong>Store Admin → Products</strong> — where the catalog data your agent will query actually lives</li>
+          <li><strong>Store Admin → Orders</strong> — where draft orders created via the Admin API show up</li>
+          <li><strong>Store Admin → Settings → Notifications</strong> — where webhook-triggering events like order confirmation emails originate</li>
+        </ul>
+      </div>
+
+      <!-- 3.2 -->
+      <div class="module-topic type-l">
+        <span class="topic-eyebrow">3.2 · Briefing + Lab</span>
+        <h3>Authentication, OAuth & Access Scopes</h3>
+        <p>Every API call this module makes needs a token, and every token needs scopes. Getting this right early avoids a class of bugs that otherwise looks like "the API is broken" but is actually "the token can't do that."</p>
+
+        <div class="concept-block">
+          <div class="concept-icon">🔑</div>
+          <div class="concept-body">
+            <h4>Custom app tokens via the Dev Dashboard — the path this program uses</h4>
+            <p>Since January 2026, a custom app's credentials no longer show up as a single static token sitting in the store Admin. You still start from <strong>Store Admin → Settings → Apps → Develop apps</strong>, but that screen now just hands off to <strong>Build apps in Dev Dashboard</strong> — a separate site (<code>dev.shopify.com/dashboard</code>) where an app is just a name and an identity. There's no checkbox screen for Admin API scopes there at all — scopes are declared in a <code>shopify.app.toml</code> file inside your own local project, edited by hand and pushed with the Shopify CLI (covered step by step in the lab below). Once installed, the app's Dev Dashboard Settings tab issues a <strong>Client ID</strong> and <strong>Client secret</strong> instead of a token — your code exchanges those for an access token itself using the <strong>client credentials grant</strong>, a direct, no-redirect exchange that's a good fit for a single app talking to a single store you control.</p>
+            <div class="code-block"><span class="cm">// Exchange client ID + secret for an Admin API access token</span>
+async function getAdminAccessToken() {
+  const res = await fetch(
+    `https://${process.env.SHOPIFY_STORE_DOMAIN}/admin/oauth/access_token`,
+    {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        client_id: process.env.SHOPIFY_APP_CLIENT_ID,
+        client_secret: process.env.SHOPIFY_APP_CLIENT_SECRET,
+        grant_type: "client_credentials",
+      }),
+    }
+  );
+  const data = await res.json();
+  return data.access_token; <span class="cm">// use as X-Shopify-Access-Token</span>
+}
+<span class="cm">// Response shape: { access_token, scope, expires_in: 86399 }</span></div>
+            <p class="mb-0">That <code>expires_in</code> matters: unlike the old static custom-app token, this one expires in <strong>24 hours</strong>. Any script that runs longer than that needs to request a fresh one before the old one lapses — covered in the lab below.</p>
+          </div>
+        </div>
+
+        <div class="concept-block">
+          <div class="concept-icon">🔁</div>
+          <div class="concept-body">
+            <h4>OAuth for public apps</h4>
+            <p class="mb-0">A public app can't pre-generate a token because it doesn't know which store will install it. Instead: the merchant is redirected to Shopify to approve the app's requested scopes, Shopify redirects back with an authorization code, and the app exchanges that code for an access token server-side. You won't build this in the program, but recognizing the flow matters if you ever ship a distributable app.</p>
+          </div>
+        </div>
+
+        <div class="concept-block">
+          <div class="concept-icon">🛡️</div>
+          <div class="concept-body">
+            <h4>Read vs. write scopes</h4>
+            <p>Scopes are granular and explicit — a token can only do what it was explicitly granted, nothing more.</p>
+            <div class="simple-table-wrap">
+              <table class="simple-table">
+                <thead><tr><th>Scope</th><th>Grants</th></tr></thead>
+                <tbody>
+                  <tr><td><code>read_products</code></td><td>Query product/collection data</td></tr>
+                  <tr><td><code>read_orders</code></td><td>Query existing orders</td></tr>
+                  <tr><td><code>read_draft_orders</code></td><td>Query existing draft orders</td></tr>
+                  <tr class="row-highlight"><td><code>write_draft_orders</code></td><td>Create/update draft orders — the agent's main "write" path</td></tr>
+                  <tr><td><code>write_orders</code></td><td>Create/modify real orders directly (used sparingly)</td></tr>
+                  <tr><td><code>read_customers</code></td><td>Query customer records</td></tr>
+                  <tr><td><code>read_inventory</code></td><td>Query stock levels</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p class="mb-0">Editing the <code>scopes</code> line in <code>shopify.app.toml</code> and running <code>shopify app deploy</code> doesn't retroactively apply to an already-installed app — the new scope set only takes effect once you reinstall the app on the store and approve the updated permission list.</p>
+          </div>
+        </div>
+
+        <div class="concept-block">
+          <div class="concept-icon">🔒</div>
+          <div class="concept-body">
+            <h4>The Protected Customer Data gate — lives at partners.shopify.com, not the Dev Dashboard</h4>
+            <p>Granting <code>read_orders</code> or <code>read_customers</code> in <code>shopify.app.toml</code> is not enough on its own. Any Admin API object touching customer PII (orders, customers) sits behind a second, distinct approval called <strong>Protected customer data access</strong> — required even for an app you own, installed only on your own dev store. It's easy to miss because it doesn't live anywhere in the Dev Dashboard (<code>dev.shopify.com/dashboard</code>) — despite that being where you create the app, declare scopes, and install it. It's on the separate, older Partners site instead: <code>partners.shopify.com</code> → your app → <strong>API access requests</strong> → <strong>Protected customer data access</strong> → Request access.</p>
+            <p class="mb-0">Skip it and a query that looks perfectly correct fails with an approval-style error — the token and declared scopes are fine; this is a separate gate entirely. For a dev-store-only app like this one, it needs no review, just checking the box and saving.</p>
+          </div>
+        </div>
+
+        <h4>Lab: create a custom app in the Dev Dashboard and generate a scoped Admin API token</h4>
+        <ol class="step-list">
+          <li><strong>Create the app</strong> — from Store Admin → Settings → Apps → Develop apps, click <strong>Build apps in Dev Dashboard</strong>, then create a new app (e.g. "Agentic AI Bootcamp") and confirm. This just names the app — it doesn't ask for scopes or a target store yet</li>
+          <li><strong>Install the Shopify CLI and link a local project</strong> — run <code>npm install -g @shopify/cli@latest</code>, then in a new project folder run <code>shopify app config link</code>. It walks you through a browser device-login, picking your Partner organization, and choosing "connect it to an existing app" → your app from step 1. This generates a <code>shopify.app.toml</code> file, pre-filled with your app's Client ID and a blank <code>scopes</code> field</li>
+          <li><strong>Declare scopes in <code>shopify.app.toml</code></strong> — this file, not any web screen, is where Admin API scopes actually live. Edit its <code>[access_scopes]</code> block: <code>scopes = "read_products,read_orders,write_draft_orders,read_customers"</code> — resist listing everything "just in case"</li>
+          <li><strong>Deploy the new version</strong> — run <code>shopify app deploy</code> and confirm "Yes, release this new version." Every edit to <code>shopify.app.toml</code> needs a fresh deploy to actually take effect on Shopify's side</li>
+          <li><strong>Install the app on your dev store</strong> — back in the Dev Dashboard, open the app's Overview tab, click <strong>Install app</strong>, and select your dev store (must be in the same Partner organization). Review and approve the consent screen it redirects you to</li>
+          <li><strong>Request Protected customer data access</strong> — go to <code>partners.shopify.com</code> (not the Dev Dashboard), open your app, <strong>API access requests</strong> → <strong>Protected customer data access</strong> → Request access, check the box, choose applicable reasons, and Save</li>
+          <li><strong>Copy your credentials</strong> — in the app's Dev Dashboard Settings tab, copy the <strong>Client ID</strong> and <strong>Client secret</strong> into your <code>.env</code> file (there's no single access token shown here anymore — that's requested in the next step)</li>
+          <li><strong>Exchange them for a token programmatically</strong> — write a small Node.js helper that POSTs to <code>/admin/oauth/access_token</code> as shown above, caches the returned token, and requests a new one once it's close to its 24-hour expiry</li>
+        </ol>
+
+        <h4>Acceptance checklist</h4>
+        <ul class="mini-check">
+          <li>App created in the Dev Dashboard and linked to a local project via <code>shopify app config link</code>, within your own Partner organization</li>
+          <li>Only the scopes actually needed for this module are declared in <code>shopify.app.toml</code> and deployed <em>before</em> installing</li>
+          <li>Protected customer data access requested and approved at <code>partners.shopify.com</code>, so <code>read_orders</code>/<code>read_customers</code> queries don't fail with an approval error</li>
+          <li>Client ID and secret are stored in <code>.env</code>, never committed to git</li>
+          <li>Your token-exchange helper successfully authenticates a test GraphQL request (e.g. a simple <code>shop { name }</code> query), and re-requests a token once the cached one is near expiry</li>
+        </ul>
+        <div class="callout-warn">⚠️ <strong>Dev store only.</strong> This token can create draft orders and read customer data — never point it at a production store, even out of curiosity.</div>
+        <a class="btn btn-sm btn-primary" href="assets/downloads/Module-3-Lab-3.2-Step-by-Step-Guide.pdf" download>⬇ Download the step-by-step lab guide (PDF)</a>
+
+        <div class="callout-tip"><strong>🏆 Challenge — no steps provided, work it out yourself:</strong> using the app, token, and <code>adminRequest()</code> helper you just built, pull back as much real data from your dev store as you can — a customer's full order history and contact details, current inventory levels across every product, existing draft orders, and anything else the Admin API exposes. If a query needs a scope you didn't declare in Step 3, you already know how to add it. Use Shopify's GraphiQL app (<code>shopify-graphiql-app.shopifycloud.com/login</code>) or the Admin API GraphQL reference to work out the queries yourself, not a script handed to you here.</div>
+      </div>
+
+      <!-- 3.3 -->
+      <div class="module-topic type-l">
+        <span class="topic-eyebrow">3.3 · Briefing + Lab</span>
+        <h3>Storefront API (GraphQL) — Products &amp; Cart</h3>
+        <p>The Storefront API is what a shopper-facing agent uses to browse the catalog and build a cart — everything Module 4's shopping agent needs before checkout.</p>
+
+        <div class="concept-block">
+          <div class="concept-icon">🛰️</div>
+          <div class="concept-body">
+            <h4>Getting a Storefront API token: the Headless channel</h4>
+            <p>Storefront API access doesn't come from the same place as the Admin API token in Topic 3.2 — it comes from installing the free <strong>Headless</strong> sales channel (from the Shopify App Store) on your dev store, then clicking <strong>Create storefront</strong>. That generates a <strong>public</strong> token (safe for client-side use) and a <strong>private</strong> token (server-side only — this is the one a Node.js backend uses, sent as the <code>Shopify-Storefront-Private-Token</code> header). Under the storefront's <strong>Storefront API permissions</strong>, enable at minimum <code>unauthenticated_read_product_listings</code>, <code>unauthenticated_read_product_inventory</code>, <code>unauthenticated_read_checkouts</code>, and <code>unauthenticated_write_checkouts</code> — the four scopes that cover product browsing and the Cart API below.</p>
+            <div class="callout-warn mb-0">⚠️ <strong>Dead end to avoid:</strong> the Dev Dashboard's Settings tab also shows a "Storefront API" card with a "Manage" button. Clicking it does <em>not</em> reveal a token — it routes to the Partners dashboard's "API access requests" page, a completely different feature for requesting extra protected scopes ahead of App Store review. The real Storefront token only ever comes from the Headless channel above.</div>
+          </div>
+        </div>
+
+        <div class="concept-block">
+          <div class="concept-icon">📦</div>
+          <div class="concept-body">
+            <h4>Querying products, collections and search</h4>
+            <div class="code-block"><span class="cm">// Storefront API — product search by title/keyword</span>
+query searchProducts($query: String) {
+  products(first: 3, query: $query) {
+    edges {
+      node {
+        title
+        priceRange { minVariantPrice { amount currencyCode } }
+        variants(first: 1) {
+          edges { node { id title availableForSale } }
+        }
+      }
+    }
+  }
+}
+<span class="cm">// Header: Shopify-Storefront-Private-Token: {your private token}
+// node.variants.edges[0].node.id is the merchandiseId a cart mutation needs</span></div>
+            <div class="callout-tip"><strong>Pitfall worth knowing up front:</strong> when a tool's search query is empty (a shopper asking "what do you sell?" rather than naming a product), pass an empty string <code>""</code> for <code>$query</code>, not <code>null</code>. Confirmed against a live dev store: <code>""</code> returns the unfiltered catalog, while an explicit <code>null</code> returns zero products — the opposite of what you might expect, and easy to get backwards.</div>
+            <div class="callout-tip mb-0"><strong>In GraphiQL's Variables panel:</strong> the variable name goes in <em>without</em> the <code>$</code> — the <code>$</code> only belongs inside the query document itself. Use <code>{ "query": "backpack" }</code> or <code>{ "query": "" }</code>; typing <code>$query</code> there directly is invalid JSON and throws a parse error.</div>
+          </div>
+        </div>
+
+        <div class="concept-block">
+          <div class="concept-icon">🛒</div>
+          <div class="concept-body">
+            <h4>The current Cart API</h4>
+            <p>Shopify deprecated the old Checkout API in favor of the <strong>Cart API</strong> — <code>cartCreate</code>, then <code>cartLinesAdd</code> to add items, then read <code>checkoutUrl</code> off the cart to hand the shopper a working payment link.</p>
+            <div class="code-block"><span class="cm">// Create a cart, then read its checkout URL</span>
+mutation { cartCreate { cart { id checkoutUrl } } }
+
+<span class="cm">// Add a line item to that cart</span>
+mutation {
+  cartLinesAdd(cartId: "gid://shopify/Cart/...", lines: [
+    { merchandiseId: "gid://shopify/ProductVariant/...", quantity: 1 }
+  ]) { cart { checkoutUrl } }
+}</div>
+            <p>On any Shopify plan below Plus, a custom page can't collect card payments directly (PCI compliance) — <code>checkoutUrl</code> is the actual, complete payment path for a self-checkout shopping agent: the shopper pays on Shopify's own hosted checkout page, not inside the conversation. This is a genuinely different object and use case from the Admin API's draft orders in Topic 3.4, which a merchant or agent builds <em>on the customer's behalf</em> — Module 4's shopping agent uses the Cart API almost exclusively for this reason.</p>
+            <div class="callout-warn mb-0">⚠️ <strong>Dev stores are always password-protected</strong> — Shopify doesn't allow disabling it on a development store at all (only on a paid or transferred store). Visiting a fresh <code>checkoutUrl</code> in a browser that's never unlocked that store hits the password gate first, and on a dev store that redirect can drop the original checkout destination and land you back on the plain homepage instead. <strong>Fix:</strong> open your store's root URL (<code>https://your-store.myshopify.com/</code>) in that browser first, enter the storefront password once, <em>then</em> open the <code>checkoutUrl</code> — an already-unlocked browser goes straight to checkout.</div>
+          </div>
+        </div>
+
+        <h4>Lab: run queries in Shopify's GraphiQL app</h4>
+        <p>Install the Headless channel on your dev store and create a storefront to get your private access token (see above), then open Shopify's GraphiQL app at <code>shopify-graphiql-app.shopifycloud.com/login</code> to run and inspect queries interactively before wiring them into code — it isn't listed in the Shopify App Store, so go straight to that URL rather than searching for it.</p>
+        <ul class="mini-check">
+          <li>Headless channel installed and a storefront created, with its private access token saved to <code>.env</code></li>
+          <li>Successfully queried at least 3 products by title/price using the Storefront API</li>
+          <li>Created a cart via <code>cartCreate</code> and captured its <code>checkoutUrl</code></li>
+          <li>Added a line item via <code>cartLinesAdd</code> and confirmed it reflects in the cart</li>
+          <li>Can explain why <code>checkoutUrl</code> replaces the deprecated Checkout API</li>
+        </ul>
+        <a class="btn btn-sm btn-primary" href="assets/downloads/Module-3-Lab-3.3-Step-by-Step-Guide.pdf" download>⬇ Download the step-by-step lab guide (PDF)</a>
+      </div>
+
+      <!-- 3.4 -->
+      <div class="module-topic type-l">
+        <span class="topic-eyebrow">3.4 · Briefing + Lab</span>
+        <h3>Admin API (GraphQL) — Orders, Draft Orders &amp; Customers</h3>
+        <p>This is the merchant-facing counterpart to 3.3 — where an agent reads order/customer history on the store owner's behalf, and can build a draft order and invoice link for a sale it's handling directly, rather than a shopper checking out live.</p>
+
+        <div class="concept-block">
+          <div class="concept-icon">🧾</div>
+          <div class="concept-body">
+            <h4><code>orderCreate</code> vs. <code>draftOrderCreate</code></h4>
+            <p class="mb-0">These are both Admin API writes, and neither is what a self-checkout shopping agent uses for a normal purchase — that's Topic 3.3's Cart API and <code>checkoutUrl</code>. <strong><code>draftOrderCreate</code></strong> is for a <em>merchant- or agent-initiated</em> sale built on the customer's behalf — think a phone order or an admin-side agent assembling an order from a conversation — and returns an <code>invoiceUrl</code> the customer pays separately. <strong><code>orderCreate</code></strong> records an order that was already paid through some other channel entirely. Both matter for Module 5's admin-scoped agent; this lab just gets the mechanics working.</p>
+          </div>
+        </div>
+
+        <div class="concept-block">
+          <div class="concept-icon">🔗</div>
+          <div class="concept-body">
+            <h4>Draft order → invoice link</h4>
+            <div class="code-block"><span class="cm">// Create a draft order and get its invoice URL</span>
+mutation {
+  draftOrderCreate(input: {
+    lineItems: [{ variantId: "gid://shopify/ProductVariant/...", quantity: 1 }]
+  }) {
+    draftOrder { id invoiceUrl }
+  }
+}</div>
+          </div>
+        </div>
+
+        <div class="concept-block">
+          <div class="concept-icon">🔍</div>
+          <div class="concept-body">
+            <h4>Customer and inventory queries</h4>
+            <p class="mb-0">Reading <code>customer</code> records (order history, contact info) and <code>inventoryItem</code>/<code>inventoryLevel</code> data lets an agent answer "have I ordered this before?" or "is this in stock?" — both reused directly in Module 4's shopping agent and Module 6's personalization labs.</p>
+          </div>
+        </div>
+
+        <h4>Lab: create a draft order and fetch its invoice URL</h4>
+        <p>Using your Topic 3.2 token, run <code>draftOrderCreate</code> against a real product variant in your dev store and confirm the returned <code>invoiceUrl</code> actually opens a payable invoice.</p>
+        <ul class="mini-check">
+          <li><code>draftOrderCreate</code> ran successfully against your dev store</li>
+          <li>The response includes a usable <code>invoiceUrl</code></li>
+          <li>At least one customer or inventory query returns real dev-store data</li>
+          <li>Can explain when to use <code>draftOrderCreate</code> vs. <code>orderCreate</code></li>
+        </ul>
+      </div>
+
+      <!-- 3.5 -->
+      <div class="module-topic type-b">
+        <span class="topic-eyebrow">3.5 · Briefing</span>
+        <h3>Scoping an AI Agent Safely</h3>
+        <p>With both APIs now in reach, it's worth pausing on a design decision that shapes every lab from here forward: not every part of an agent needs the same level of access.</p>
+
+        <div class="concept-block">
+          <div class="concept-icon">🎯</div>
+          <div class="concept-body">
+            <h4>Minimum-necessary scopes, mapped to capability</h4>
+            <p class="mb-0">Before writing a tool, ask what it actually needs to do — a product-search tool needs <code>read_products</code> and nothing else. Granting it <code>write_orders</code> "in case it's useful later" is exactly the kind of over-scoping that turns a minor bug into a real incident.</p>
+          </div>
+        </div>
+
+        <div class="concept-block">
+          <div class="concept-icon">🪪</div>
+          <div class="concept-body">
+            <h4>Two tokens, not one</h4>
+            <p class="mb-0">A practical pattern used throughout the rest of the program — and one that now maps naturally onto two genuinely different credential sources: a <strong>read-only "shopper" token</strong> — the Headless channel's Storefront API token from Topic 3.3, which only ever sees <code>read</code>-shaped operations like product search and cart building — and a separate <strong>write-capable "admin-actions" token</strong>, the Dev Dashboard's Admin API access token from Topic 3.2, scoped to <code>write_draft_orders</code> (and later <code>write_orders</code> in Module 5) and reserved for actions that actually change store state. If the shopper-facing side of the agent is ever compromised or misused, it physically cannot place an order — it's holding the wrong credential entirely.</p>
+          </div>
+        </div>
+
+        <div class="callout-tip mb-0"><strong>This isn't paranoia — it's the same instinct behind Module 2's guardrails.</strong> Scoping is a guardrail that exists before the agent even runs, rather than one checked at each tool call.</div>
+      </div>
+
+      <!-- 3.6 -->
+      <div class="module-topic type-l">
+        <span class="topic-eyebrow">3.6 · Lab</span>
+        <h3>Wrap Shopify APIs as Claude Tools (Node.js)</h3>
+        <p>This is where Module 2's multi-tool agent stops being a demo with mock data and starts talking to a real store — still no MCP yet, that's Module 7. Just your own Node.js tool functions calling the Shopify GraphQL client directly.</p>
+
+        <h4>What to build</h4>
+        <p>Return to your <a href="module-2.html">Lab 2.6</a> <code>multi-tool-agent</code> project (or a fresh copy of it) and replace its mock tools with real ones backed by the APIs from this module:</p>
+        <ul class="plain-list">
+          <li><strong>Product search</strong> — Storefront API query from Topic 3.3, replacing <code>get_product_info</code></li>
+          <li><strong>Cart create</strong> — <code>cartCreate</code> + <code>cartLinesAdd</code> from Topic 3.3, a new tool</li>
+          <li><strong>Draft order create</strong> — <code>draftOrderCreate</code> from Topic 3.4, replacing the discount-calculator's role as the "write" tool — keep its confirmation guardrail from Lab 2.6</li>
+        </ul>
+        <p>This deliberately exercises both credential types from Topic 3.5's two-token pattern in one project: the first two tools run on the read-only Storefront token, the third on the write-capable Admin token. Module 4's actual shopping agent keeps only the first two — the draft-order tool's real home is the separate, locked-down admin agent in Module 5.</p>
+
+        <h4>Try prompting Claude Code with something like:</h4>
+        <div class="code-block">"In my existing multi-tool-agent project, replace the three mock
+tools with real Shopify-backed ones, keeping the same zod
+input/output validation and confirmation-guardrail patterns:
+
+1. search_products(query: string) — calls the Storefront API
+   products query and returns title + price for up to 5 matches
+2. create_cart_with_item(variantId: string, quantity: number) —
+   calls cartCreate then cartLinesAdd, returns the checkoutUrl
+3. create_draft_order(variantId: string, quantity: number) — calls
+   draftOrderCreate, returns the invoiceUrl. Keep the same y/n
+   confirmation guardrail this tool's predecessor had in Lab 2.6
+   before it actually creates anything.
+
+Read a long-lived STOREFRONT_PRIVATE_TOKEN (from the Headless channel,
+Topic 3.3) from .env and use it for search_products and
+create_cart_with_item. For create_draft_order, reuse the Admin API
+token-exchange helper from Topic 3.2's lab — SHOPIFY_CLIENT_ID and
+SHOPIFY_CLIENT_SECRET in .env, with the token cached and refreshed
+automatically before its 24-hour expiry, per the two-token pattern
+from Topic 3.5."</div>
+
+        <h4>Acceptance checklist</h4>
+        <ul class="mini-check">
+          <li>All three tools call the real Shopify GraphQL APIs, not mock data</li>
+          <li>The Storefront token and the Admin client credentials are kept separate, matching each tool's actual needs</li>
+          <li>The Admin token-exchange helper refreshes automatically rather than reusing a stale token past its 24-hour expiry</li>
+          <li>The draft-order tool still pauses for a real confirmation before creating anything</li>
+          <li>A natural-language conversation can search a product, add it to a cart, and produce a real invoice link, all against your dev store</li>
+        </ul>
+        <div class="callout-tip"><strong>Keep this project too.</strong> Module 4 wires this exact tool set into the end-to-end shopping agent and a React chat widget — you won't rebuild it from scratch.</div>
+      </div>
+
+      <!-- 3.7 -->
+      <div class="module-topic type-d">
+        <span class="topic-eyebrow">3.7 · Briefing + Demo</span>
+        <h3>Shopify Native AI — Magic &amp; Sidekick</h3>
+        <p>Shopify ships its own AI tools out of the box. Knowing exactly where they stop is what justifies building a custom agent at all, rather than just pointing merchants at what's already there.</p>
+
+        <div class="concept-block">
+          <div class="concept-icon">✨</div>
+          <div class="concept-body">
+            <h4>Shopify Magic</h4>
+            <p class="mb-0">Free, built into the Admin: generates product descriptions, marketing copy, FAQ answers, and edited product images from a short prompt. It's fast and requires zero setup — but it's confined to specific Admin fields, isn't scriptable, and can't be embedded into your own product or automated as part of a larger workflow.</p>
+          </div>
+        </div>
+
+        <div class="concept-block">
+          <div class="concept-icon">🤝</div>
+          <div class="concept-body">
+            <h4>Sidekick</h4>
+            <p class="mb-0">Shopify's chat-based merchant assistant, built into the Admin. It can answer questions about the store and take some actions via MCP-based app extensions (previewed properly in Module 7). Like Magic, it's merchant-facing only — it doesn't talk to shoppers, and you can't redirect its behavior or give it your own tools.</p>
+          </div>
+        </div>
+
+        <div class="concept-block">
+          <div class="concept-icon">⚖️</div>
+          <div class="concept-body">
+            <h4>Where a custom agent earns its place</h4>
+            <p class="mb-0">Magic and Sidekick solve merchant-side content and admin tasks well. A custom Claude-powered agent is what you need the moment you want <strong>shopper-facing</strong> conversation, <strong>your own tools and business logic</strong>, or behavior embedded in <strong>your own product</strong> rather than inside Shopify's Admin UI — exactly what Module 4 builds.</p>
+          </div>
+        </div>
+
+        <h4>Demo: Magic vs. a Claude-authored equivalent, side by side</h4>
+        <p>Generate a product description with Shopify Magic for the same product used in your Module 2 labs, then generate an equivalent with the Claude API using your own prompt. Compare:</p>
+        <ul class="plain-list">
+          <li>Tone and brand-voice control — how much can you actually steer each one?</li>
+          <li>Whether either invents details not present in the product data</li>
+          <li>How each result could (or couldn't) be produced programmatically, at scale, outside the Admin UI</li>
+        </ul>
+      </div>
+
+      <!-- 3.8 -->
+      <div class="module-topic type-l">
+        <span class="topic-eyebrow">3.8 · Briefing + Lab</span>
+        <h3>Webhooks &amp; Event-Driven Foundations</h3>
+        <p>Everything so far has been the agent initiating a request. Webhooks flip that: Shopify tells your code when something happens in the store — the foundation Module 5's event-driven agents build directly on.</p>
+
+        <div class="concept-block">
+          <div class="concept-icon">📡</div>
+          <div class="concept-body">
+            <h4>Registering webhooks</h4>
+            <p class="mb-0">Common topics you'll use this program: <code>orders/create</code> (a new order was placed), <code>inventory_levels/update</code> (stock changed), and <code>app/uninstalled</code> (your app lost access — always handle this one). Each is registered against a URL your code controls, via the Admin API.</p>
+          </div>
+        </div>
+
+        <div class="concept-block">
+          <div class="concept-icon">🔐</div>
+          <div class="concept-body">
+            <h4>Verifying HMAC signatures</h4>
+            <p>Every webhook request carries an <code>X-Shopify-Hmac-Sha256</code> header. Recompute the HMAC yourself using your webhook secret and the raw request body, and compare — a mismatch means the request didn't actually come from Shopify.</p>
+            <div class="code-block"><span class="cm">// Verifying a webhook's HMAC (Node.js, using the raw request body)</span>
+import crypto from "crypto";
+
+const digest = crypto
+  .createHmac("sha256", process.env.SHOPIFY_WEBHOOK_SECRET)
+  .update(rawBody, "utf8")
+  .digest("base64");
+
+const isValid = crypto.timingSafeEqual(
+  Buffer.from(digest), Buffer.from(hmacHeader)
+);</div>
+          </div>
+        </div>
+
+        <div class="callout-warn">⚠️ <strong>Never skip HMAC verification.</strong> Your webhook endpoint is a public URL — without verification, anyone who finds it can send fake "order placed" events straight into your agent.</div>
+
+        <h4>Lab: build a lightweight Node.js webhook receiver</h4>
+        <p>Stand up a small Express endpoint that registers for <code>orders/create</code>, verifies every incoming request's HMAC before doing anything else, and logs the order details on success.</p>
+        <ul class="mini-check">
+          <li>Registered at least one webhook (e.g. <code>orders/create</code>) against your dev store</li>
+          <li>The receiver correctly verifies the HMAC signature and rejects mismatches</li>
+          <li>Triggering the event in your dev store (e.g. placing a test order) hits your receiver</li>
+          <li>The receiver responds quickly with a <code>200</code>, deferring any heavy work rather than blocking the response</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="callout callout-shopify">
+        <span class="emoji">🔭</span>
+        <div>
+          <h3>Where this goes next</h3>
+          <p>Every piece built here — scoped tokens, the Storefront and Admin tools from 3.6, and the webhook receiver from 3.8 — comes together in Module 4's end-to-end shopping agent, and again in Module 5's event-driven, admin-scoped operations agent.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <h4>Shopify Agentic AI Developer Bootcamp</h4>
+        <p class="small">A hands-on program on building agentic commerce experiences on Shopify with Claude, Node.js and React.</p>
+      </div>
+      <div>
+        <h4>Program</h4>
+        <ul>
+          <li><a href="schedule.html">Schedule</a></li>
+          <li><a href="curriculum.html">Curriculum</a></li>
+          <li><a href="prerequisites.html">Prerequisites</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>More</h4>
+        <ul>
+          <li><a href="about.html">About</a></li>
+          <li><a href="resources.html">Resources &amp; FAQ</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="mailto:Maitri.Bhansali@koenig-solutions.com">Maitri.Bhansali@koenig-solutions.com</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span id="footerYear"></span> Koenig Solutions. Delivered for V Group Inc.</span>
+      <div class="footer-logos">
+        <span class="logo-slot">
+          <img src="assets/images/koenig-logo.png" alt="Koenig Solutions" data-fallback onerror="this.style.display='none';this.nextElementSibling.style.display='inline-block'">
+          <span class="text-logo koenig" style="font-size:.85rem">KOENIG</span>
+        </span>
+        <span class="logo-slot">
+          <img src="assets/images/vgroup-logo.png" alt="V Group Inc." data-fallback onerror="this.style.display='none';this.nextElementSibling.style.display='inline-block'">
+          <span class="text-logo vgroup" style="font-size:.85rem">V Group Inc.</span>
+        </span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/data.js"></script>
+<script src="assets/js/main.js"></script>
+</body>
+</html>

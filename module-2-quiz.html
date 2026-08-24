@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module 2 Quick Quiz | Shopify Agentic AI Developer Bootcamp</title>
+<meta name="description" content="A 10-question quick quiz covering Module 2: Building Agents with the Claude API & Agent SDK.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛍️</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+<style>
+  /* ---- Quiz-specific styles (page-scoped, not needed elsewhere on the site) ---- */
+  .quiz-meta-row { display: flex; gap: 10px; flex-wrap: wrap; margin: 14px 0 0; }
+  .field label { display: block; font-size: .82rem; font-weight: 600; color: var(--text); margin-bottom: 6px; }
+  .field input {
+    width: 100%; padding: 10px 12px; border: 1px solid var(--border); border-radius: var(--radius-sm);
+    background: var(--surface); color: var(--text); font-size: .92rem; font-family: inherit;
+  }
+  .field input:focus { outline: 2px solid var(--koenig-blue); outline-offset: 1px; }
+
+  .quiz-question {
+    border: 1px solid var(--border); border-radius: var(--radius-md); padding: 18px 20px;
+    margin-bottom: 16px; background: var(--surface);
+  }
+  .quiz-question.unanswered { border-color: #c0392b; }
+  .quiz-q-num { font-size: .78rem; font-weight: 700; color: var(--shopify-green); text-transform: uppercase; letter-spacing: .05em; margin-bottom: 6px; display: block; }
+  .quiz-q-text { font-size: 1rem; font-weight: 600; color: var(--text); margin: 0 0 14px; }
+  .quiz-options { display: flex; flex-direction: column; gap: 10px; }
+  .quiz-option {
+    display: flex; align-items: flex-start; gap: 10px; padding: 10px 12px;
+    border: 1px solid var(--border); border-radius: var(--radius-sm); cursor: pointer;
+    font-size: .92rem; color: var(--text-muted); transition: border-color .15s, background .15s;
+  }
+  .quiz-option:hover { border-color: var(--koenig-blue); }
+  .quiz-option input { margin-top: 3px; flex-shrink: 0; accent-color: var(--shopify-green); }
+  .quiz-option.selected { border-color: var(--shopify-green); background: rgba(0,132,61,.06); color: var(--text); }
+
+  .quiz-option.result-correct { border-color: var(--shopify-green); background: rgba(0,132,61,.08); }
+  .quiz-option.result-wrong { border-color: #c0392b; background: rgba(192,57,43,.08); }
+  .result-tag { font-size: .74rem; font-weight: 700; margin-left: auto; padding: 2px 8px; border-radius: 20px; flex-shrink: 0; }
+  .result-tag.correct { background: var(--shopify-green); color: #fff; }
+  .result-tag.wrong { background: #c0392b; color: #fff; }
+
+  .quiz-submit-row { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin-top: 8px; }
+  .quiz-status { font-size: .86rem; color: var(--text-faint); }
+
+  .quiz-results { text-align: center; padding: 36px 24px; }
+  .quiz-score-circle {
+    width: 120px; height: 120px; border-radius: 50%; margin: 0 auto 18px;
+    display: flex; align-items: center; justify-content: center; flex-direction: column;
+    border: 6px solid var(--shopify-green); color: var(--text);
+  }
+  .quiz-score-circle .num { font-size: 1.8rem; font-weight: 800; line-height: 1; }
+  .quiz-score-circle .denom { font-size: .78rem; color: var(--text-faint); margin-top: 2px; }
+  .quiz-results.fail .quiz-score-circle { border-color: #c0392b; }
+  #quizFormSection.hidden, #quizResultsSection.hidden { display: none; }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="nav-wrap">
+    <a class="brand-lockup" href="index.html">
+      <span class="logo-slot">
+        <img src="assets/images/koenig-logo.png" alt="Koenig Solutions" data-fallback onerror="this.style.display='none';this.nextElementSibling.style.display='inline-block'">
+        <span class="text-logo koenig">KOENIG<span> solutions</span></span>
+      </span>
+      <span class="brand-x">×</span>
+      <span class="logo-slot">
+        <img src="assets/images/vgroup-logo.png" alt="V Group Inc." data-fallback onerror="this.style.display='none';this.nextElementSibling.style.display='inline-block'">
+        <span class="text-logo vgroup">V Group Inc.</span>
+      </span>
+      <span class="brand-title">Agentic AI Developer Bootcamp</span>
+    </a>
+    <nav>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="schedule.html">Schedule</a></li>
+        <li><a href="curriculum.html" class="active">Curriculum</a></li>
+        <li><a href="prerequisites.html">Prerequisites</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="resources.html">Resources</a></li>
+      </ul>
+    </nav>
+    <div class="nav-actions">
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">🌙</button>
+      <button class="nav-burger" id="navBurger" aria-label="Toggle menu" aria-expanded="false">☰</button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <section class="hero" style="padding:44px 0 36px">
+    <div class="hero-inner">
+      <p style="margin-bottom:14px"><a href="module-2.html" class="small" style="text-decoration:none;color:var(--koenig-blue);font-weight:600">← Back to Module 2</a></p>
+      <span class="eyebrow badge-live" style="background:var(--live-bg);border-color:transparent;color:var(--live-text)">📝 Quick Quiz</span>
+      <h1>Module 2 Quick Quiz</h1>
+      <p class="hero-sub">10 questions covering everything from the Messages API to the standalone multi-tool agent. Takes about 10 minutes.</p>
+      <div class="quiz-meta-row">
+        <span class="pill"><strong>10</strong> Questions</span>
+        <span class="pill">🎯 Pass mark: <strong>70%</strong></span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container" style="max-width:760px">
+
+      <div class="callout callout-koenig">
+        <span class="emoji">💡</span>
+        <div>
+          <h3>Before you start</h3>
+          <p>Your score is shown right here on this screen once you submit — nothing is saved or sent anywhere. Retake it as many times as you like. This covers <a href="module-2.html">Module 2</a> only.</p>
+        </div>
+      </div>
+
+      <!-- ============ QUIZ FORM ============ -->
+      <div id="quizFormSection">
+        <form id="quizForm" novalidate>
+          <div class="field" id="nameField" style="margin-top:24px;max-width:340px">
+            <label for="traineeName">Your name (optional)</label>
+            <input type="text" id="traineeName" name="traineeName" autocomplete="name">
+          </div>
+
+          <div id="questionsContainer" style="margin-top:20px"><!-- filled by JS --></div>
+
+          <div class="quiz-submit-row">
+            <button type="submit" class="btn btn-primary" id="submitBtn">Submit Quiz</button>
+          </div>
+        </form>
+      </div>
+
+      <!-- ============ RESULTS ============ -->
+      <div id="quizResultsSection" class="hidden">
+        <div class="quiz-results" id="quizResultsSummary"></div>
+        <div id="quizReview"><!-- filled by JS --></div>
+        <p style="text-align:center;margin-top:24px">
+          <a class="btn btn-outline" href="module-2.html">← Back to Module 2</a>
+          <button class="btn btn-primary" id="retakeBtn" style="margin-left:10px">Retake Quiz</button>
+        </p>
+      </div>
+
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <h4>Shopify Agentic AI Developer Bootcamp</h4>
+        <p class="small">A hands-on program on building agentic commerce experiences on Shopify with Claude, Node.js and React.</p>
+      </div>
+      <div>
+        <h4>Program</h4>
+        <ul>
+          <li><a href="schedule.html">Schedule</a></li>
+          <li><a href="curriculum.html">Curriculum</a></li>
+          <li><a href="prerequisites.html">Prerequisites</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>More</h4>
+        <ul>
+          <li><a href="about.html">About</a></li>
+          <li><a href="resources.html">Resources &amp; FAQ</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="mailto:Maitri.Bhansali@koenig-solutions.com">Maitri.Bhansali@koenig-solutions.com</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span id="footerYear"></span> Koenig Solutions. Delivered for V Group Inc.</span>
+      <div class="footer-logos">
+        <span class="logo-slot">
+          <img src="assets/images/koenig-logo.png" alt="Koenig Solutions" data-fallback onerror="this.style.display='none';this.nextElementSibling.style.display='inline-block'">
+          <span class="text-logo koenig" style="font-size:.85rem">KOENIG</span>
+        </span>
+        <span class="logo-slot">
+          <img src="assets/images/vgroup-logo.png" alt="V Group Inc." data-fallback onerror="this.style.display='none';this.nextElementSibling.style.display='inline-block'">
+          <span class="text-logo vgroup" style="font-size:.85rem">V Group Inc.</span>
+        </span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/data.js"></script>
+<script src="assets/js/main.js"></script>
+<script src="assets/js/quiz-module-2.js"></script>
+</body>
+</html>

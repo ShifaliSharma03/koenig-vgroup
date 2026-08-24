@@ -561,23 +561,25 @@ code {
 .concept-block + h4 { margin-top: 18px; }
 
 /* Acceptance / test-case checklist — reserved for things a trainee actually checks off as verified */
+/* li uses position/padding rather than display:flex so multi-element inline content (several <strong>/<code>
+   spans in one item) flows and wraps as one paragraph, instead of each run becoming its own flex item. */
 .mini-check { list-style: none; margin: 8px 0 14px; padding: 0; display: flex; flex-direction: column; gap: 6px; }
-.mini-check li { display: flex; align-items: flex-start; gap: 8px; font-size: .92rem; color: var(--text-muted); }
-.mini-check li::before { content: "✓"; color: var(--shopify-green); font-weight: 800; flex-shrink: 0; }
+.mini-check li { position: relative; padding-left: 22px; font-size: .92rem; color: var(--text-muted); }
+.mini-check li::before { content: "✓"; color: var(--shopify-green); font-weight: 800; position: absolute; left: 0; top: 0; }
 
 /* Sequential process steps — numbered, not checkmarked (nothing to "verify" yet) */
 .step-list { list-style: none; margin: 8px 0 14px; padding: 0; counter-reset: steps; display: flex; flex-direction: column; gap: 10px; }
-.step-list li { counter-increment: steps; display: flex; align-items: flex-start; gap: 10px; font-size: .92rem; color: var(--text-muted); }
+.step-list li { counter-increment: steps; position: relative; padding-left: 32px; font-size: .92rem; color: var(--text-muted); }
 .step-list li::before {
-  content: counter(steps); flex-shrink: 0; width: 22px; height: 22px; border-radius: 50%;
+  content: counter(steps); position: absolute; left: 0; top: 1px; width: 22px; height: 22px; border-radius: 50%;
   background: var(--koenig-blue); color: #fff; font-size: .72rem; font-weight: 700;
-  display: flex; align-items: center; justify-content: center; margin-top: 1px;
+  display: flex; align-items: center; justify-content: center;
 }
 
 /* Plain informational bullets — review questions, considerations; not steps, not checks */
 .plain-list { list-style: none; margin: 8px 0 14px; padding: 0; display: flex; flex-direction: column; gap: 8px; }
-.plain-list li { display: flex; align-items: flex-start; gap: 10px; font-size: .92rem; color: var(--text-muted); }
-.plain-list li::before { content: "–"; color: var(--text-faint); font-weight: 700; flex-shrink: 0; }
+.plain-list li { position: relative; padding-left: 20px; font-size: .92rem; color: var(--text-muted); }
+.plain-list li::before { content: "–"; color: var(--text-faint); font-weight: 700; position: absolute; left: 0; top: 0; }
 
 .simple-table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: var(--radius-sm); margin: 10px 0 16px; }
 table.simple-table { width: 100%; border-collapse: collapse; min-width: 480px; }
