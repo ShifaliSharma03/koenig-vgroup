@@ -66,7 +66,7 @@
         <span class="emoji">💡</span>
         <div>
           <h3>Before you arrive</h3>
-          <p>Every lab this module runs against your own <strong>free Shopify Partner development store</strong> — never a live/production store. If you don't have one yet, create it now from your Partner Dashboard; see <a href="prerequisites.html">Prerequisites</a> for the setup link. The multi-tool agent project from Module 2's <a href="module-2.html">Lab 2.6</a> also gets extended directly in this module — keep that project folder handy.</p>
+          <p>Every lab this module runs against your own <strong>free Shopify Partner development store</strong> — never a live/production store. If you don't have one yet, create it now from your Partner Dashboard; see <a href="prerequisites.html">Prerequisites</a> for the setup link.</p>
         </div>
       </div>
     </div>
@@ -117,7 +117,7 @@
                 </tbody>
               </table>
             </div>
-            <p class="mb-0">Nearly everything this module and Module 4 build touches the first two — Admin API for anything an agent needs to read or write on the merchant's behalf, Storefront API for anything a shopper-facing agent needs.</p>
+            <p class="mb-0">Nearly everything this module and Module 5 build touches the first two — Admin API for anything an agent needs to read or write on the merchant's behalf, Storefront API for anything a shopper-facing agent needs.</p>
           </div>
         </div>
 
@@ -235,7 +235,7 @@ async function getAdminAccessToken() {
       <div class="module-topic type-l">
         <span class="topic-eyebrow">3.3 · Briefing + Lab</span>
         <h3>Storefront API (GraphQL) — Products &amp; Cart</h3>
-        <p>The Storefront API is what a shopper-facing agent uses to browse the catalog and build a cart — everything Module 4's shopping agent needs before checkout.</p>
+        <p>The Storefront API is what a shopper-facing agent uses to browse the catalog and build a cart — everything Module 5's shopping agent needs before checkout.</p>
 
         <div class="concept-block">
           <div class="concept-icon">🛰️</div>
@@ -285,7 +285,7 @@ mutation {
     { merchandiseId: "gid://shopify/ProductVariant/...", quantity: 1 }
   ]) { cart { checkoutUrl } }
 }</div>
-            <p>On any Shopify plan below Plus, a custom page can't collect card payments directly (PCI compliance) — <code>checkoutUrl</code> is the actual, complete payment path for a self-checkout shopping agent: the shopper pays on Shopify's own hosted checkout page, not inside the conversation. This is a genuinely different object and use case from the Admin API's draft orders in Topic 3.4, which a merchant or agent builds <em>on the customer's behalf</em> — Module 4's shopping agent uses the Cart API almost exclusively for this reason.</p>
+            <p>On any Shopify plan below Plus, a custom page can't collect card payments directly (PCI compliance) — <code>checkoutUrl</code> is the actual, complete payment path for a self-checkout shopping agent: the shopper pays on Shopify's own hosted checkout page, not inside the conversation. This is a genuinely different object and use case from the Admin API's draft orders in Topic 3.4, which a merchant or agent builds <em>on the customer's behalf</em> — Module 5's shopping agent uses the Cart API almost exclusively for this reason.</p>
             <div class="callout-warn mb-0">⚠️ <strong>Dev stores are always password-protected</strong> — Shopify doesn't allow disabling it on a development store at all (only on a paid or transferred store). Visiting a fresh <code>checkoutUrl</code> in a browser that's never unlocked that store hits the password gate first, and on a dev store that redirect can drop the original checkout destination and land you back on the plain homepage instead. <strong>Fix:</strong> open your store's root URL (<code>https://your-store.myshopify.com/</code>) in that browser first, enter the storefront password once, <em>then</em> open the <code>checkoutUrl</code> — an already-unlocked browser goes straight to checkout.</div>
           </div>
         </div>
@@ -312,7 +312,7 @@ mutation {
           <div class="concept-icon">🧾</div>
           <div class="concept-body">
             <h4><code>orderCreate</code> vs. <code>draftOrderCreate</code></h4>
-            <p class="mb-0">These are both Admin API writes, and neither is what a self-checkout shopping agent uses for a normal purchase — that's Topic 3.3's Cart API and <code>checkoutUrl</code>. <strong><code>draftOrderCreate</code></strong> is for a <em>merchant- or agent-initiated</em> sale built on the customer's behalf — think a phone order or an admin-side agent assembling an order from a conversation — and returns an <code>invoiceUrl</code> the customer pays separately. <strong><code>orderCreate</code></strong> records an order that was already paid through some other channel entirely. Both matter for Module 5's admin-scoped agent; this lab just gets the mechanics working.</p>
+            <p class="mb-0">These are both Admin API writes, and neither is what a self-checkout shopping agent uses for a normal purchase — that's Topic 3.3's Cart API and <code>checkoutUrl</code>. <strong><code>draftOrderCreate</code></strong> is for a <em>merchant- or agent-initiated</em> sale built on the customer's behalf — think a phone order or an admin-side agent assembling an order from a conversation — and returns an <code>invoiceUrl</code> the customer pays separately. <strong><code>orderCreate</code></strong> records an order that was already paid through some other channel entirely. Both matter for Module 6's admin-scoped agent; this lab just gets the mechanics working.</p>
           </div>
         </div>
 
@@ -335,7 +335,7 @@ mutation {
           <div class="concept-icon">🔍</div>
           <div class="concept-body">
             <h4>Customer and inventory queries</h4>
-            <p class="mb-0">Reading <code>customer</code> records (order history, contact info) and <code>inventoryItem</code>/<code>inventoryLevel</code> data lets an agent answer "have I ordered this before?" or "is this in stock?" — both reused directly in Module 4's shopping agent and Module 6's personalization labs.</p>
+            <p class="mb-0">Reading <code>customer</code> records (order history, contact info) and <code>inventoryItem</code>/<code>inventoryLevel</code> data lets an agent answer "have I ordered this before?" or "is this in stock?" — both reused directly in Module 5's shopping agent and Module 7's personalization labs.</p>
           </div>
         </div>
 
@@ -347,6 +347,7 @@ mutation {
           <li>At least one customer or inventory query returns real dev-store data</li>
           <li>Can explain when to use <code>draftOrderCreate</code> vs. <code>orderCreate</code></li>
         </ul>
+        <a class="btn btn-sm btn-primary" href="assets/downloads/Module-3-Lab-3.4-Step-by-Step-Guide.pdf" download>⬇ Download the step-by-step lab guide (PDF)</a>
       </div>
 
       <!-- 3.5 -->
@@ -367,7 +368,7 @@ mutation {
           <div class="concept-icon">🪪</div>
           <div class="concept-body">
             <h4>Two tokens, not one</h4>
-            <p class="mb-0">A practical pattern used throughout the rest of the program — and one that now maps naturally onto two genuinely different credential sources: a <strong>read-only "shopper" token</strong> — the Headless channel's Storefront API token from Topic 3.3, which only ever sees <code>read</code>-shaped operations like product search and cart building — and a separate <strong>write-capable "admin-actions" token</strong>, the Dev Dashboard's Admin API access token from Topic 3.2, scoped to <code>write_draft_orders</code> (and later <code>write_orders</code> in Module 5) and reserved for actions that actually change store state. If the shopper-facing side of the agent is ever compromised or misused, it physically cannot place an order — it's holding the wrong credential entirely.</p>
+            <p class="mb-0">A practical pattern used throughout the rest of the program — and one that now maps naturally onto two genuinely different credential sources: a <strong>read-only "shopper" token</strong> — the Headless channel's Storefront API token from Topic 3.3, which only ever sees <code>read</code>-shaped operations like product search and cart building — and a separate <strong>write-capable "admin-actions" token</strong>, the Dev Dashboard's Admin API access token from Topic 3.2, scoped to <code>write_draft_orders</code> (and later <code>write_orders</code> in Module 6) and reserved for actions that actually change store state. If the shopper-facing side of the agent is ever compromised or misused, it physically cannot place an order — it's holding the wrong credential entirely.</p>
           </div>
         </div>
 
@@ -378,53 +379,80 @@ mutation {
       <div class="module-topic type-l">
         <span class="topic-eyebrow">3.6 · Lab</span>
         <h3>Wrap Shopify APIs as Claude Tools (Node.js)</h3>
-        <p>This is where Module 2's multi-tool agent stops being a demo with mock data and starts talking to a real store — still no MCP yet, that's Module 7. Just your own Node.js tool functions calling the Shopify GraphQL client directly.</p>
+        <p>This is where an agent stops being a demo with mock data and starts talking to a real store — still no MCP yet, that's Module 4. Just your own Node.js tool functions calling the Shopify GraphQL client directly.</p>
 
         <h4>What to build</h4>
-        <p>Return to your <a href="module-2.html">Lab 2.6</a> <code>multi-tool-agent</code> project (or a fresh copy of it) and replace its mock tools with real ones backed by the APIs from this module:</p>
+        <p>A standalone Claude agent, built from a blank folder, with three tools backed by real Shopify APIs:</p>
         <ul class="plain-list">
-          <li><strong>Product search</strong> — Storefront API query from Topic 3.3, replacing <code>get_product_info</code></li>
-          <li><strong>Cart create</strong> — <code>cartCreate</code> + <code>cartLinesAdd</code> from Topic 3.3, a new tool</li>
-          <li><strong>Draft order create</strong> — <code>draftOrderCreate</code> from Topic 3.4, replacing the discount-calculator's role as the "write" tool — keep its confirmation guardrail from Lab 2.6</li>
+          <li><strong>Product search</strong> — a Storefront API query, read-only</li>
+          <li><strong>Cart create</strong> — <code>cartCreate</code> + <code>cartLinesAdd</code>, a new cart with a real checkout link</li>
+          <li><strong>Draft order create</strong> — <code>draftOrderCreate</code> on the Admin API, the agent's only write-capable tool, gated behind an explicit y/n confirmation before it creates anything</li>
         </ul>
-        <p>This deliberately exercises both credential types from Topic 3.5's two-token pattern in one project: the first two tools run on the read-only Storefront token, the third on the write-capable Admin token. Module 4's actual shopping agent keeps only the first two — the draft-order tool's real home is the separate, locked-down admin agent in Module 5.</p>
+        <p>This deliberately exercises both credential types from Topic 3.5's two-token pattern in one project: the first two tools run on a read-only Storefront token, the third on a write-capable Admin token. Module 5's actual shopping agent keeps only the first two — the draft-order tool's real home is the separate, locked-down admin agent in Module 6.</p>
 
         <h4>Try prompting Claude Code with something like:</h4>
-        <div class="code-block">"In my existing multi-tool-agent project, replace the three mock
-tools with real Shopify-backed ones, keeping the same zod
-input/output validation and confirmation-guardrail patterns:
+        <div class="code-block">"Scaffold a new Node.js/ESM project with the Claude Agent SDK,
+zod, and dotenv. Give it three tools, each with a zod input schema
+and output validation:
 
 1. search_products(query: string) — calls the Storefront API
-   products query and returns title + price for up to 5 matches
+   products query and returns title + price + variant ID for up to
+   5 matches. Pass query through as-is, defaulting to an empty
+   string, never null, so a generic question still returns results.
 2. create_cart_with_item(variantId: string, quantity: number) —
    calls cartCreate then cartLinesAdd, returns the checkoutUrl
 3. create_draft_order(variantId: string, quantity: number) — calls
-   draftOrderCreate, returns the invoiceUrl. Keep the same y/n
-   confirmation guardrail this tool's predecessor had in Lab 2.6
-   before it actually creates anything.
+   draftOrderCreate, returns the invoiceUrl. Before it runs, print a
+   y/n confirmation prompt and only proceed if the answer is exactly
+   'y' — otherwise return an error result explaining it was declined.
 
-Read a long-lived STOREFRONT_PRIVATE_TOKEN (from the Headless channel,
-Topic 3.3) from .env and use it for search_products and
-create_cart_with_item. For create_draft_order, reuse the Admin API
-token-exchange helper from Topic 3.2's lab — SHOPIFY_CLIENT_ID and
-SHOPIFY_CLIENT_SECRET in .env, with the token cached and refreshed
-automatically before its 24-hour expiry, per the two-token pattern
-from Topic 3.5."</div>
+Read a long-lived STOREFRONT_PRIVATE_TOKEN from .env and use it for
+search_products and create_cart_with_item. For create_draft_order,
+write a separate Admin API helper that exchanges SHOPIFY_CLIENT_ID
+and SHOPIFY_CLIENT_SECRET for an access token via the client
+credentials grant, caching it and refreshing automatically before
+its 24-hour expiry. Keep the two credentials in separate files so
+each tool only ever touches the one it actually needs.
+
+Register the three tools on an SDK MCP server and drive them with
+query(), fed by an async generator so one session stays open across
+an interactive REPL. In query()'s options, set allowedTools to the
+three tools' fully-qualified mcp__<server>__<toolName> names — the
+default permission mode otherwise waits on an approval prompt with
+no handler wired up to answer it, and the whole thing just hangs on
+the first tool call.
+
+The REPL's async generator and the draft-order tool's own y/n prompt
+both call rl.question() on the same shared readline interface. Don't
+let the generator loop straight back to 'You: ' the instant it yields
+a prompt — have it await the SDK's own 'result' message first (a
+turnComplete/turnCompletePromise gate works well), so the current
+turn — including any tool-side confirmation — is fully finished
+before the next prompt is shown. Otherwise the two rl.question()
+calls race and the tool's real confirmation answer, along with the
+invoiceUrl that depends on it, gets silently swallowed."</div>
+
+        <div class="callout-warn">⚠️ <strong>A real bug you'll otherwise hit:</strong> without <code>allowedTools</code> set, the agent silently stalls the moment a tool should run — <code>query()</code>'s default permission mode asks for approval before every call, and this script never wires up a handler to answer that prompt. Pre-approving the three tools this way doesn't loosen safety anywhere: <code>create_draft_order</code> still runs its own y/n confirmation inside the tool itself regardless, so a real write still can't happen without an explicit human "yes."</div>
+
+        <div class="callout-warn">⚠️ <strong>A second real bug you'll otherwise hit:</strong> even with <code>allowedTools</code> fixed, confirming the draft order with <code>y</code> can silently jump straight back to the next <code>You:</code> prompt with no <code>invoiceUrl</code> in sight. The cause is a readline race: the REPL's generator calls <code>rl.question("You: ")</code> again right after yielding, at the same moment the tool's own <code>askConfirmation()</code> is calling <code>rl.question()</code> on that same shared interface, so the tool's prompt loses the race and your real answer never reaches it. The fix is to make the generator await the SDK's <code>"result"</code> message — signaling the whole turn, tool confirmation included, is done — before it prompts for the next input.</div>
 
         <h4>Acceptance checklist</h4>
         <ul class="mini-check">
           <li>All three tools call the real Shopify GraphQL APIs, not mock data</li>
           <li>The Storefront token and the Admin client credentials are kept separate, matching each tool's actual needs</li>
+          <li><code>search_products</code> and <code>create_cart_with_item</code> run immediately, with no permission prompt blocking them</li>
           <li>The Admin token-exchange helper refreshes automatically rather than reusing a stale token past its 24-hour expiry</li>
           <li>The draft-order tool still pauses for a real confirmation before creating anything</li>
+          <li>Confirming with <code>y</code> makes the real <code>invoiceUrl</code> appear in the agent's own reply — not a silent jump straight to the next <code>You:</code> prompt</li>
           <li>A natural-language conversation can search a product, add it to a cart, and produce a real invoice link, all against your dev store</li>
         </ul>
-        <div class="callout-tip"><strong>Keep this project too.</strong> Module 4 wires this exact tool set into the end-to-end shopping agent and a React chat widget — you won't rebuild it from scratch.</div>
+        <div class="callout-tip"><strong>Keep this project.</strong> Module 5 wires this exact tool set into the end-to-end shopping agent and a React chat widget — you won't rebuild it again from here.</div>
+        <a class="btn btn-sm btn-primary" href="assets/downloads/Module-3-Lab-3.6-Step-by-Step-Guide.pdf" download>⬇ Download the step-by-step lab guide (PDF)</a>
       </div>
 
       <!-- 3.7 -->
-      <div class="module-topic type-d">
-        <span class="topic-eyebrow">3.7 · Briefing + Demo</span>
+      <div class="module-topic type-b">
+        <span class="topic-eyebrow">3.7 · Briefing</span>
         <h3>Shopify Native AI — Magic &amp; Sidekick</h3>
         <p>Shopify ships its own AI tools out of the box. Knowing exactly where they stop is what justifies building a custom agent at all, rather than just pointing merchants at what's already there.</p>
 
@@ -440,7 +468,7 @@ from Topic 3.5."</div>
           <div class="concept-icon">🤝</div>
           <div class="concept-body">
             <h4>Sidekick</h4>
-            <p class="mb-0">Shopify's chat-based merchant assistant, built into the Admin. It can answer questions about the store and take some actions via MCP-based app extensions (previewed properly in Module 7). Like Magic, it's merchant-facing only — it doesn't talk to shoppers, and you can't redirect its behavior or give it your own tools.</p>
+            <p class="mb-0">Shopify's chat-based merchant assistant, built into the Admin. It can answer questions about the store and take some actions via MCP-based app extensions (previewed properly in Module 4). Like Magic, it's merchant-facing only — it doesn't talk to shoppers, and you can't redirect its behavior or give it your own tools.</p>
           </div>
         </div>
 
@@ -448,24 +476,17 @@ from Topic 3.5."</div>
           <div class="concept-icon">⚖️</div>
           <div class="concept-body">
             <h4>Where a custom agent earns its place</h4>
-            <p class="mb-0">Magic and Sidekick solve merchant-side content and admin tasks well. A custom Claude-powered agent is what you need the moment you want <strong>shopper-facing</strong> conversation, <strong>your own tools and business logic</strong>, or behavior embedded in <strong>your own product</strong> rather than inside Shopify's Admin UI — exactly what Module 4 builds.</p>
+            <p class="mb-0">Magic and Sidekick solve merchant-side content and admin tasks well. A custom Claude-powered agent is what you need the moment you want <strong>shopper-facing</strong> conversation, <strong>your own tools and business logic</strong>, or behavior embedded in <strong>your own product</strong> rather than inside Shopify's Admin UI — exactly what Module 5 builds.</p>
           </div>
         </div>
 
-        <h4>Demo: Magic vs. a Claude-authored equivalent, side by side</h4>
-        <p>Generate a product description with Shopify Magic for the same product used in your Module 2 labs, then generate an equivalent with the Claude API using your own prompt. Compare:</p>
-        <ul class="plain-list">
-          <li>Tone and brand-voice control — how much can you actually steer each one?</li>
-          <li>Whether either invents details not present in the product data</li>
-          <li>How each result could (or couldn't) be produced programmatically, at scale, outside the Admin UI</li>
-        </ul>
       </div>
 
       <!-- 3.8 -->
       <div class="module-topic type-l">
         <span class="topic-eyebrow">3.8 · Briefing + Lab</span>
         <h3>Webhooks &amp; Event-Driven Foundations</h3>
-        <p>Everything so far has been the agent initiating a request. Webhooks flip that: Shopify tells your code when something happens in the store — the foundation Module 5's event-driven agents build directly on.</p>
+        <p>Everything so far has been the agent initiating a request. Webhooks flip that: Shopify tells your code when something happens in the store — the foundation Module 6's event-driven agents build directly on.</p>
 
         <div class="concept-block">
           <div class="concept-icon">📡</div>
@@ -504,6 +525,7 @@ const isValid = crypto.timingSafeEqual(
           <li>Triggering the event in your dev store (e.g. placing a test order) hits your receiver</li>
           <li>The receiver responds quickly with a <code>200</code>, deferring any heavy work rather than blocking the response</li>
         </ul>
+        <a class="btn btn-sm btn-primary" href="assets/downloads/Module-3-Lab-3.8-Step-by-Step-Guide.pdf" download>⬇ Download the step-by-step lab guide (PDF)</a>
       </div>
 
     </div>
@@ -515,7 +537,7 @@ const isValid = crypto.timingSafeEqual(
         <span class="emoji">🔭</span>
         <div>
           <h3>Where this goes next</h3>
-          <p>Every piece built here — scoped tokens, the Storefront and Admin tools from 3.6, and the webhook receiver from 3.8 — comes together in Module 4's end-to-end shopping agent, and again in Module 5's event-driven, admin-scoped operations agent.</p>
+          <p>Every piece built here — scoped tokens, the Storefront and Admin tools from 3.6, and the webhook receiver from 3.8 — comes together in Module 5's end-to-end shopping agent, and again in Module 6's event-driven, admin-scoped operations agent.</p>
         </div>
       </div>
     </div>

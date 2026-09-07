@@ -222,7 +222,7 @@ await stream.finalMessage();</div>
           <div class="concept-icon">🖥️</div>
           <div class="concept-body">
             <h4>Custom tools via createSdkMcpServer</h4>
-            <p>Rather than defining raw tool schemas by hand as in 2.2, the SDK lets you expose a set of typed Node.js functions as an in-process MCP server the agent can call directly — the same shape of tool you'll later expose over the network in Module 7's custom MCP server lab.</p>
+            <p>Rather than defining raw tool schemas by hand as in 2.2, the SDK lets you expose a set of typed Node.js functions as an in-process MCP server the agent can call directly — the same shape of tool you'll later expose over the network in Module 4's custom MCP server lab.</p>
             <div class="code-block">import { createSdkMcpServer, tool } from "@anthropic-ai/claude-agent-sdk";
 import { z } from "zod";
 
@@ -242,7 +242,7 @@ const stockServer = createSdkMcpServer({
           <div class="concept-icon">🔐</div>
           <div class="concept-body">
             <h4>Permission modes</h4>
-            <p class="mb-0">The SDK supports permission modes ranging from prompting before every tool call to fully autonomous execution. For anything that can write data — draft orders, webhooks — default to a mode that requires explicit approval; we'll tighten this further with confirmation gates in Module 5.</p>
+            <p class="mb-0">The SDK supports permission modes ranging from prompting before every tool call to fully autonomous execution. For anything that can write data — draft orders, webhooks — default to a mode that requires explicit approval; we'll tighten this further with confirmation gates in Module 6.</p>
           </div>
         </div>
 
@@ -333,7 +333,7 @@ if (!parsed.success) {
           </div>
         </div>
 
-        <div class="callout-warn">⚠️ <strong>Safe defaults for state-changing actions.</strong> Any tool that writes data (creates an order, sends a message, changes inventory) should default to requiring explicit confirmation until proven safe in testing — this is the same principle behind the permission modes in 2.3, and the confirmation gates you'll build explicitly in Module 5.</div>
+        <div class="callout-warn">⚠️ <strong>Safe defaults for state-changing actions.</strong> Any tool that writes data (creates an order, sends a message, changes inventory) should default to requiring explicit confirmation until proven safe in testing — this is the same principle behind the permission modes in 2.3, and the confirmation gates you'll build explicitly in Module 6.</div>
       </div>
 
       <!-- 2.6 -->
@@ -382,7 +382,7 @@ so I can ask follow-up questions that reference earlier answers."</div>
         <span class="emoji">🔭</span>
         <div>
           <h3>Where this goes next</h3>
-          <p>The multi-tool agent from 2.6 is the reusable skeleton for the rest of the program — Module 3 replaces its mock tools with real Shopify Storefront and Admin API calls, and Module 7 exposes the same tools through a standards-compliant MCP server.</p>
+          <p>The multi-tool agent from 2.6 is the reusable skeleton for the rest of the program — Module 3 replaces its mock tools with real Shopify Storefront and Admin API calls, and Module 4 exposes the same tools through a standards-compliant MCP server.</p>
         </div>
       </div>
 
