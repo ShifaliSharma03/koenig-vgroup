@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module 4 Content | Shopify Agentic AI Developer Bootcamp</title>
+<meta name="description" content="Module 4: Shopify MCP, UCP & Agentic Commerce — the Model Context Protocol, Shopify's official MCP servers, building a custom MCP server, and the wider agentic-commerce standards landscape.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛍️</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="nav-wrap">
+    <a class="brand-lockup" href="index.html">
+      <span class="logo-slot">
+        <img src="assets/images/koenig-logo.png" alt="Koenig Solutions" data-fallback onerror="this.style.display='none';this.nextElementSibling.style.display='inline-block'">
+        <span class="text-logo koenig">KOENIG<span> solutions</span></span>
+      </span>
+      <span class="brand-x">×</span>
+      <span class="logo-slot">
+        <img src="assets/images/vgroup-logo.png" alt="V Group Inc." data-fallback onerror="this.style.display='none';this.nextElementSibling.style.display='inline-block'">
+        <span class="text-logo vgroup">V Group Inc.</span>
+      </span>
+      <span class="brand-title">Agentic AI Developer Bootcamp</span>
+    </a>
+    <nav>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="schedule.html">Schedule</a></li>
+        <li><a href="curriculum.html" class="active">Curriculum</a></li>
+        <li><a href="prerequisites.html">Prerequisites</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="resources.html">Resources</a></li>
+      </ul>
+    </nav>
+    <div class="nav-actions">
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">🌙</button>
+      <button class="nav-burger" id="navBurger" aria-label="Toggle menu" aria-expanded="false">☰</button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <section class="hero" style="padding:44px 0 36px">
+    <div class="hero-inner">
+      <p style="margin-bottom:14px"><a href="curriculum.html" class="small" style="text-decoration:none;color:var(--koenig-blue);font-weight:600">← Back to Curriculum</a></p>
+      <span class="eyebrow badge-live" style="background:var(--live-bg);border-color:transparent;color:var(--live-text)">📖 Module 4 · Live</span>
+      <h1>Shopify MCP, UCP &amp; Agentic Commerce</h1>
+      <p class="hero-sub">Adopt Shopify's native agent protocols and understand the wider agentic-commerce landscape.</p>
+      <div class="hero-meta">
+        <span class="pill">📅 <strong>28 Aug, 7 – 8 Sep 2026</strong></span>
+        <span class="pill">🕥 10:00 – 12:00 IST</span>
+        <span class="pill"><strong>3</strong> Live Sessions</span>
+        <span class="pill"><strong>6</strong> Topics</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="callout callout-koenig">
+        <span class="emoji">💡</span>
+        <div>
+          <h3>Before you arrive</h3>
+          <p>This module doesn't start a new project. The lab reuses <code>search_products</code> and <code>update_cart</code> from <a href="module-5.html">Module 5</a>, re-exposing the exact same logic through a different door. Have that project, its <code>.env</code>, and Claude Code itself ready — Claude Code is the MCP client used for every live demo this module.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">What's covered</span>
+        <h2>Six topics across three sessions</h2>
+        <p>This page is meant to be a complete, standalone reference for Module 4 — everything below is enough to prepare for, follow along with, and revisit after each session, without needing outside material.</p>
+      </div>
+
+      <!-- 4.1 -->
+      <div class="module-topic type-b">
+        <span class="topic-eyebrow">4.1 · Briefing</span>
+        <h3>Model Context Protocol (MCP), Explained</h3>
+        <p>Every custom tool built so far in this program has quietly been an MCP server. This topic makes that explicit before Topic 4.3 takes it further.</p>
+
+        <div class="concept-block">
+          <div class="concept-icon">🔌</div>
+          <div class="concept-body">
+            <h4>Why MCP exists</h4>
+            <p class="mb-0">Before MCP, connecting an LLM to N different tools or data sources meant writing N different bespoke integrations, and every new client application had to redo that work again. MCP (Model Context Protocol) is Anthropic's open standard — open-sourced in November 2024 — for one common client-server protocol any LLM application can speak to any compliant tool/data server, so the integration gets written once.</p>
+          </div>
+        </div>
+
+        <div class="concept-block">
+          <div class="concept-icon">🎁</div>
+          <div class="concept-body">
+            <h4>You've already been using it</h4>
+            <p class="mb-0"><code>createSdkMcpServer()</code> — used all the way back in Module 2's Lab 2.3, and in every Shopify tool since — builds a real MCP server. It's just run <em>in-process</em>, wired directly into <code>query()</code>'s <code>mcpServers</code> option, with no network hop and no other client able to reach it. Topic 4.3 takes that exact same tool logic and exposes it as a standalone server anything MCP-aware can connect to — the protocol underneath doesn't change, only its reach does.</p>
+          </div>
+        </div>
+
+        <div class="concept-block">
+          <div class="concept-icon">🏗️</div>
+          <div class="concept-body">
+            <h4>Architecture: host, client, server</h4>
+            <p>A <strong>host</strong> (Claude Code, Claude Desktop, or your own agent) contains one or more <strong>clients</strong>, each holding a dedicated 1:1 connection to one <strong>server</strong>. A server exposes some mix of three primitives: <strong>tools</strong> (actions the model decides to invoke — everything built in this program so far), <strong>resources</strong> (data the host application controls access to), and <strong>prompts</strong> (reusable templates the user selects).</p>
+            <p class="mb-0">Two transports matter here: <strong>stdio</strong>, where the host launches the server as a local subprocess and talks over its stdin/stdout (what Claude Desktop uses for local servers), and <strong>Streamable HTTP</strong>, a real network endpoint any client can reach remotely — what Shopify's own MCP servers use, and what Topic 4.3's server uses too.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4.2 -->
+      <div class="module-topic type-d">
+        <span class="topic-eyebrow">4.2 · Briefing + Demo</span>
+        <h3>Shopify's Official MCP Servers</h3>
+        <p>Shopify exposes several of its own MCP servers, no custom code required. This topic tours them and demos connecting to one directly from Claude Code.</p>
+
+        <div class="concept-block">
+          <div class="concept-icon">🏪</div>
+          <div class="concept-body">
+            <h4>Storefront MCP</h4>
+            <p class="mb-0">Every Shopify store exposes a Storefront MCP endpoint, giving any MCP-aware client product search and cart/checkout capability against that store's real catalog — the same job as Module 5's hand-written <code>search_products</code> and <code>update_cart</code> tools, but with zero code and zero control over exactly what's exposed or how it behaves.</p>
+          </div>
+        </div>
+
+        <div class="concept-block">
+          <div class="concept-icon">🧰</div>
+          <div class="concept-body">
+            <h4>Customer Account MCP, Checkout MCP &amp; the Dev MCP/AI Toolkit</h4>
+            <p class="mb-0">Customer Account MCP and Checkout MCP extend the same idea to authenticated customer-account actions and checkout completion respectively — both newer and more limited in scope than Storefront MCP. Separately, the <strong>Dev MCP / AI Toolkit</strong> isn't shopper-facing at all: it's a developer-facing server that surfaces Shopify's own API docs and schemas, useful inside Claude Code itself while you're building the labs in this program.</p>
+          </div>
+        </div>
+
+        <h4>Try prompting Claude Code with something like:</h4>
+        <div class="code-block">claude mcp add --transport http shopify-storefront https://your-store.myshopify.com/api/mcp</div>
+        <p>Then, in the same Claude Code session, ask it something like <em>"search this store for snowboards"</em> in plain language — no code, no <code>.env</code>, no tool you wrote yourself.</p>
+
+        <div class="callout-warn">⚠️ <strong>Verify the exact endpoint and available tools against your own dev store first.</strong> Shopify's MCP surface is new and still evolving — confirm <code>/api/mcp</code> is live on your store and see what <code>claude mcp list</code> reports before relying on it in a live session, the same "test it live before trusting it" habit every Shopify API in this program has needed.</div>
+
+        <h4>Why build your own at all, then?</h4>
+        <ul class="mini-check">
+          <li>Storefront MCP exposes what Shopify chose to expose — Module 5's confirmation gate on <code>create_draft_order</code>-style writes, or a cart tool that tracks state your way, isn't something you control there</li>
+          <li>It can't call your own Admin-scoped tools (order status lookups, discount logic) alongside the Storefront ones in a single coherent tool set</li>
+          <li>Topic 4.3 is what lets you keep everything built in Module 5 while still being reachable by any MCP client, not just your own <code>agent.js</code></li>
+        </ul>
+      </div>
+
+      <!-- 4.3 -->
+      <div class="module-topic type-l">
+        <span class="topic-eyebrow">4.3 · Lab</span>
+        <h3>Build a Custom Shopify MCP Server (Node.js)</h3>
+        <p>Re-expose Module 5's tools as a standalone, standards-compliant MCP server any MCP-aware client can use — not just the <code>query()</code> call that owned them before.</p>
+
+        <div class="concept-block">
+          <div class="concept-icon">🔀</div>
+          <div class="concept-body">
+            <h4>A different SDK for a different job</h4>
+            <p class="mb-0"><code>createSdkMcpServer()</code> from the <strong>Claude Agent SDK</strong> only ever runs in-process, wired straight into one <code>query()</code> call — that's why Module 5's tools couldn't be reached by anything else. This lab uses the official, LLM-agnostic <strong>Model Context Protocol SDK</strong> (<code>@modelcontextprotocol/sdk</code>) instead: it speaks the real MCP wire protocol over a real transport, so it can be reached by Claude Code, Claude Desktop, or any other compliant client — including, if you wanted, a completely different agent framework.</p>
+          </div>
+        </div>
+
+        <h4>Step 1 — Install and write the server</h4>
+        <div class="code-block">npm install @modelcontextprotocol/sdk zod</div>
+        <div class="code-label" style="font-size:.72rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--text-faint);margin:10px 0 4px">mcpServer.js — same tool logic as Module 5, a different registration API</div>
+        <div class="code-block">import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
+import { StreamableHTTPServerTransport } from "@modelcontextprotocol/sdk/server/streamableHttp.js";
+import express from "express";
+import { z } from "zod";
+import { storefrontRequest } from "./storefrontClient.js"; <span class="cm">// straight from Lab 3.6</span>
+
+function buildServer() {
+  const server = new McpServer({ name: "shopify-tools", version: "1.0.0" });
+
+  server.registerTool(
+    "search_products",
+    {
+      title: "Search Products",
+      description: "Search the store catalog for products matching a text query.",
+      inputSchema: { query: z.string().default("") },
+    },
+    async ({ query }) => {
+      const data = await storefrontRequest(`
+        query($query: String) {
+          products(first: 5, query: $query) {
+            edges { node {
+              title
+              priceRange { minVariantPrice { amount currencyCode } }
+              variants(first: 1) { edges { node { id } } }
+            } }
+          }
+        }
+      `, { query });
+
+      const products = data.products.edges.map((e) => ({
+        title: e.node.title,
+        price: e.node.priceRange.minVariantPrice.amount,
+        currency: e.node.priceRange.minVariantPrice.currencyCode,
+        variantId: e.node.variants.edges[0]?.node.id ?? "",
+      }));
+      return { content: [{ type: "text", text: JSON.stringify({ products }) }] };
+    }
+  );
+
+  return server;
+}
+
+const app = express();
+app.use(express.json());
+
+<span class="cm">// Stateless mode: a fresh server + transport per request. Simple, and enough</span>
+<span class="cm">// for tools with no cross-call session state (Module 5's cart tool needs a</span>
+<span class="cm">// session id of its own if you bring it into this same server).</span>
+app.post("/mcp", async (req, res) => {
+  const transport = new StreamableHTTPServerTransport({ sessionIdGenerator: undefined });
+  const server = buildServer();
+  await server.connect(transport);
+  await transport.handleRequest(req, res, req.body);
+  res.on("close", () => { transport.close(); server.close(); });
+});
+
+app.listen(3200, () => console.log("MCP server listening on :3200/mcp"));</div>
+
+        <div class="callout-tip"><strong>Tested end to end, both transports.</strong> This server was driven by a real <code>@modelcontextprotocol/sdk</code> client — not a mock — over both a local <code>stdio</code> subprocess and this real HTTP transport: a genuine MCP handshake, <code>listTools()</code> correctly advertising <code>search_products</code>, and <code>callTool()</code> round-tripping arguments and returning the tool's real output shape. Both passed.</div>
+
+        <h4>Step 2 — Connect Claude Code to your own server</h4>
+        <div class="code-block">node mcpServer.js
+<span class="cm"># in a separate terminal</span>
+claude mcp add --transport http my-shop-tools http://localhost:3200/mcp</div>
+        <p class="mb-0">Ask Claude Code to search your catalog in plain language, exactly like Topic 4.2's demo against Shopify's own Storefront MCP — except this time it's calling a tool you wrote, with whatever logic and guardrails you put in it.</p>
+
+        <h4>Acceptance checklist</h4>
+        <ul class="mini-check">
+          <li><code>claude mcp list</code> shows your server connected, and its tool is discoverable</li>
+          <li>A natural-language product question in Claude Code returns real catalog data through your own tool, not Shopify's Storefront MCP</li>
+          <li>The tool's logic is unchanged from Module 5 — only how it's reached is different</li>
+          <li>The server responds correctly whether reached over <code>stdio</code> or HTTP</li>
+        </ul>
+      </div>
+
+      <!-- 4.4 -->
+      <div class="module-topic type-d">
+        <span class="topic-eyebrow">4.4 · Briefing + Demo</span>
+        <h3>Universal Commerce Protocol (UCP)</h3>
+        <p>MCP connects an agent to tools. UCP is a level up: a standard for an agent to discover and transact with <em>any</em> participating merchant, not just one you've already integrated with.</p>
+
+        <div class="concept-block">
+          <div class="concept-icon">🌐</div>
+          <div class="concept-body">
+            <h4>What UCP is for</h4>
+            <p class="mb-0">Universal Commerce Protocol is an open standard from Shopify and Google for agent-driven commerce: capability discovery, negotiation, cart/checkout, and order monitoring, expressed the same way across any merchant that implements it. The goal is that a shopping agent doesn't need a bespoke integration per store — it discovers what a UCP-enabled store supports and transacts against a common interface, the same spirit as MCP but one layer up, aimed at commerce specifically rather than tools in general.</p>
+          </div>
+        </div>
+
+        <p class="mb-0">The demo walks through inspecting capability discovery against a UCP-enabled endpoint live.</p>
+
+        <div class="callout-warn">⚠️ <strong>This is one of the newest, fastest-moving standards in the whole program.</strong> UCP was only announced in 2025 and its exact discovery endpoints and payload shapes are still settling. Check Shopify's current published UCP documentation before this session rather than treating anything specific here as fixed — the concept (standardized discovery and negotiation across merchants) is the durable part; the exact wire format is not something to memorize yet.</div>
+      </div>
+
+      <!-- 4.5 -->
+      <div class="module-topic type-b">
+        <span class="topic-eyebrow">4.5 · Briefing</span>
+        <h3>Agentic Commerce Protocol (ACP) &amp; the Wider Landscape</h3>
+        <p>UCP isn't the only standard chasing "let an AI agent shop on a user's behalf." A walkthrough-only comparison — no live demo, since it's a competing ecosystem, not one built on Shopify's own stack.</p>
+
+        <div class="concept-block">
+          <div class="concept-icon">🛒</div>
+          <div class="concept-body">
+            <h4>ACP: OpenAI + Stripe</h4>
+            <p class="mb-0">Agentic Commerce Protocol is what currently powers ChatGPT's "Instant Checkout" — a shopper completes a purchase from inside a ChatGPT conversation, with Stripe handling payment. It's narrower and more vertically integrated than UCP: built around one assistant (ChatGPT) and one payments partner (Stripe), focused specifically on completing a checkout rather than the broader discovery-and-negotiation scope UCP targets.</p>
+          </div>
+        </div>
+
+        <table class="data" style="width:100%;border-collapse:collapse;margin:14px 0">
+          <tr><th style="text-align:left;background:#1a1f24;color:#fff;padding:8px 10px;font-size:.8rem">Standard</th><th style="text-align:left;background:#1a1f24;color:#fff;padding:8px 10px;font-size:.8rem">Backed by</th><th style="text-align:left;background:#1a1f24;color:#fff;padding:8px 10px;font-size:.8rem">Scope</th></tr>
+          <tr><td style="padding:8px 10px;border-bottom:1px solid var(--border)">MCP</td><td style="padding:8px 10px;border-bottom:1px solid var(--border)">Anthropic (open standard)</td><td style="padding:8px 10px;border-bottom:1px solid var(--border)">Connecting any LLM app to any tool/data source</td></tr>
+          <tr><td style="padding:8px 10px;border-bottom:1px solid var(--border)">UCP</td><td style="padding:8px 10px;border-bottom:1px solid var(--border)">Shopify + Google</td><td style="padding:8px 10px;border-bottom:1px solid var(--border)">Cross-merchant agent discovery, negotiation, cart/checkout, order monitoring</td></tr>
+          <tr><td style="padding:8px 10px">ACP</td><td style="padding:8px 10px">OpenAI + Stripe</td><td style="padding:8px 10px">Checkout completion inside ChatGPT specifically</td></tr>
+        </table>
+
+        <p class="mb-0">Treat this as an actively contested space rather than a settled one — expect the boundaries between these (and others that emerge) to keep shifting well past this program.</p>
+      </div>
+
+      <!-- 4.6 -->
+      <div class="module-topic type-b">
+        <span class="topic-eyebrow">4.6 · Briefing</span>
+        <h3>Shopify Sidekick &amp; Agentic Storefronts</h3>
+        <p>Two more places Shopify's own AI shows up — one merchant-facing, one about being found by AI shopping assistants you don't control at all.</p>
+
+        <div class="concept-block">
+          <div class="concept-icon">🤝</div>
+          <div class="concept-body">
+            <h4>Sidekick and MCP-based app extensions</h4>
+            <p class="mb-0">Sidekick is Shopify's merchant-facing AI assistant built into the Admin — natural-language actions like "show me my best-selling products this month" or drafting a discount. MCP-based app extensions are how a third-party app (in principle, one you built) can plug its own capabilities directly into Sidekick's action surface, rather than being a separate screen the merchant has to navigate to.</p>
+          </div>
+        </div>
+
+        <div class="concept-block">
+          <div class="concept-icon">🔭</div>
+          <div class="concept-body">
+            <h4>Agentic Storefronts</h4>
+            <p class="mb-0">This is the flip side of Topics 4.4–4.5: making a merchant's catalog discoverable and transactable from <em>inside</em> ChatGPT, Microsoft Copilot, Google Gemini, and Google's AI Mode — surfaces the merchant doesn't own or control. A store becomes an "agentic storefront" by implementing the discovery/transaction standards (UCP, ACP, or both) those assistants speak, so a shopper never has to leave their AI assistant of choice to buy something.</p>
+          </div>
+        </div>
+
+        <p class="mb-0">The thread connecting all six topics this module: Shopify already gives you a lot for free — MCP servers, Sidekick extensions, agentic-storefront discoverability. Everything built by hand in Modules 3–4 is what you reach for when you need control, custom logic, or guardrails those built-in surfaces don't give you.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="callout callout-shopify">
+        <span class="emoji">🔭</span>
+        <div>
+          <h3>Where this goes next</h3>
+          <p>Keep the MCP server from Lab 4.3 running. Module 8's capstone folds it — alongside the shopping agent from Module 5, the admin-ops agent from Module 6, and the RAG support agent from Module 7 — into one multi-agent, orchestrated platform, with this MCP server as one of several standardized surfaces other agents and clients can reach.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <h4>Shopify Agentic AI Developer Bootcamp</h4>
+        <p class="small">A hands-on program on building agentic commerce experiences on Shopify with Claude, Node.js and React.</p>
+      </div>
+      <div>
+        <h4>Program</h4>
+        <ul>
+          <li><a href="schedule.html">Schedule</a></li>
+          <li><a href="curriculum.html">Curriculum</a></li>
+          <li><a href="prerequisites.html">Prerequisites</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>More</h4>
+        <ul>
+          <li><a href="about.html">About</a></li>
+          <li><a href="resources.html">Resources &amp; FAQ</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="mailto:Maitri.Bhansali@koenig-solutions.com">Maitri.Bhansali@koenig-solutions.com</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span id="footerYear"></span> Koenig Solutions. Delivered for V Group Inc.</span>
+      <div class="footer-logos">
+        <span class="logo-slot">
+          <img src="assets/images/koenig-logo.png" alt="Koenig Solutions" data-fallback onerror="this.style.display='none';this.nextElementSibling.style.display='inline-block'">
+          <span class="text-logo koenig" style="font-size:.85rem">KOENIG</span>
+        </span>
+        <span class="logo-slot">
+          <img src="assets/images/vgroup-logo.png" alt="V Group Inc." data-fallback onerror="this.style.display='none';this.nextElementSibling.style.display='inline-block'">
+          <span class="text-logo vgroup" style="font-size:.85rem">V Group Inc.</span>
+        </span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/data.js"></script>
+<script src="assets/js/main.js"></script>
+</body>
+</html>
