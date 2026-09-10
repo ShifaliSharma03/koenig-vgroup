@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module 5 Content | Shopify Agentic AI Developer Bootcamp</title>
+<meta name="description" content="Module 5: End-to-End Shopping Agent — assembling a complete customer-facing shopping agent, from product discovery through payment, in Node.js and React.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛍️</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="nav-wrap">
+    <a class="brand-lockup" href="index.html">
+      <span class="logo-slot">
+        <img src="assets/images/koenig-logo.png" alt="Koenig Solutions" data-fallback onerror="this.style.display='none';this.nextElementSibling.style.display='inline-block'">
+        <span class="text-logo koenig">KOENIG<span> solutions</span></span>
+      </span>
+      <span class="brand-x">×</span>
+      <span class="logo-slot">
+        <img src="assets/images/vgroup-logo.png" alt="V Group Inc." data-fallback onerror="this.style.display='none';this.nextElementSibling.style.display='inline-block'">
+        <span class="text-logo vgroup">V Group Inc.</span>
+      </span>
+      <span class="brand-title">Agentic AI Developer Bootcamp</span>
+    </a>
+    <nav>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="schedule.html">Schedule</a></li>
+        <li><a href="curriculum.html" class="active">Curriculum</a></li>
+        <li><a href="prerequisites.html">Prerequisites</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="resources.html">Resources</a></li>
+      </ul>
+    </nav>
+    <div class="nav-actions">
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">🌙</button>
+      <button class="nav-burger" id="navBurger" aria-label="Toggle menu" aria-expanded="false">☰</button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <section class="hero" style="padding:44px 0 36px">
+    <div class="hero-inner">
+      <p style="margin-bottom:14px"><a href="curriculum.html" class="small" style="text-decoration:none;color:var(--koenig-blue);font-weight:600">← Back to Curriculum</a></p>
+      <span class="eyebrow badge-live" style="background:var(--live-bg);border-color:transparent;color:var(--live-text)">📖 Module 5 · Live</span>
+      <h1>End-to-End Shopping Agent</h1>
+      <p class="hero-sub">Assemble a complete customer-facing shopping agent, from product discovery through payment — in Claude, Node.js, and React.</p>
+      <div class="hero-meta">
+        <span class="pill">📅 <strong>9 – 11 Sep 2026</strong></span>
+        <span class="pill">🕥 10:00 – 12:00 IST</span>
+        <span class="pill"><strong>3</strong> Live Sessions</span>
+        <span class="pill"><strong>6</strong> Topics</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="callout callout-koenig">
+        <span class="emoji">💡</span>
+        <div>
+          <h3>Before you arrive</h3>
+          <p>Nothing in this module starts from a blank folder. Every lab builds directly on top of the project from <a href="module-3.html">Module 3's Lab 3.6</a> — the same <code>search_products</code> and <code>create_cart_with_item</code> tools, the same Storefront token, the same two-credential pattern. Have that project, and its <code>.env</code>, ready to open before Session 1.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">What's covered</span>
+        <h2>Six topics across three sessions</h2>
+        <p>This page is meant to be a complete, standalone reference for Module 5 — everything below is enough to prepare for, follow along with, and revisit after each session, without needing outside material.</p>
+      </div>
+
+      <!-- 5.1 -->
+      <div class="module-topic type-b">
+        <span class="topic-eyebrow">5.1 · Briefing</span>
+        <h3>Agent Architecture for Commerce</h3>
+        <p>Lab 3.6 built one agent talking to one developer over a terminal. A real shopping agent talks to many shoppers at once, each with their own conversation and their own cart — a genuinely different architecture, not just more traffic on the same code.</p>
+
+        <div class="concept-block">
+          <div class="concept-icon">🧭</div>
+          <div class="concept-body">
+            <h4>Tool selection is the router</h4>
+            <p class="mb-0">There's no hand-written intent classifier deciding "this is a browse request, that's a checkout request." Claude's own tool-use already does that job: give it the right tools and a clear system prompt, and which tool (if any) gets called on a given message <em>is</em> the routing decision. The architecture work is choosing what tools exist and what each one is allowed to do — not writing if/else branches over user text.</p>
+          </div>
+        </div>
+
+        <div class="concept-block">
+          <div class="concept-icon">👥</div>
+          <div class="concept-body">
+            <h4>One Claude session per shopper, not one for everyone</h4>
+            <p>Lab 3.6's <code>agent.js</code> opened exactly one <code>query()</code> session for the one person typing into its terminal. A chat widget on a live storefront has many shoppers at once, each expecting the agent to remember only <em>their</em> conversation and only <em>their</em> cart. That means one <code>query()</code> session — and, as Topic 5.3 covers, one cart — per browser session, not a single shared session for the whole site.</p>
+            <p class="mb-0">Lab 3.6 also fed its session from a shared <code>readline</code> interface, which is exactly what caused the confirmation race bug you may have hit there. A web backend has no terminal and no shared <code>readline</code> at all — Topic 5.2 replaces it with a queue built for exactly this: one request in, one reply out, per shopper, with no possibility of that particular race.</p>
+          </div>
+        </div>
+
+        <div class="concept-block">
+          <div class="concept-icon">💳</div>
+          <div class="concept-body">
+            <h4>Where the agent's job ends</h4>
+            <p class="mb-0">The agent never collects a card number, an address, or any payment detail — it hands the shopper a real <code>checkoutUrl</code> and Shopify's own hosted checkout takes over completely from there. That's not a shortcut; it's the only supported way to accept payment, and it's what keeps PCI compliance entirely off your plate. Because of this, the agent can't know synchronously whether a shopper actually paid — Topic 5.4 covers confirming that after the fact instead of assuming it.</p>
+          </div>
+        </div>
+
+        <div class="callout-warn">⚠️ <strong>Never build a payment form into the conversation.</strong> There's no supported way to collect real card details inside a chat UI, and trying to would take on PCI-DSS obligations no lab in this program is set up to meet. The <code>checkoutUrl</code> handoff is the entire integration surface for payment — nothing else touches it.</div>
+      </div>
+
+      <!-- 5.2 -->
+      <div class="module-topic type-l">
+        <span class="topic-eyebrow">5.2 · Lab</span>
+        <h3>Product Discovery &amp; Q&amp;A</h3>
+        <p>The first build of the module: a real Express backend that talks to Claude and to your dev store, with one Claude session per shopper instead of Lab 3.6's single terminal session.</p>
+
+        <div class="concept-block">
+          <div class="concept-icon">🔁</div>
+          <div class="concept-body">
+            <h4>From a readline loop to a request queue</h4>
+            <p class="mb-0">Lab 3.6 fed <code>query()</code> from an async generator that pulled from <code>readline</code>. Here, each shopper's browser session gets its own generator instead, fed by a small queue: an incoming HTTP request pushes a message onto the queue and waits for the matching reply; the generator pulls from the queue and yields it into <code>query()</code>. No shared input source, no race.</p>
+          </div>
+        </div>
+
+        <h4>Try prompting Claude Code with something like:</h4>
+        <div class="code-block">"Adapt Lab 3.6's terminal agent into a Node.js/Express backend that
+can serve many shoppers at once, each with their own conversation.
+
+Write chatSession.js exporting a ChatSession class. Internally, use a
+small message queue - not a single mutable 'next message' slot - where
+push() either hands a value straight to a reader that's already
+waiting, or holds it until one asks: this is what keeps two messages
+from ever racing each other. Feed query()'s async generator from that
+queue instead of readline. Give the class a send(text) method that
+pushes a message and returns a promise resolving with the assistant's
+full reply once the SDK's 'result' message for that turn arrives;
+chain each send() onto the session's previous one so two messages from
+the same shopper can never overlap.
+
+Then write server.js: an Express POST /api/chat endpoint that takes
+{ sessionId, message }. Keep a Map from sessionId to ChatSession,
+lazily creating one per new sessionId, each wired to its own query()
+call that registers Lab 3.6's search_products tool with the same
+allowedTools requirement - query()'s default permission mode will
+otherwise stall the first tool call exactly like it did there. Clean
+up any session that's gone idle for more than 30 minutes so memory
+doesn't grow without bound.
+
+Test it by opening two different sessionIds and confirming neither
+ever sees the other's conversation history; asking a generic question
+like 'what do you sell?' and confirming it still returns real catalog
+results; and firing two messages at the very same session back-to-back
+without waiting for the first reply, confirming each one comes back
+matched to its own message rather than swapped."</div>
+
+        <div class="callout-tip"><strong>Tested, not just prompted for.</strong> This exact queue-based design was run against a mock <code>query()</code>-shaped stream under three conditions: sequential messages in one session, several messages fired at the same session without waiting for replies, and twenty sessions hammered concurrently. Every reply came back matched to its own message, every time — the queue (not a single mutable "next message" slot) is what makes that hold regardless of timing.</div>
+
+        <div class="callout-warn">⚠️ <strong>allowedTools still matters here.</strong> Exactly like Lab 3.6, <code>query()</code>'s default permission mode will otherwise stall the first time <code>search_products</code> should run, with no handler to approve it. Nothing about moving to HTTP changes that requirement — make sure the prompt above (or Claude Code's output) actually includes it.</div>
+
+        <h4>Acceptance checklist</h4>
+        <ul class="mini-check">
+          <li>Two different <code>sessionId</code> values get two independent conversations — one never sees the other's history</li>
+          <li>A generic question ("what do you sell?") still returns real catalog results, not an empty list</li>
+          <li>Sending a second message before the first reply arrives never crosses replies between two different sessions</li>
+          <li>Idle sessions are cleaned up rather than accumulating forever in memory</li>
+        </ul>
+      </div>
+
+      <!-- 5.3 -->
+      <div class="module-topic type-l">
+        <span class="topic-eyebrow">5.3 · Lab</span>
+        <h3>Cart Management &amp; Checkout Link</h3>
+        <p>Add a second tool, backed by Lab 3.6's other Storefront mutations — but this time the cart has to survive across turns, and grow and shrink correctly as the shopper changes their mind.</p>
+
+        <div class="concept-block">
+          <div class="concept-icon">🔒</div>
+          <div class="concept-body">
+            <h4>Why the model never sees a cart ID</h4>
+            <p class="mb-0">Shopify's cart and line IDs are long opaque GIDs — exactly the kind of token a model can mistype, truncate, or half-remember three turns later. Instead of passing them back and forth as tool arguments, this lab keeps them in a small object closed over by that one shopper's tools — the same "one thing per session" principle from Topic 5.1, just applied to cart state instead of conversation memory. The model only ever passes a <code>variantId</code> and a <code>quantity</code>; it never has to track anything Shopify-specific.</p>
+          </div>
+        </div>
+
+        <h4>Try prompting Claude Code with something like:</h4>
+        <div class="code-block">"Add a second tool for managing the shopper's cart, using Lab 3.6's
+other Storefront mutations - but keep every Shopify cart and line ID
+out of the model's hands entirely, since those are exactly the kind of
+opaque token a model can mistype or half-remember a few turns later.
+
+Write cartState.js exporting a createCartManager(storefrontRequest)
+factory. It should track a cartId and a variantId-to-lineId map as
+private state, and expose one method, addOrSetQuantity(variantId,
+quantity): the first call for any session should create the cart
+(cartCreate) and add the line (cartLinesAdd); a later call for a
+variant already in the cart should update its quantity in place
+(cartLinesUpdate) rather than adding a duplicate line; and a call with
+quantity 0 should remove the line (cartLinesRemove) if it's tracked,
+or do nothing if it was never added.
+
+Register a tool called update_cart, taking a variantId and a quantity,
+that calls this cart manager and returns the resulting checkoutUrl.
+Construct one cart manager per shopper session, right alongside their
+query() call from Topic 5.2, so the tool always resolves to that
+shopper's own cart and no one else's.
+
+Test the cart logic against a mocked Storefront client before wiring
+it to a real store: confirm adding two different variants only calls
+cartCreate once; confirm calling the tool twice on the same variant
+updates the line instead of duplicating it; confirm quantity 0 removes
+a tracked line and is a safe no-op for one that was never added; and
+confirm removing one line never disturbs any other line in the same
+cart."</div>
+
+        <div class="callout-tip"><strong>Verified with a mocked Storefront client, exactly as prompted above:</strong> adding two different variants calls <code>cartCreate</code> exactly once, not once per item; calling <code>update_cart</code> twice on the <em>same</em> variant updates the existing line instead of adding a duplicate; setting a variant's quantity to <code>0</code> removes it and forgets it; and removing a variant that was never added is a safe no-op rather than an error. Twelve assertions across five scenarios, all passing.</div>
+
+        <h4>Acceptance checklist</h4>
+        <ul class="mini-check">
+          <li>Adding a first item creates exactly one cart; adding a second item reuses it</li>
+          <li>"Actually, make it 3" updates the existing line's quantity instead of adding a duplicate</li>
+          <li>"Never mind, remove that" takes the item out of the cart and the checkout link reflects it</li>
+          <li>The model's replies never contain a raw Shopify cart or line ID</li>
+          <li>Two different shoppers' carts never merge or leak into each other</li>
+        </ul>
+      </div>
+
+      <!-- 5.4 -->
+      <div class="module-topic type-l">
+        <span class="topic-eyebrow">5.4 · Lab</span>
+        <h3>Order Placement Flow</h3>
+        <p>Since payment happens on Shopify's own hosted checkout page, not inside the conversation, the agent confirms an order actually completed by looking it up via the Admin API afterward rather than assuming success.</p>
+
+        <div class="concept-block">
+          <div class="concept-icon">⏱️</div>
+          <div class="concept-body">
+            <h4>Real-time vs. after-the-fact</h4>
+            <p class="mb-0">Handing over a <code>checkoutUrl</code> doesn't tell you what happens next — the shopper might pay immediately, abandon it, or come back an hour later. This lab covers the simplest reliable pattern: when a shopper asks something like "did my order go through?", look it up by the email they give you. Module 6's event-driven agent later adds the other half — reacting the moment Lab 3.8's webhook fires, instead of waiting to be asked.</p>
+          </div>
+        </div>
+
+        <h4>Try prompting Claude Code with something like:</h4>
+        <div class="code-block">"Add a third, read-only tool so the agent can answer 'did my order go
+through?' after the fact, since it can never know that synchronously.
+
+Write tools/checkOrderStatus.js: a tool called check_order_status
+taking a shopper's email, that queries the Admin API's orders field
+filtered by that email (query: 'email:&lt;address&gt;'), sorted by
+CREATED_AT descending, and returns each order's name, financial
+status, and fulfillment status. Reuse the same Admin client-credentials
+helper from Lab 3.6 for the request - this just needs the read_orders
+scope added to that same Dev Dashboard app, not a new one.
+
+Make sure the agent asks for an email if it doesn't have one yet
+rather than guessing, and that it never claims an order succeeded
+without having actually called this tool."</div>
+
+        <div class="callout-warn">⚠️ <strong>Verify the field names against your own store first, before trusting Claude Code's output as-is.</strong> <code>displayFinancialStatus</code> and <code>displayFulfillmentStatus</code> are the fields this tool is written against, but Admin API schemas do shift between versions. Run the exact query in the GraphiQL app from <a href="module-3.html">Lab 3.3</a> against your dev store first — the same "test it live before trusting it" habit every Admin API query in this program has needed so far.</div>
+
+        <h4>Acceptance checklist</h4>
+        <ul class="mini-check">
+          <li>Asking about an order with no email yet prompts the agent to ask for one, rather than guessing</li>
+          <li>A real completed order's financial and fulfillment status come back accurately</li>
+          <li>An email with no orders gets a clear "nothing found" answer, not an error or a hallucinated order</li>
+          <li>The tool never claims an order succeeded without having actually queried for it</li>
+        </ul>
+      </div>
+
+      <!-- 5.5 -->
+      <div class="module-topic type-l">
+        <span class="topic-eyebrow">5.5 · Lab</span>
+        <h3>Multi-Item &amp; Edge-Case Conversations</h3>
+        <p>No new architecture here — this lab stress-tests the agent you've already built against the conversational situations that actually come up, and closes the two real gaps that surface when you do.</p>
+
+        <div class="concept-block">
+          <div class="concept-icon">📦</div>
+          <div class="concept-body">
+            <h4>Out-of-stock, before the cart mutation ever runs</h4>
+            <p class="mb-0">Add <code>availableForSale</code> to <code>search_products</code>' query and its output schema. When a shopper tries to add something that's out of stock, the agent should say so using data it already has — not find out from a failed <code>cartLinesAdd</code> call.</p>
+          </div>
+        </div>
+
+        <div class="concept-block">
+          <div class="concept-icon">🏷️</div>
+          <div class="concept-body">
+            <h4>Discount codes are a cart mutation too</h4>
+            <p class="mb-0">A fourth tool, <code>apply_discount_code</code>, wraps the Storefront API's <code>cartDiscountCodesUpdate</code> mutation against this session's tracked <code>cartId</code> — no new state to manage, since Topic 5.3 already keeps the cart ID out of the model's hands.</p>
+          </div>
+        </div>
+
+        <h4>Try prompting Claude Code with something like:</h4>
+        <div class="code-block">"Extend the two existing tools to close two real gaps.
+
+First, add availableForSale to search_products' GraphQL query and its
+output schema, so every search result already says whether an item is
+in stock. The agent should mention this directly in its own reply
+rather than letting a shopper find out only when update_cart fails.
+
+Second, add a fourth tool, apply_discount_code, that takes a discount
+code and calls the Storefront API's cartDiscountCodesUpdate mutation
+against this session's already-tracked cartId - no new state to
+manage, since update_cart's cart manager from Topic 5.3 already keeps
+it. Return the resulting checkoutUrl so the shopper can see the
+discount reflected."</div>
+
+        <div class="callout-tip"><strong>What "handling" out-of-stock means here:</strong> the agent should never silently add an unavailable item and let Shopify's checkout be the one to break the news. It should say so in the same reply as the search result, using <code>availableForSale</code> it already fetched.</div>
+
+        <p>Work through this conversation end to end, watching which tool fires at each step:</p>
+        <ul class="step-list">
+          <li>"Do you have any wireless headphones?" — <code>search_products</code>, includes stock status for each result</li>
+          <li>"Add two of the black ones" — <code>update_cart</code> creates the cart</li>
+          <li>"Actually, just one" — <code>update_cart</code> again, same variant, quantity corrected in place</li>
+          <li>"Do you have the white ones too? Add one" — a second line added to the same cart</li>
+          <li>"I have a code, SAVE10" — <code>apply_discount_code</code>, checkout link reflects the discount</li>
+          <li>"Never mind the white ones, remove them" — that line removed, the black-headphone line untouched</li>
+        </ul>
+
+        <h4>Acceptance checklist</h4>
+        <ul class="mini-check">
+          <li>An out-of-stock item is flagged in the agent's own reply, not discovered later at checkout</li>
+          <li>A quantity correction updates the existing line rather than creating a second one for the same item</li>
+          <li>A valid discount code changes the checkout link's total; an invalid one is reported as invalid, not silently ignored</li>
+          <li>Removing one line item never disturbs any other line in the same cart</li>
+          <li>The full six-step conversation above completes without the agent losing track of the cart</li>
+        </ul>
+      </div>
+
+      <!-- 5.6 -->
+      <div class="module-topic type-d">
+        <span class="topic-eyebrow">5.6 · Demo</span>
+        <h3>Wiring It Into a React Chat Widget</h3>
+        <p>Live demo connecting the React chat widget to the Node.js agent backend and embedding it on the dev store storefront — an end-to-end walkthrough of ask → browse → cart → pay → confirm, using everything built in this module.</p>
+
+        <div class="concept-block">
+          <div class="concept-icon">🪪</div>
+          <div class="concept-body">
+            <h4>One browser, one session ID</h4>
+            <p class="mb-0">The widget generates a random ID on first load, stores it in <code>localStorage</code>, and sends it with every request — that's the only thing connecting a browser tab to a specific <code>ChatSession</code> and cart on the backend from Topics 5.2–5.3. No login is required for any of this.</p>
+          </div>
+        </div>
+
+        <h4>Try prompting Claude Code with something like:</h4>
+        <div class="code-block">"Build ChatWidget.jsx, a React component for the storefront chat
+window.
+
+On first render, generate a random UUID as this browser's session ID
+and persist it in localStorage under a fixed key, reusing it on every
+later visit rather than generating a new one each time - that ID is
+the only thing connecting this browser tab to a specific ChatSession
+and cart on the backend.
+
+Hold a list of messages and an input value in state. On submit, append
+the shopper's message to the list immediately, POST { sessionId,
+message } to /api/chat, and append the agent's reply once it comes
+back - showing a lightweight typing indicator while waiting, and a
+graceful error message if the request fails rather than leaving the
+shopper staring at nothing. Auto-scroll to the latest message whenever
+the list changes."</div>
+
+        <div class="callout-tip"><strong>Syntax-verified before this page was written:</strong> the resulting component was bundled with esbuild's JSX transform to confirm it compiles cleanly — the logic itself is exercised indirectly through Topics 5.2–5.5's tested backend, since the widget is a thin fetch-and-render layer on top of it.</div>
+
+        <p class="mb-0">Embedding on the storefront itself is a build-and-drop step: bundle this component, mount it into a small script your theme loads on every page (a theme app extension, or simply a <code>&lt;script&gt;</code> tag pointing at the built bundle), and point <code>apiUrl</code> at your deployed backend. The demo walks through that handoff live, end to end, on the dev store.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="callout callout-shopify">
+        <span class="emoji">🔭</span>
+        <div>
+          <h3>Where this goes next</h3>
+          <p>Keep this backend running. Module 6 extends the same shopper-facing agent with Admin-scoped write tools and a live reaction to the webhook receiver built in Lab 3.8 — turning today's "ask me and I'll look it up" order status into "I'll tell you the moment it happens." Module 7 later grounds <code>search_products</code>' answers in your actual policy pages with RAG, and Module 8's capstone folds this agent into the full multi-agent platform.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <h4>Shopify Agentic AI Developer Bootcamp</h4>
+        <p class="small">A hands-on program on building agentic commerce experiences on Shopify with Claude, Node.js and React.</p>
+      </div>
+      <div>
+        <h4>Program</h4>
+        <ul>
+          <li><a href="schedule.html">Schedule</a></li>
+          <li><a href="curriculum.html">Curriculum</a></li>
+          <li><a href="prerequisites.html">Prerequisites</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>More</h4>
+        <ul>
+          <li><a href="about.html">About</a></li>
+          <li><a href="resources.html">Resources &amp; FAQ</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="mailto:Maitri.Bhansali@koenig-solutions.com">Maitri.Bhansali@koenig-solutions.com</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span id="footerYear"></span> Koenig Solutions. Delivered for V Group Inc.</span>
+      <div class="footer-logos">
+        <span class="logo-slot">
+          <img src="assets/images/koenig-logo.png" alt="Koenig Solutions" data-fallback onerror="this.style.display='none';this.nextElementSibling.style.display='inline-block'">
+          <span class="text-logo koenig" style="font-size:.85rem">KOENIG</span>
+        </span>
+        <span class="logo-slot">
+          <img src="assets/images/vgroup-logo.png" alt="V Group Inc." data-fallback onerror="this.style.display='none';this.nextElementSibling.style.display='inline-block'">
+          <span class="text-logo vgroup" style="font-size:.85rem">V Group Inc.</span>
+        </span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/data.js"></script>
+<script src="assets/js/main.js"></script>
+</body>
+</html>
