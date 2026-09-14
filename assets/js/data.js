@@ -139,8 +139,8 @@ const CURRICULUM = [
     id: "m5",
     title: "Admin-Scoped, Event-Driven & Risk-Aware Agents",
     goal: "Extend the shopping agent into a governed operations agent that reacts to live store events safely.",
-    materialsAvailable: false,
-    materialsUrl: null,
+    materialsAvailable: true,
+    materialsUrl: "module-6.html",
     topics: [
       { type: "B+L", title: "Lab — Agent with Admin Scopes", detail: "Extend the agent with write_orders/write_draft_orders/read_customers/read_inventory tools for order status, stock checks and customer lookups — gated behind confirmation prompts and role checks." },
       { type: "B+D", title: "Shopify Flow as a Governed Action Layer", detail: "Routing agent-initiated writes through the flowTriggerReceive Admin GraphQL mutation instead of raw Admin API calls, with payload validation and rate limiting. Demo: an agent action triggers a Shopify Flow workflow." },

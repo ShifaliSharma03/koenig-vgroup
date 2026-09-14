@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module 6 Content | Shopify Agentic AI Developer Bootcamp</title>
+<meta name="description" content="Module 6: Admin-Scoped, Event-Driven & Risk-Aware Agents — extending the shopping agent into a governed operations agent that reacts to live store events safely.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛍️</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="nav-wrap">
+    <a class="brand-lockup" href="index.html">
+      <span class="logo-slot">
+        <img src="assets/images/koenig-logo.png" alt="Koenig Solutions" data-fallback onerror="this.style.display='none';this.nextElementSibling.style.display='inline-block'">
+        <span class="text-logo koenig">KOENIG<span> solutions</span></span>
+      </span>
+      <span class="brand-x">×</span>
+      <span class="logo-slot">
+        <img src="assets/images/vgroup-logo.png" alt="V Group Inc." data-fallback onerror="this.style.display='none';this.nextElementSibling.style.display='inline-block'">
+        <span class="text-logo vgroup">V Group Inc.</span>
+      </span>
+      <span class="brand-title">Agentic AI Developer Bootcamp</span>
+    </a>
+    <nav>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="schedule.html">Schedule</a></li>
+        <li><a href="curriculum.html" class="active">Curriculum</a></li>
+        <li><a href="prerequisites.html">Prerequisites</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="resources.html">Resources</a></li>
+      </ul>
+    </nav>
+    <div class="nav-actions">
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">🌙</button>
+      <button class="nav-burger" id="navBurger" aria-label="Toggle menu" aria-expanded="false">☰</button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <section class="hero" style="padding:44px 0 36px">
+    <div class="hero-inner">
+      <p style="margin-bottom:14px"><a href="curriculum.html" class="small" style="text-decoration:none;color:var(--koenig-blue);font-weight:600">← Back to Curriculum</a></p>
+      <span class="eyebrow badge-live" style="background:var(--live-bg);border-color:transparent;color:var(--live-text)">📖 Module 6 · Live</span>
+      <h1>Admin-Scoped, Event-Driven &amp; Risk-Aware Agents</h1>
+      <p class="hero-sub">Extend the shopping agent into a governed operations agent that reacts to live store events safely.</p>
+      <div class="hero-meta">
+        <span class="pill">📅 <strong>14, 17 Sep 2026</strong></span>
+        <span class="pill">🕥 10:00 – 12:00 IST</span>
+        <span class="pill"><strong>2</strong> Live Sessions</span>
+        <span class="pill"><strong>6</strong> Topics</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="callout callout-koenig">
+        <span class="emoji">💡</span>
+        <div>
+          <h3>Before you arrive</h3>
+          <p>This module builds on top of Module 5's project — same backend, same per-shopper <code>ChatSession</code> pattern, same reused tools. The new work is a separate, write-capable agent that acts on the merchant's behalf, using the Admin credential from Lab 3.2 with new scopes added. Have your Lab 3.6/Module 5 project, its <code>.env</code>, and your Dev Dashboard app open before Session 1.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">What's covered</span>
+        <h2>Six topics across two sessions</h2>
+        <p>This page is meant to be a complete, standalone reference for Module 6 — everything below is enough to prepare for, follow along with, and revisit after each session, without needing outside material.</p>
+      </div>
+
+      <!-- 6.1 -->
+      <div class="module-topic type-l">
+        <span class="topic-eyebrow">6.1 · Lab</span>
+        <h3>Agent with Admin Scopes</h3>
+        <p>Module 5's agent never wrote anything — <code>search_products</code> and <code>update_cart</code> both run on the read-only-for-writes Storefront token. This lab adds a second, separate agent surface that actually writes on the merchant's behalf, using the write-capable Admin token from Topic 3.5's two-token pattern for real.</p>
+
+        <div class="concept-block">
+          <div class="concept-icon">🛡️</div>
+          <div class="concept-body">
+            <h4>One gate, in front of every write</h4>
+            <p class="mb-0">Rather than sprinkling a confirmation check inside each new tool, this lab centralizes it: one <code>requireApproval()</code> function that every write-capable tool calls first, checking both the caller's role <em>and</em> whether a human has actually confirmed this specific action. A single choke point is easier to audit and harder to accidentally bypass than the same check copy-pasted into five different tools.</p>
+          </div>
+        </div>
+
+        <h4>Try prompting Claude Code with something like:</h4>
+        <div class="code-block">"Scaffold a new Node.js/ESM operations-agent project with the Claude
+Agent SDK, zod, and dotenv. Give it a separate Admin API client: read
+SHOPIFY_STORE_DOMAIN, SHOPIFY_CLIENT_ID, and SHOPIFY_CLIENT_SECRET from
+.env, and write a helper that exchanges the client ID and secret for an
+access token via the client credentials grant (POST
+/admin/oauth/access_token), caching it and refreshing automatically
+before its 24-hour expiry. Use this client for every request below -
+never the Storefront API.
+
+Add four Admin-scoped tools, each with a zod input schema:
+update_order_status (write_orders scope), create_draft_order_for_customer
+(write_draft_orders scope), look_up_customer (read_customers scope),
+and check_inventory_level (read_inventory scope).
+
+Before any of the three write-capable tools actually calls the Admin
+API, run their input through a shared requireApproval({ action, role,
+confirmed }) gate: read-only actions always pass; write actions
+require the caller's role to be 'admin' or 'staff' (never a plain
+'shopper' role) AND an explicit confirmed: true - both conditions,
+not just one. If either check fails, return a clear reason why instead
+of silently doing nothing.
+
+Test the gate on its own, with no real Shopify calls involved: confirm
+read-only actions never need approval; confirm a shopper-role caller
+is rejected even if confirmed is true; confirm an admin-role caller is
+still rejected without explicit confirmation; and confirm admin +
+confirmed is the only combination that passes."</div>
+
+        <div class="callout-tip"><strong>Tested exactly as prompted above.</strong> This gate's branching logic was run against all four combinations of role and confirmation state, with no real Shopify calls involved: read-only actions always pass; a shopper-role caller is rejected even when marked confirmed; an admin-role caller is rejected without explicit confirmation; and admin role plus explicit confirmation is the only combination that's allowed through.</div>
+
+        <h4>Acceptance checklist</h4>
+        <ul class="mini-check">
+          <li>All four tools use the write-capable Admin token, kept separate from the shopper-facing Storefront token</li>
+          <li>Every write-capable tool call passes through <code>requireApproval()</code> before touching the Admin API</li>
+          <li>A non-admin caller can never get a write through, no matter what it claims to have confirmed</li>
+          <li>Read-only lookups (customer, inventory) never trigger an approval prompt</li>
+        </ul>
+      </div>
+
+      <!-- 6.2 -->
+      <div class="module-topic type-d">
+        <span class="topic-eyebrow">6.2 · Briefing + Demo</span>
+        <h3>Shopify Flow as a Governed Action Layer</h3>
+        <p>An alternative to hand-rolling validation and rate limiting yourself: let Shopify's own workflow engine own that job instead.</p>
+
+        <div class="concept-block">
+          <div class="concept-icon">🔀</div>
+          <div class="concept-body">
+            <h4><code>flowTriggerReceive</code> instead of a raw Admin API call</h4>
+            <p class="mb-0">Rather than your agent calling <code>orderUpdate</code> or similar directly, it calls the Admin GraphQL <code>flowTriggerReceive</code> mutation with a custom payload, which kicks off a Shopify Flow workflow you've configured in the Admin. The workflow itself — built visually in Shopify Flow, not in your code — is what does the actual validation, rate limiting, and the real write. Your agent's job shrinks to "decide this should happen" and "hand off the payload"; Flow's job is "actually do it, safely."</p>
+          </div>
+        </div>
+
+        <div class="callout-warn">⚠️ <strong>This one needs your own store's Flow app, configured live.</strong> Unlike the Admin API calls elsewhere in this program, there's no code path to test this without a real Flow workflow built in your dev store's Admin first. The demo walks through building a minimal one live — verify the trigger fires and the workflow runs before wiring your agent to depend on it.</div>
+
+        <p class="mb-0">This is a genuine design choice, not a strict upgrade: a raw Admin API call is simpler and keeps all logic in your own code; routing through Flow adds a layer of indirection but gets you validation, retries, and rate limiting you'd otherwise have to build and maintain yourself. Reach for it when a write action's rules are something a non-developer on the team should be able to see and adjust — that's exactly what a Flow workflow makes visible, and a raw API call inside a tool file doesn't.</p>
+      </div>
+
+      <!-- 6.3 -->
+      <div class="module-topic type-l">
+        <span class="topic-eyebrow">6.3 · Lab</span>
+        <h3>Webhook-Reactive Agent</h3>
+        <p>Lab 3.8 built a receiver that verifies and logs. This lab gives it somewhere to send what it verifies — an agent that reacts differently depending on which event just happened.</p>
+
+        <div class="concept-block">
+          <div class="concept-icon">🗺️</div>
+          <div class="concept-body">
+            <h4>One router, many topics</h4>
+            <p class="mb-0">Once Lab 3.8's HMAC check passes, the request still needs to go somewhere specific — an <code>orders/create</code> event calls for a different reaction than <code>inventory_levels/update</code> or <code>app/uninstalled</code>. A small router keyed by the <code>X-Shopify-Topic</code> header keeps that dispatch logic in one place instead of a growing if/else chain inside the receiver itself.</p>
+          </div>
+        </div>
+
+        <h4>Try prompting Claude Code with something like:</h4>
+        <div class="code-block">"Extend Lab 3.8's webhook receiver with a router that dispatches an
+already-HMAC-verified payload to a handler based on its X-Shopify-Topic
+header.
+
+Write a createWebhookRouter(handlers) factory that takes an object
+mapping topic names to async handler functions, and returns a
+route(topic, payload) function: if a handler exists for that topic,
+call it and report { handled: true }; if not, report { handled: false,
+reason: ... } instead of silently dropping the event or throwing.
+
+Register three handlers: orders/create drafts a restock-check or
+order-confirmation message via Claude (human-in-the-loop, not sent
+automatically - same pattern as Topic 6.5), inventory_levels/update
+checks whether stock crossed a low-stock threshold and flags it if so,
+and app/uninstalled logs the loss of access and stops any further
+scheduled work for this store.
+
+Test the router itself: confirm a registered topic calls its handler
+with the right payload; confirm an unregistered topic is reported as
+unhandled rather than crashing the receiver or being silently
+swallowed."</div>
+
+        <div class="callout-tip"><strong>Tested exactly as prompted above.</strong> The router was run with a registered <code>orders/create</code> handler and a deliberately unregistered topic: the registered one fired with the correct payload, and the unregistered one came back as a clean <code>{ handled: false }</code> rather than a crash or a silent no-op.</div>
+
+        <div class="callout-warn">⚠️ <strong>The router's logic is tested; a real event reaching it is not, without your own store.</strong> Getting an actual webhook to actually call this router still needs Lab 3.8's full setup — a real registered subscription, a real public tunnel, and a real triggering event in your dev store. Confirm that end-to-end path yourself before relying on it in a live session.</div>
+
+        <h4>Acceptance checklist</h4>
+        <ul class="mini-check">
+          <li>The router correctly dispatches to the matching handler by topic, and reports unhandled topics cleanly</li>
+          <li>An <code>orders/create</code> event produces a drafted message, not an auto-sent one</li>
+          <li>An <code>inventory_levels/update</code> event correctly flags stock crossing a threshold</li>
+          <li>An <code>app/uninstalled</code> event is handled — this is the one topic every store's agent must never ignore</li>
+        </ul>
+      </div>
+
+      <!-- 6.4 -->
+      <div class="module-topic type-l">
+        <span class="topic-eyebrow">6.4 · Lab</span>
+        <h3>Order-Risk-Aware Agent</h3>
+        <p>Not every order that comes in should be treated the same — this lab reads Shopify's own fraud-risk signal before the agent decides whether to auto-confirm or hold.</p>
+
+        <div class="concept-block">
+          <div class="concept-icon">⚠️</div>
+          <div class="concept-body">
+            <h4>A decision, not just a read</h4>
+            <p class="mb-0">Reading <code>OrderRiskAssessment</code> on the Admin API is only half the job — the other half is a clear, testable rule for what happens at each risk level. Keeping that rule as its own small function (rather than buried inside a bigger tool) is what makes it something you can actually verify in isolation, the same way Topic 6.1's approval gate is separated from the tools that call it.</p>
+          </div>
+        </div>
+
+        <h4>Try prompting Claude Code with something like:</h4>
+        <div class="code-block">"Add a tool that reads an order's risk assessment via the Admin API
+and decides whether to auto-confirm it.
+
+Write shouldAutoConfirm(riskLevel) as a small, pure function, separate
+from the API call itself: 'LOW' auto-confirms; 'MEDIUM' and 'HIGH' both
+decline to auto-confirm and return a reason ('flagged for manual
+review' vs. 'held - high risk'); anything else should throw rather than
+silently defaulting to auto-confirm, since an unrecognized value is
+exactly the case you don't want failing open.
+
+Wire this into a check_order_risk tool that fetches the real risk
+assessment via the Admin API and calls shouldAutoConfirm with whatever
+it gets back.
+
+Test shouldAutoConfirm on its own with plain strings, no real API call
+involved: confirm LOW auto-confirms; confirm MEDIUM and HIGH both
+don't; confirm an unrecognized value throws instead of defaulting to
+auto-confirm."</div>
+
+        <div class="callout-tip"><strong>The decision logic is tested; the exact field names are not.</strong> <code>shouldAutoConfirm</code> was run against <code>"LOW"</code>, <code>"MEDIUM"</code>, <code>"HIGH"</code>, and an invalid value directly — all four branches behave exactly as specified, including the invalid case failing loudly instead of failing open. What this doesn't verify is Shopify's actual <code>OrderRiskAssessment</code> field and enum names for your API version — confirm those in the GraphiQL app from Lab 3.3 before wiring the real query in, the same habit every Admin API field in this program has needed.</div>
+
+        <h4>Acceptance checklist</h4>
+        <ul class="mini-check">
+          <li>A low-risk order auto-confirms without pausing for a human</li>
+          <li>A medium- or high-risk order never auto-confirms, and says why</li>
+          <li>An unrecognized or missing risk value fails loudly rather than defaulting to auto-confirm</li>
+          <li>The real Admin API field names have been checked against your own store's schema in GraphiQL</li>
+        </ul>
+      </div>
+
+      <!-- 6.5 -->
+      <div class="module-topic type-l">
+        <span class="topic-eyebrow">6.5 · Lab</span>
+        <h3>Abandoned Cart Recovery Agent</h3>
+        <p>The one tool in this whole program whose entire job is to write text a human reads before anything happens — not to take an action.</p>
+
+        <div class="concept-block">
+          <div class="concept-icon">✍️</div>
+          <div class="concept-body">
+            <h4>Human-in-the-loop by construction, not by convention</h4>
+            <p class="mb-0">Earlier confirmation gates (Topic 6.1's <code>requireApproval</code>, Lab 3.6's y/n prompt) stop a write from happening until a human says yes. This tool goes further: it has no send capability at all. The only thing it can return is a drafted message and a status of <code>draft_pending_review</code> — sending is a separate, human action outside this tool entirely, so there's no confirmation flag to accidentally leave defaulted to <code>true</code>.</p>
+          </div>
+        </div>
+
+        <h4>Try prompting Claude Code with something like:</h4>
+        <div class="code-block">"Build a tool that drafts a personalized win-back message for an
+abandoned cart, using webhook data from Topic 6.3's checkout/create or
+carts/update events.
+
+Write createCartRecoveryTool(draftMessage) as a factory taking a
+draftMessage function (the part that actually calls Claude to write
+the message, kept separate so it's swappable and testable on its own).
+It should return an async recoverAbandonedCart({ cartLines,
+customerName }) function that calls draftMessage with that data and
+returns { status: 'draft_pending_review', draft, sent: false } - always
+sent: false, since this tool has no sending capability at all.
+
+Test the wrapper with a fake draftMessage that just returns a fixed
+string, with no real Claude call involved: confirm the result's sent
+is always false, confirm status is always 'draft_pending_review', and
+confirm a real draft string comes back for a human to actually read."</div>
+
+        <div class="callout-tip"><strong>Tested exactly as prompted above.</strong> With a stubbed <code>draftMessage</code> standing in for the real Claude call, the wrapper was confirmed to always return <code>sent: false</code> and <code>status: "draft_pending_review"</code>, with a real string in <code>draft</code> — this tests the tool's own guarantee that it can never itself send anything, independent of whatever text Claude actually produces.</div>
+
+        <h4>Acceptance checklist</h4>
+        <ul class="mini-check">
+          <li>The tool's result always has <code>sent: false</code> — there is no code path that sets it otherwise</li>
+          <li>A drafted message references the actual abandoned items, not generic filler text</li>
+          <li>Sending the message is a separate, explicit human action outside this tool</li>
+          <li>The draft reads as on-brand and personalized, not templated boilerplate</li>
+        </ul>
+      </div>
+
+      <!-- 6.6 -->
+      <div class="module-topic type-l">
+        <span class="topic-eyebrow">6.6 · Lab</span>
+        <h3>Unified Operations Agent</h3>
+        <p>No new logic here — this lab is assembly and verification. Every tool from 6.1–6.5 gets registered on one operations agent and run against the dev store's actual live events and Flow workflows.</p>
+
+        <div class="concept-block">
+          <div class="concept-icon">🧩</div>
+          <div class="concept-body">
+            <h4>Why this is verification, not a new build</h4>
+            <p class="mb-0">Each piece — the approval gate, the webhook router, the risk decision, the draft-only recovery tool — was already tested in isolation. What hasn't been tested is all of them running together on one agent, reached through the same webhook receiver, against the same dev store, with the same Admin token. That's a different kind of failure mode (a name collision between tools, a shared client mis-imported, a router topic wired to the wrong handler) than any single piece failing on its own.</p>
+          </div>
+        </div>
+
+        <p>Work through this end to end against your real dev store:</p>
+        <ul class="step-list">
+          <li>Place a real test order and confirm the risk-aware tool reads its actual risk assessment</li>
+          <li>Trigger a real <code>orders/create</code> webhook and confirm the router dispatches it correctly</li>
+          <li>Abandon a real cart and confirm a draft recovery message is produced, not sent</li>
+          <li>Attempt a write action as a non-admin role and confirm <code>requireApproval</code> blocks it</li>
+          <li>If you built Topic 6.2's Flow workflow, confirm an agent action actually triggers it live</li>
+        </ul>
+
+        <h4>Acceptance checklist</h4>
+        <ul class="mini-check">
+          <li>All five prior tools are registered on one agent, sharing one Admin client and one webhook router</li>
+          <li>Each step in the walkthrough above produces the expected real result against your dev store, not a mock</li>
+          <li>A non-admin write attempt is blocked by <code>requireApproval</code> in this combined agent too, not just in isolation</li>
+          <li>Nothing in this agent ever sends a customer-facing message without a human explicitly approving it first</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="callout callout-shopify">
+        <span class="emoji">🔭</span>
+        <div>
+          <h3>Where this goes next</h3>
+          <p>Keep this operations agent running alongside Module 5's shopping agent. Module 7 grounds both agents' answers in your actual policy pages with RAG, and Module 8's capstone folds this governed, event-driven layer — approval gates, webhook router, and all — into the full multi-agent platform.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <h4>Shopify Agentic AI Developer Bootcamp</h4>
+        <p class="small">A hands-on program on building agentic commerce experiences on Shopify with Claude, Node.js and React.</p>
+      </div>
+      <div>
+        <h4>Program</h4>
+        <ul>
+          <li><a href="schedule.html">Schedule</a></li>
+          <li><a href="curriculum.html">Curriculum</a></li>
+          <li><a href="prerequisites.html">Prerequisites</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>More</h4>
+        <ul>
+          <li><a href="about.html">About</a></li>
+          <li><a href="resources.html">Resources &amp; FAQ</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="mailto:Maitri.Bhansali@koenig-solutions.com">Maitri.Bhansali@koenig-solutions.com</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span id="footerYear"></span> Koenig Solutions. Delivered for V Group Inc.</span>
+      <div class="footer-logos">
+        <span class="logo-slot">
+          <img src="assets/images/koenig-logo.png" alt="Koenig Solutions" data-fallback onerror="this.style.display='none';this.nextElementSibling.style.display='inline-block'">
+          <span class="text-logo koenig" style="font-size:.85rem">KOENIG</span>
+        </span>
+        <span class="logo-slot">
+          <img src="assets/images/vgroup-logo.png" alt="V Group Inc." data-fallback onerror="this.style.display='none';this.nextElementSibling.style.display='inline-block'">
+          <span class="text-logo vgroup" style="font-size:.85rem">V Group Inc.</span>
+        </span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/data.js"></script>
+<script src="assets/js/main.js"></script>
+</body>
+</html>
